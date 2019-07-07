@@ -1,4 +1,4 @@
- <style>
+<!-- <style>
 	h1, figure, p {
 		text-align: center;
 		margin: 0 auto;
@@ -42,48 +42,30 @@
 	<img alt='Borat' src='great-success.png'>
 	<figcaption>HIGH FIVE!</figcaption>
 </figure>
-<!-- <p>Token is : {$token}</p> -->
-<!-- <p>Authenticated is {$authenticated}</p> -->
-
-{#if ($authenticated == true)}
-    <p>You are logged in !</p>
- {:else}
-
-    <p>Please log in.
-    <a href="/login"> Log In</a> 
-    </p> 
-      
-{/if}
 
 <p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
 <p>Fine playig along, Gurmeet !!!</p> -->
 
-<script>
-import { authenticated } from '../store/stores.js';
-
-        // $token= "123456";
-</script> 
 
 
-<!-- 
 <svelte:head>
     <!-- <base href="/" />
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
     <title>jhipster</title>
     <meta name="description" content="Description for jhipster">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000"> 
+    <meta name="theme-color" content="#000000"> -->
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="manifest" href="manifest.webapp" />
     <link rel="stylesheet" href="content/css/loading.css">
     <!-- jhipster-needle-add-resources-to-root - JHipster will add new resources here -->
-<!-- </svelte:head>  -->
+</svelte:head>
 
     <!--[if lt IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <!-- <div id="app">
+    <div id="app">
         <div class="app-loading">
             <div class="lds-pacman">
                 <div><div></div><div></div><div></div></div>
@@ -93,7 +75,7 @@ import { authenticated } from '../store/stores.js';
         <div class="app-loading">
             <div id="jhipster-error" style="display:none">
                 <!-- This content is for troubleshooting purpose and will be removed when app renders -->
-                <!-- <h1>An error has occured :-(</h1>
+                <h1>An error has occured :-(</h1>
                 <h2>Usual error causes</h2>
                 <ol>
                     <li>You started the application from an IDE and you didn't run <code style="color:red">npm start</code>
@@ -148,7 +130,7 @@ import { authenticated } from '../store/stores.js';
                     correct English language!
                 </p>
                 <!-- end of troubleshooting content -->
-            <!-- </div>
+            </div>
         </div>
     </div>
     <noscript>
@@ -164,11 +146,8 @@ import { authenticated } from '../store/stores.js';
             if (errorElm && errorElm.style) {
                 errorElm.style.display = "block";
             }
-        } 
+        }
     </script>
-
-
-
     <!-- uncomment this for adding service worker
         <script>
             if ('serviceWorker' in navigator) {

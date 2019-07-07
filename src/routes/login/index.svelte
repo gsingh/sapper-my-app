@@ -4,11 +4,11 @@
 	// import ListErrors from '../components/ListErrors.svelte';
 	// import { post } from '../auth/login.js';
 	// const fetch =require('node-fetch');
-
+	import {token, authenticated} from '../../store/stores.js';
 	// const { session } = stores();
 	 fetch = process.browser ? window.fetch : require('node-fetch').default;
 
-
+	let authenticationError = null;
 	let username = '';
 	let password = '';
 	let errors = null;
@@ -33,7 +33,7 @@ function checkStatus(response) {
 
 
 	async function submit(event) {
-		return fetch(`${baseUrl}/${path}`, {
+		return await fetch(`${baseUrl}/${path}`, {
 		method: 'POST',
 		headers: {
 		  "Content-Type": "application/json",
@@ -47,9 +47,33 @@ function checkStatus(response) {
 			"rememberMe": true,
 			"username": username 
 		})
-	  }) .then(checkStatus)
-//   .then(parseJSON)
-  .then(json => console.log('JSON is:' + json));
+	  }) 
+	.then(checkStatus)
+  .then(parseJSON)
+  .then(json => console.log('JSON is:' + json.headers.Authorization))
+       .then(result => {
+		const bearerToken = result.headers.authorization;
+        if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
+          const jwt = bearerToken.slice(7, bearerToken.length);
+        //   if (this.rememberMe) {
+			// localStorage.setItem('jhi-authenticationToken', jwt);
+			$token = jwt;
+			
+        //   } else {
+        //     sessionStorage.setItem('jhi-authenticationToken', jwt);
+        //   }
+        }
+		this.authenticationError = false;
+		console.log("Token is:" + {$token});
+		console.log("Authenticated:" + {$authenticated});
+		// goto('/');
+        // this.$root.$emit('bv::hide::modal', 'login-page');
+        // this.accountService().retrieveAccount();
+	  }) 
+	   .catch(() => {
+		this.authenticationError = true;
+		console.log("Ther was an error while fetching token:" + {$token});
+      });
 //   const token_id = res.json();
 // 	console.log('token_id:' + token_id);
 //   return null;
@@ -106,4 +130,5 @@ function checkStatus(response) {
 			</div>
 		</div>
 	</div>
+	<!-- <p>Token is {$token} and authorization is {$authenticated}</p> -->
 </div>
