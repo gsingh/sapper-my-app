@@ -16,8 +16,9 @@
 	const baseUrl = `http://localhost:8080/api`
 	const path = `authenticate`
 
-function checkStatus(response) {
-	if (response.status >= 200 && response.status < 300) {
+async function checkStatus(response) {
+	if (response.ok) {
+		console.log("from checkstatus response: " + JSON.stringify(response));
 	  return response;
 	} else {
 	  var error = new Error(response.statusText)
@@ -27,52 +28,71 @@ function checkStatus(response) {
 	}
   }
   
-  function parseJSON(response) {
-	return JSON.stringify(response);
+  async function parseJSON(response) {
+	  console.log("from parseJson response: " + JSON.stringify(response));
+	return response.json();
   }
 
 
 	async function submit(event) {
-		return await fetch(`${baseUrl}/${path}`, {
+		await fetch(`${baseUrl}/${path}`, {
 		method: 'POST',
 		headers: {
-		  "Content-Type": "application/json",
-		  "password": password,
-			"rememberMe": true,
-			"username": username 
+		  'Content-Type': 'application/json',
+		//   'credentials': 'include',
+		'cache': 'no-cache'
+		//   "password": password,
+		// 	"rememberMe": true,
+		// 	"username": username 
 		  		},
 		body: JSON.stringify({
-			 "Content-Type": 'application/json',
-			"password": password,
+			 "password": password,
 			"rememberMe": true,
 			"username": username 
 		})
 	  }) 
 	.then(checkStatus)
   .then(parseJSON)
-  .then(json => console.log('JSON is:' + json.headers.Authorization))
-       .then(result => {
-		const bearerToken = result.headers.authorization;
-        if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
-          const jwt = bearerToken.slice(7, bearerToken.length);
-        //   if (this.rememberMe) {
-			// localStorage.setItem('jhi-authenticationToken', jwt);
-			$token = jwt;
+  .then((response) => 
+  {
+	//   console.log('response from submit is:' + JSON.stringify(response));
+	  const json = JSON.stringify(response);
+	//    console.log('response from submit : json is:' + json);
+	   const jwt_obj = JSON.parse(json);
+	    //  console.log('response from submit: jwt_obj is:' + JSON.stringify(jwt_obj));
+	   const jwt = JSON.stringify(jwt_obj.id_token);
+	    // console.log('response from submit: jwt is:' + jwt);
+	   $token = jwt;
+	//    console.log('response from submit: token is:' + $token);
+		// $authenticated = true;
+		// console.log('response from submit: authenticated is:' + authenticated);
+		 goto('/');
+
+  })
+//   .then(response => {
+// 		// const bearerToken = response.headers.get('Authorization');
+// 	// 	// console.log("Bearer Token from body: " + result.body);
+// 		// console.log("Bearer Token: " + bearerToken);
+//     //     // if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
+//           const jwt = bearerToken.slice(7, bearerToken.length);
+//     //     // //   if (this.rememberMe) {
+// 	// 	// 	// localStorage.setItem('jhi-authenticationToken', jwt);
+// 			$token = jwt;
 			
-        //   } else {
-        //     sessionStorage.setItem('jhi-authenticationToken', jwt);
-        //   }
-        }
-		this.authenticationError = false;
-		console.log("Token is:" + {$token});
-		console.log("Authenticated:" + {$authenticated});
-		// goto('/');
-        // this.$root.$emit('bv::hide::modal', 'login-page');
-        // this.accountService().retrieveAccount();
-	  }) 
+//     //     //   } else {
+//     //     //     sessionStorage.setItem('jhi-authenticationToken', jwt);
+//     //     //   }
+//     //     // }
+// 	// 	this.authenticationError = false;
+// 		console.log("Token is:" + {$token});
+// 		console.log("Authenticated:" + {$authenticated});
+// 		goto('/');
+//     //     // this.$root.$emit('bv::hide::modal', 'login-page');
+//     //     // this.accountService().retrieveAccount();
+// 	  }) 
 	   .catch(() => {
-		this.authenticationError = true;
-		console.log("Ther was an error while fetching token:" + {$token});
+	// 	this.authenticationError = true;
+		console.log("Ther was an error while fetching token:" );
       });
 //   const token_id = res.json();
 // 	console.log('token_id:' + token_id);
