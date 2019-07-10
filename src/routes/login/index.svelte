@@ -1,5 +1,4 @@
 <script>
-
 	import { goto, stores } from '@sapper/app';
 	// import ListErrors from '../components/ListErrors.svelte';
 	// import { post } from '../auth/login.js';
@@ -7,7 +6,6 @@
 	import {token, authenticated} from '../../store/stores.js';
 	// const { session } = stores();
 	 fetch = process.browser ? window.fetch : require('node-fetch').default;
-
 	let authenticationError = null;
 	let username = '';
 	let password = '';
@@ -15,13 +13,12 @@
 	let rememberMe = true;
 	const baseUrl = `http://localhost:8080/api`
 	const path = `authenticate`
-
 async function checkStatus(response) {
 	if (response.ok) {
-		console.log("from checkstatus response: " + JSON.stringify(response));
+		console.log("from checkstatus response: " + response.statusText);
 	  return response;
 	} else {
-	  var error = new Error(response.statusText)
+	  var error = new Error(response.statusText + '-' + response.baseUrl)
 	  error.response = response
 	  console.log(error);
 	  return error;
@@ -29,11 +26,9 @@ async function checkStatus(response) {
   }
   
   async function parseJSON(response) {
-	  console.log("from parseJson response: " + JSON.stringify(response));
+	  console.log("from parseJson response: " + response.statusText);
 	return response.json();
   }
-
-
 	async function submit(event) {
 		await fetch(`${baseUrl}/${path}`, {
 		method: 'POST',
@@ -52,22 +47,23 @@ async function checkStatus(response) {
 		})
 	  }) 
 	.then(checkStatus)
-  .then(parseJSON)
+//   .then(parseJSON)
   .then((response) => 
   {
+	  console.log('From response Authorization: ' + JSON.stringify(response.headers.get("Authorization")));
+	$token =  JSON.stringify(response.headers.get("Authorization"));
 	//   console.log('response from submit is:' + JSON.stringify(response));
-	  const json = JSON.stringify(response);
-	//    console.log('response from submit : json is:' + json);
-	   const jwt_obj = JSON.parse(json);
-	    //  console.log('response from submit: jwt_obj is:' + JSON.stringify(jwt_obj));
-	   const jwt = JSON.stringify(jwt_obj.id_token);
-	    // console.log('response from submit: jwt is:' + jwt);
-	   $token = jwt;
+	//   const json = JSON.stringify(response);
+	// //    console.log('response from submit : json is:' + json);
+	//    const jwt_obj = JSON.parse(json);
+	//     //  console.log('response from submit: jwt_obj is:' + JSON.stringify(jwt_obj));
+	//    const jwt = JSON.stringify(jwt_obj.id_token);
+	//     // console.log('response from submit: jwt is:' + jwt);
+	//    $token = jwt;
 	//    console.log('response from submit: token is:' + $token);
-		// $authenticated = true;
-		// console.log('response from submit: authenticated is:' + authenticated);
+	// 	// $authenticated = true;
+	// 	// console.log('response from submit: authenticated is:' + authenticated);
 		 goto('/');
-
   })
 //   .then(response => {
 // 		// const bearerToken = response.headers.get('Authorization');
@@ -90,9 +86,9 @@ async function checkStatus(response) {
 //     //     // this.$root.$emit('bv::hide::modal', 'login-page');
 //     //     // this.accountService().retrieveAccount();
 // 	  }) 
-	   .catch(() => {
+	   .catch((error) => {
 	// 	this.authenticationError = true;
-		console.log("Ther was an error while fetching token:" );
+		console.log("Ther was an error while fetching token: "  + error);
       });
 //   const token_id = res.json();
 // 	console.log('token_id:' + token_id);
@@ -108,16 +104,12 @@ async function checkStatus(response) {
 		 
 		 
 		 // post(`auth/login`, { username, password });
-
 		// TODO handle network errors
 		// errors = response.errors;
-
 		// if (response.user) {
 		// 	$session.user = response.user;
 		// 	goto('/');
 		// }
-
-
 	}
 </script>
 
@@ -150,5 +142,5 @@ async function checkStatus(response) {
 			</div>
 		</div>
 	</div>
-	<!-- <p>Token is {$token} and authorization is {$authenticated}</p> -->
+	<p>Token is {$token} and authorization is {$authenticated}</p>
 </div>

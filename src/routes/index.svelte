@@ -56,8 +56,8 @@
 {/if}
 
 <p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
-<p>Fine playig along, Gurmeet !!!</p> -->
-
+<p>Fine playig along, Gurmeet !!!</p> 
+<!-- <p>Token is {$token} and authorization is {$authenticated}</p> -->
 <script>
 import { authenticated } from '../store/stores.js';
 
