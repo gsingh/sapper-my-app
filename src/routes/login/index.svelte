@@ -11,6 +11,7 @@
 	let password = '';
 	let errors = null;
 	let rememberMe = true;
+	let token_1 = '';
 	const baseUrl = `http://localhost:8080/api`
 	const path = `authenticate`
 async function checkStatus(response) {
@@ -51,7 +52,10 @@ async function checkStatus(response) {
   .then((response) => 
   {
 	  console.log('From response Authorization: ' + JSON.stringify(response.headers.get("Authorization")));
-	$token =  JSON.stringify(response.headers.get("Authorization"));
+
+	token_1 =  JSON.stringify(response.headers.get("Authorization"));
+	$token = token_1.slice(1,token_1.length-1);
+	console.log("$token from response : " + $token);
 	//   console.log('response from submit is:' + JSON.stringify(response));
 	//   const json = JSON.stringify(response);
 	// //    console.log('response from submit : json is:' + json);

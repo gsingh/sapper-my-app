@@ -1,13 +1,14 @@
-<script >
+<script context="module">
 import {token, authenticated} from '../../store/stores.js';
 	
-let productions = "dummy production";
-
+export let productions = "dummy production";
+// let token_1 = $token.slice(1,$token.length-1);
+// console.log("token_1 : " + token_1);
 	const baseUrl = `http://localhost:9000/api`
 	const path = `productions`
 // const myHeader = new Headers();
-console.log('$token : ' + $token);
-console.log('Bearer : ' + $token);
+// console.log('$token : ' + $token);
+// console.log('Bearer : ' + $token);
 // myHeader.append('Authorization', 'Bearer ' + $token);
 const myAuth = $token;
 console.log("myAuth :" + myAuth);
@@ -22,8 +23,8 @@ async function checkStatus(response) {
 	  return error;
 	}
   }
-	// export async function submit(event) {
-		fetch(`${baseUrl}/${path}`, {
+	export async function preload(page, session) {
+	const res = await	this.fetch(`${baseUrl}/${path}`, {
 			method: 'GET',
 			headers: {
 				'Authorization': $token,
@@ -40,31 +41,28 @@ async function checkStatus(response) {
 		// 	"username": username 
 
 		}).then(checkStatus)
-		// .then(function(r){
-		// 	return r.json();
-		// })
-		 
-		.then(function(myJson) {
-    console.log(JSON.stringify(myJson));
-  })
+		
 		// .then(productions => {
 		// 		// console.log(JSON.stringify(productions));
-		// 		// productions=data;
+		// 	productions.json();
 		// 	return {productions};
 		// })
 		.catch((error) => {
 			console.log(error + ': from fetch !')
 		});
-	// preload();	
-		
-	// }
+		const productions = await res.json();
+		return {productions};
+
 	
-$: console.log(JSON.stringify({productions}));
+		
+	}
+	
+// $: console.log(JSON.stringify({productions}));
 // import {token, authenticated} from '../../store/stores.js';
 
 </script>
 
-<!-- <style>
+<style>
 	ul {
 		margin: 0 0 1em 0;
 		line-height: 1.5;
@@ -77,9 +75,9 @@ $: console.log(JSON.stringify({productions}));
 
 <h1>Recent posts</h1>
 
-<button on:click= {submit} >
+<!-- <button on:click= {submit} >
 	load data
-	</button>
+	</button> -->
 
 
  <ul>
@@ -88,6 +86,6 @@ $: console.log(JSON.stringify({productions}));
 				tell Sapper to load the data for the page as soon as
 				the user hovers over the link or taps it, instead of
 				waiting for the 'click' event -->
-		 <!-- <li>{production.prodTonnage}</li> -->
-	<!-- {/each} -->
-<!-- </ul> --> 
+		 <li>{production.prodTonnage}</li>
+	{/each}
+ </ul> 
