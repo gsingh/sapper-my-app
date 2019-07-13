@@ -1,11 +1,11 @@
 import { writable, derived } from 'svelte/store';
 
-export const token = writable("");
+export const token_id = writable("");
 
 export const authenticated = derived(
-    token,
-    $token => {
-        if ($token != "") 
+    token_id,
+    $token_id => {
+        if ($token_id != "") 
             return true;
         else 
             return false;

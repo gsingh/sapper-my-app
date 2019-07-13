@@ -3,7 +3,7 @@
 	// import ListErrors from '../components/ListErrors.svelte';
 	// import { post } from '../auth/login.js';
 	// const fetch =require('node-fetch');
-	import {token, authenticated} from '../../store/stores.js';
+	import {token_id, authenticated} from '../../store/stores.js';
 	// const { session } = stores();
 	 fetch = process.browser ? window.fetch : require('node-fetch').default;
 	let authenticationError = null;
@@ -54,8 +54,8 @@ async function checkStatus(response) {
 	  console.log('From response Authorization: ' + JSON.stringify(response.headers.get("Authorization")));
 
 	token_1 =  JSON.stringify(response.headers.get("Authorization"));
-	$token = token_1.slice(1,token_1.length-1);
-	console.log("$token from response : " + $token);
+	$token_id = token_1.slice(1,token_1.length-1);
+	console.log("$token from response : " + $token_id);
 	//   console.log('response from submit is:' + JSON.stringify(response));
 	//   const json = JSON.stringify(response);
 	// //    console.log('response from submit : json is:' + json);
@@ -92,7 +92,7 @@ async function checkStatus(response) {
 // 	  }) 
 	   .catch((error) => {
 	// 	this.authenticationError = true;
-		console.log("Ther was an error while fetching token: "  + error);
+		console.log("Ther was an error while fetching token_id: "  + error);
       });
 //   const token_id = res.json();
 // 	console.log('token_id:' + token_id);
@@ -146,5 +146,5 @@ async function checkStatus(response) {
 			</div>
 		</div>
 	</div>
-	<p>Token is {$token} and authorization is {$authenticated}</p>
+	<p>Token is {$token_id} and authorization is {$authenticated}</p>
 </div>

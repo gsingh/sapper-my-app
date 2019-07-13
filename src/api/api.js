@@ -1,4 +1,6 @@
-const base = 'http://localhost:8080/api';
+import { token_id } from '../store/stores';
+const base = 'http://localhost:9000/api';
+
 
 function send({ method, path, data, token }) {
 	const fetch = process.browser ? window.fetch : require('node-fetch').default;
@@ -7,8 +9,19 @@ function send({ method, path, data, token }) {
 		opts.headers['Content-Type'] = 'application/json';
 		opts.body = JSON.stringify(data);
 	}
+
+	let token_value;
+
+	const unsubscribe = token_id.subscribe(value => {
+		token_value = value;
+
+		// onDestroy(unsubscribe);
+	// var token_derived = JSON.stringify(token_id);
+	});
 	if (token) {
-		opts.headers['Authorization'] = `Token ${token}`;
+		console.log("$token from api.js : " + token_value);
+		opts.headers['Authorization'] = token_value;
+		
 	}
 	return fetch(`${base}/${path}`, opts)
 		.then(r => r.text())
