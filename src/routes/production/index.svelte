@@ -96,5 +96,6 @@ import * as api from '../../api/api.js';
 				the user hovers over the link or taps it, instead of
 				waiting for the 'click' event -->
 		 <li>{production.prodTonnage}</li>
+		 <li><a rel='prefetch' href='productions/{production.id}'>{production.prodDate}</a></li>
 	{/each}
  </ul>  
