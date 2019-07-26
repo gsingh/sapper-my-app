@@ -1,4 +1,5 @@
 <script context="module">
+import * as api from '../../api/api.js';
 	// export async function preload({ params, query }) {
 	// 	// the `slug` parameter is available because
 	// 	// this file is called [slug].html
@@ -6,10 +7,16 @@
 	// 	const data = await res.json();
 
 	export async function preload(page, session, params) {
-		const {slug} = page.params;
-
-		const production = await api.get(`productions/1`, true);
-		return {production};
+		// const {slug} = page.params;
+		console.log("from [id].svelte: page.params.id " + page.params);
+		const res = await api.get(`productions/${params}`, true);
+		
+		const production = res.json();
+return {
+			id: params.id,
+			production
+		};
+		
 
 	}
 
@@ -23,6 +30,7 @@
 
 <script>
 	export let production;
+	export let id;
 </script>
 
 <style>

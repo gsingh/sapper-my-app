@@ -69,6 +69,7 @@ import * as api from '../../api/api.js';
 
 <script>
 		export let productions;
+		export let id;
 </script>
 
 <!-- <style>
@@ -96,6 +97,10 @@ import * as api from '../../api/api.js';
 				the user hovers over the link or taps it, instead of
 				waiting for the 'click' event -->
 		 <li>{production.prodTonnage}</li>
-		 <li><a rel='prefetch' href='productions/{production.id}'>{production.prodDate}</a></li>
+		 <!-- <li><button class="btn btn-lg pull-xs-right btn-primary" type="button" disabled={inProgress} on:click={publish}>
+							Publish Article
+						</button>
+		 </li> -->
+		 <li><a  href='productions/${production.id}'>{production.prodDate}</a></li>
 	{/each}
  </ul>  

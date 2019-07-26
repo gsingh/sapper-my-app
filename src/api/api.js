@@ -4,6 +4,7 @@ const base = 'http://localhost:9000/api';
 
 function send({ method, path, data, token }) {
 	const fetch = process.browser ? window.fetch : require('node-fetch').default;
+console.log("from api.js");
 	const opts = { method, headers: {} };
 	if (data) {
 		opts.headers['Content-Type'] = 'application/json';
