@@ -12,12 +12,6 @@
     "test": "run-p --race dev cy:run"
   },
   "dependencies": {
-    "compression": "^1.7.1",
-    "dotenv": "^8.0.0",
-    "express": "^4.17.1",
-    "node-fetch": "^2.6.0",
-    "polka": "^0.5.0",
-    "sirv": "^0.4.0",
     "@fortawesome/fontawesome-svg-core": "1.2.15",
     "@fortawesome/free-solid-svg-icons": "5.7.2",
     "@fortawesome/vue-fontawesome": "0.1.5",
@@ -25,7 +19,14 @@
     "babel-core": "^6.25.0",
     "bootstrap": "4.3.1",
     "bootswatch": "4.3.1",
+    "compression": "^1.7.1",
     "date-fns": "2.0.0-alpha.26",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "jsonq": "^1.2.0",
+    "node-fetch": "^2.6.0",
+    "polka": "^0.5.0",
+    "sirv": "^0.4.0",
     "swagger-ui": "2.2.10"
   },
   "devDependencies": {

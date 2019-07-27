@@ -101,6 +101,6 @@ import * as api from '../../api/api.js';
 							Publish Article
 						</button>
 		 </li> -->
-		 <li><a  href='productions/${production.id}'>{production.prodDate}</a></li>
+		 <li><a rel='prefetch' href='productions/${production.id}'>{production.prodDate}</a></li>
 	{/each}
  </ul>  
