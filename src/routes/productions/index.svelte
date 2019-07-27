@@ -70,6 +70,8 @@ import * as api from '../../api/api.js';
 <script>
 		export let productions;
 		export let id;
+		import Getter from './_Getter.svelte';
+		import Delete from './_Delete.svelte';
 </script>
 
 <!-- <style>
@@ -101,6 +103,8 @@ import * as api from '../../api/api.js';
 							Publish Article
 						</button>
 		 </li> -->
-		 <li><a rel='prefetch' href='productions/${production.id}'>{production.prodDate}</a></li>
+		 <!-- <li><a rel='prefetch' href='productions/${production.id}'>{production.prodDate}</a></li> -->
+		  <li><Getter id='${production.id}' date={production.prodDate}></Getter></li>
+		  <li><Delete id='${production.id}'></Delete></li>
 	{/each}
  </ul>  
