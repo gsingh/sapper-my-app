@@ -9,7 +9,7 @@ async function remove() {
 	}
 	$: goto('/productions');
 </script>
-
-<button class="btn btn-outline-danger btn-sm" on:click='{remove}'>
-				<i class="ion-trash-a"/> Delete 
+<button class="bg-blue-600 text-white font-bold py-2 px-4 rounded" on:click='{remove}'>
+<!-- <button class="btn btn-outline-danger btn-sm" on:click='{remove}'> -->
+				Delete 
 			</button>

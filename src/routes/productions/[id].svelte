@@ -37,7 +37,7 @@ return {
 	export let id;
 </script>
 
-<style>
+<!-- <style>
 	/*
 		By default, CSS is locally scoped to the component,
 		and any unused styles are dead-code-eliminated.
@@ -71,7 +71,7 @@ return {
 	.content :global(li) {
 		margin: 0 0 0.5em 0;
 	}
-</style>
+</style> -->
 
 <svelte:head>
 	<title>{production.prodDate}</title>

@@ -2,30 +2,25 @@
 1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
 1 verbose cli   'C:\\Users\\mes\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',
 1 verbose cli   'run',
-1 verbose cli   'dev' ]
+1 verbose cli   'watch:tailwind' ]
 2 info using npm@3.10.9
 3 info using node@v10.15.3
-4 verbose run-script [ 'predev', 'dev', 'postdev' ]
-5 info lifecycle TODO@0.0.1~predev: TODO@0.0.1
-6 silly lifecycle TODO@0.0.1~predev: no script for predev, continuing
-7 info lifecycle TODO@0.0.1~dev: TODO@0.0.1
-8 verbose lifecycle TODO@0.0.1~dev: unsafe-perm in lifecycle true
-9 verbose lifecycle TODO@0.0.1~dev: PATH: C:\Users\mes\AppData\Roaming\npm\node_modules\npm\bin\node-gyp-bin;D:\sapper-my-app\node_modules\.bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;c:\Program Files\Hewlett-Packard\HP ProtectTools Security Manager\Bin\;c:\Program Files\Intel\DMIX;C:\Program Files\Intel\Services\IPT\;D:\apache-maven-3.5.4-bin\apache-maven-3.5.4\bin;D:\spring-roo-2.0.0.release\bin;C:\Program Files\gradle\gradle-2.14-all\gradle-2.14\bin;C:\HashiCorp\Vagrant\bin;C:\Program Files\Rust stable GNU 1.28\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Users\mes\.cargo\bin;C:\Users\mes\AppData\Roaming\npm;C:\Users\mes\AppData\Local\Programs\Microsoft VS Code\bin
-10 verbose lifecycle TODO@0.0.1~dev: CWD: D:\sapper-my-app
-11 silly lifecycle TODO@0.0.1~dev: Args: [ '/d /s /c', 'sapper dev' ]
-12 verbose stack Error: kill ENOSYS
-12 verbose stack     at process.kill (internal/process/per_thread.js:198:13)
-12 verbose stack     at process.listener (C:\Users\mes\AppData\Roaming\npm\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:86:15)
-12 verbose stack     at process.emit (events.js:194:15)
-13 verbose cwd D:\sapper-my-app
-14 error Windows_NT 6.1.7601
-15 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Users\\mes\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "run" "dev"
-16 error node v10.15.3
-17 error npm  v3.10.9
-18 error code ENOSYS
-19 error errno ENOSYS
-20 error syscall kill
-21 error kill ENOSYS
-22 error If you need help, you may report this error at:
-22 error     <https://github.com/npm/npm/issues>
-23 verbose exit [ 1, true ]
+4 verbose stack Error: missing script: watch:tailwind
+4 verbose stack     at run (C:\Users\mes\AppData\Roaming\npm\node_modules\npm\lib\run-script.js:151:19)
+4 verbose stack     at C:\Users\mes\AppData\Roaming\npm\node_modules\npm\lib\run-script.js:61:5
+4 verbose stack     at C:\Users\mes\AppData\Roaming\npm\node_modules\npm\node_modules\read-package-json\read-json.js:356:5
+4 verbose stack     at checkBinReferences_ (C:\Users\mes\AppData\Roaming\npm\node_modules\npm\node_modules\read-package-json\read-json.js:320:45)
+4 verbose stack     at final (C:\Users\mes\AppData\Roaming\npm\node_modules\npm\node_modules\read-package-json\read-json.js:354:3)
+4 verbose stack     at then (C:\Users\mes\AppData\Roaming\npm\node_modules\npm\node_modules\read-package-json\read-json.js:124:5)
+4 verbose stack     at C:\Users\mes\AppData\Roaming\npm\node_modules\npm\node_modules\read-package-json\read-json.js:311:12
+4 verbose stack     at C:\Users\mes\AppData\Roaming\npm\node_modules\npm\node_modules\graceful-fs\graceful-fs.js:78:16
+4 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+5 verbose cwd D:\sapper-my-app
+6 error Windows_NT 6.1.7601
+7 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Users\\mes\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "run" "watch:tailwind"
+8 error node v10.15.3
+9 error npm  v3.10.9
+10 error missing script: watch:tailwind
+11 error If you need help, you may report this error at:
+11 error     <https://github.com/npm/npm/issues>
+12 verbose exit [ 1, true ]
