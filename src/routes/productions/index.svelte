@@ -70,8 +70,8 @@ import * as api from '../../api/api.js';
 <script>
 		export let productions;
 		export let id;
-		import Getter from './_Getter.svelte';
-		import Delete from './_Delete.svelte';
+		import Getter from '../_CRUD/_Getter.svelte';
+		import Delete from '../_CRUD/_Delete.svelte';
 </script>
 
 <!-- <style>
@@ -91,7 +91,7 @@ import * as api from '../../api/api.js';
 	load data
 	</button> -->
 
-	<pre>{productions}</pre>
+	<!-- <pre>{productions}</pre> -->
  <ul>
 	{#each productions as production}
 		<!-- we're using the non-standard `rel=prefetch` attribute to
@@ -104,7 +104,7 @@ import * as api from '../../api/api.js';
 						</button>
 		 </li> -->
 		 <!-- <li><a rel='prefetch' href='productions/${production.id}'>{production.prodDate}</a></li> -->
-		  <li><Getter id='${production.id}' date={production.prodDate}></Getter></li>
-		  <li><Delete id='${production.id}'></Delete></li>
+		  <li><Getter base='productions' id='${production.id}' date={production.prodDate}></Getter></li>
+		  <li><Delete base='productions/' id='${production.id}'></Delete></li>
 	{/each}
  </ul>  
