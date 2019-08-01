@@ -1,5 +1,7 @@
 <script context="module">
 import * as api from '../../api/api.js';
+	import Getter from '../_CRUD/_Getter.svelte';
+	import Delete from '../_CRUD/_Delete.svelte';
 	// export async function preload({ params, query }) {
 	// 	// the `slug` parameter is available because
 	// 	// this file is called [slug].html
@@ -35,6 +37,8 @@ return {
 <script>
 	export let production;
 	export let id;
+	export let getter, deleter,putter, creater;
+	
 </script>
 
 <!-- <style>
