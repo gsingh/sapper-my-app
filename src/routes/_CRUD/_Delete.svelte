@@ -1,5 +1,6 @@
 <script>
 import * as api from '../../api/api.js';
+import {onMount} from 'svelte';
 import { goto } from '@sapper/app';
 export let id;
 export let base;

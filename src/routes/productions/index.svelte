@@ -1,6 +1,7 @@
 <script context="module" >
 // import {token, authenticated} from '../../store/stores.js';
 import * as api from '../../api/api.js';
+import {onMount} from 'svelte';
 
 // export let productions = '';
 // let token_1 = $token.slice(1,$token.length-1);
@@ -29,6 +30,12 @@ import * as api from '../../api/api.js';
 		return {productions};
 
 	}
+	// onMount(async ()=> {
+	// 		productions = await api.get('productions', true);
+	// 	return {productions};
+	// 	console.log("fron onmount()");
+	// 	}
+	// 	);
 		// fetch(`${baseUrl}/${path}`, {
 		// 	method: 'GET',
 		// 	headers: {
@@ -72,6 +79,12 @@ import * as api from '../../api/api.js';
 		export let id;
 		import Getter from '../_CRUD/_Getter.svelte';
 		import Delete from '../_CRUD/_Delete.svelte';
+		onMount(async ()=> {
+			productions = await api.get('productions', true);
+		return {productions};
+		console.log("fron onmount()");
+		}
+		);
 </script>
 
 <!-- <style>
