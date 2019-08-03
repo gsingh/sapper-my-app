@@ -91,7 +91,7 @@ import * as api from '../../api/api.js';
 	load data
 	</button> -->
 
-	<pre>{productions}</pre>
+	<!-- <pre>{productions}</pre> -->
  <ul>
 	{#each productions as production}
 		<!-- we're using the non-standard `rel=prefetch` attribute to
