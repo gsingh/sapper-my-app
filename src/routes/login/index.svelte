@@ -4,8 +4,10 @@
 	// import { post } from '../auth/login.js';
 	// const fetch =require('node-fetch');
 	import {token_id, authenticated} from '../../store/stores.js';
-	// const { session } = stores();
-	 fetch = process.browser ? window.fetch : require('node-fetch').default;
+	
+	const { session } = stores();
+	
+	fetch = process.browser ? window.fetch : require('node-fetch').default;
 	let authenticationError = null;
 	let username = '';
 	let password = '';
@@ -31,89 +33,39 @@ async function checkStatus(response) {
 	return response.json();
   }
 	async function submit(event) {
-		await fetch(`${baseUrl}/${path}`, {
+	const response = 	await fetch(`${baseUrl}/${path}`, {
 		method: 'POST',
 		headers: {
 		  'Content-Type': 'application/json',
 		//   'credentials': 'include',
 		'cache': 'no-cache'
-		//   "password": password,
-		// 	"rememberMe": true,
-		// 	"username": username 
-		  		},
+		},
 		body: JSON.stringify({
 			 "password": password,
 			"rememberMe": true,
 			"username": username 
 		})
-	  }) 
-	.then(checkStatus)
+	  }) ;
+
+	response.then(checkStatus)
 //   .then(parseJSON)
   .then((response) => 
   {
 	  console.log('From response Authorization: ' + JSON.stringify(response.headers.get("Authorization")));
-
+	
 	token_1 =  JSON.stringify(response.headers.get("Authorization"));
 	$token_id = token_1.slice(1,token_1.length-1);
+	// this.req.session.token_id=$token_id;
 	console.log("$token from response : " + $token_id);
-	//   console.log('response from submit is:' + JSON.stringify(response));
-	//   const json = JSON.stringify(response);
-	// //    console.log('response from submit : json is:' + json);
-	//    const jwt_obj = JSON.parse(json);
-	//     //  console.log('response from submit: jwt_obj is:' + JSON.stringify(jwt_obj));
-	//    const jwt = JSON.stringify(jwt_obj.id_token);
-	//     // console.log('response from submit: jwt is:' + jwt);
-	//    $token = jwt;
-	//    console.log('response from submit: token is:' + $token);
-	// 	// $authenticated = true;
-	// 	// console.log('response from submit: authenticated is:' + authenticated);
+	
 		 goto('/');
   })
-//   .then(response => {
-// 		// const bearerToken = response.headers.get('Authorization');
-// 	// 	// console.log("Bearer Token from body: " + result.body);
-// 		// console.log("Bearer Token: " + bearerToken);
-//     //     // if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
-//           const jwt = bearerToken.slice(7, bearerToken.length);
-//     //     // //   if (this.rememberMe) {
-// 	// 	// 	// localStorage.setItem('jhi-authenticationToken', jwt);
-// 			$token = jwt;
-			
-//     //     //   } else {
-//     //     //     sessionStorage.setItem('jhi-authenticationToken', jwt);
-//     //     //   }
-//     //     // }
-// 	// 	this.authenticationError = false;
-// 		console.log("Token is:" + {$token});
-// 		console.log("Authenticated:" + {$authenticated});
-// 		goto('/');
-//     //     // this.$root.$emit('bv::hide::modal', 'login-page');
-//     //     // this.accountService().retrieveAccount();
-// 	  }) 
+
 	   .catch((error) => {
-	// 	this.authenticationError = true;
+	
 		console.log("Ther was an error while fetching token_id: "  + error);
       });
-//   const token_id = res.json();
-// 	console.log('token_id:' + token_id);
-//   return null;
-  
-//   .then(function(data) {
-//     console.log('request succeeded with JSON response', data)
-//   }).catch(function(error) {
-//     console.log('request failed', error)
-//   })
-		 
-		 
-		 
-		 
-		 // post(`auth/login`, { username, password });
-		// TODO handle network errors
-		// errors = response.errors;
-		// if (response.user) {
-		// 	$session.user = response.user;
-		// 	goto('/');
-		// }
+
 	}
 </script>
 

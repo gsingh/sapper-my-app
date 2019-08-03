@@ -1,4 +1,4 @@
-import { writable, derived } from 'svelte/store';
+import { writable, derived } from '@sapper/app';
 
 export const token_id = writable("");
 
