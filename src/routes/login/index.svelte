@@ -33,7 +33,7 @@ async function checkStatus(response) {
 	return response.json();
   }
 	async function submit(event) {
-	const response = 	await fetch(`${baseUrl}/${path}`, {
+	 	await fetch(`${baseUrl}/${path}`, {
 		method: 'POST',
 		headers: {
 		  'Content-Type': 'application/json',
@@ -45,9 +45,9 @@ async function checkStatus(response) {
 			"rememberMe": true,
 			"username": username 
 		})
-	  }) ;
+	  }) 
 
-	response.then(checkStatus)
+	.then(checkStatus)
 //   .then(parseJSON)
   .then((response) => 
   {
