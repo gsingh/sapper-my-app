@@ -7,4 +7,4 @@ $: link = base + {id};
 $: console.log("from _CRUD/getter: " + link);
 </script>
 
-<a rel='prefetch' href= '{base}/{id}'>{date}</a>
+<a rel='prefetch' href='{base}/{id}'>{date}</a>

@@ -99,7 +99,7 @@ import {onMount} from 'svelte';
 </svelte:head>
 
 <h1>Recent posts</h1>
-
+{#if {productions}}
 <!-- <button on:click= {preload} >
 	load data
 	</button> -->
@@ -121,3 +121,4 @@ import {onMount} from 'svelte';
 		  <li><Delete base='productions/' id='${production.id}'></Delete></li>
 	{/each}
  </ul>  
+ {/if}

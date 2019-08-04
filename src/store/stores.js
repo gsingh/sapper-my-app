@@ -1,18 +1,6 @@
-import {Store } from 'svelte/store';
-import useLocalStorage from './useLocalStorage.js';
+import { writable, derived } from 'svelte/store';
 
-export const store = writable(localStorage.getItem("store") || "");
-
-store.subscribe(val => localStorage.setItem("store", val));
-
-const store = new Store({
-	token_id: ''
-});
-
-window.store = store;
-
-// save data to localStorage every time our state changes
-useLocalStorage(store, 'my-app');
+export const token_id = writable("");
 
 export const authenticated = derived(
     token_id,

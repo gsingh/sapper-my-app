@@ -1,11 +1,12 @@
 <script>
-	import { goto, stores } from '@sapper/app';
+	import { goto } from 'svelte';
+	import { store } from '../../client.js'
 	// import ListErrors from '../components/ListErrors.svelte';
 	// import { post } from '../auth/login.js';
 	// const fetch =require('node-fetch');
-	import {token_id, authenticated} from '../../store/stores.js';
+	// import {token_id, authenticated} from '../../store/stores.js';
 	
-	const { session } = stores();
+	// const { session } = stores();
 	
 	fetch = process.browser ? window.fetch : require('node-fetch').default;
 	let authenticationError = null;
@@ -14,6 +15,7 @@
 	let errors = null;
 	let rememberMe = true;
 	let token_1 = '';
+	let token = '';
 	const baseUrl = `http://localhost:8080/api`
 	const path = `authenticate`
 async function checkStatus(response) {
@@ -54,9 +56,10 @@ async function checkStatus(response) {
 	  console.log('From response Authorization: ' + JSON.stringify(response.headers.get("Authorization")));
 	
 	token_1 =  JSON.stringify(response.headers.get("Authorization"));
-	$token_id = token_1.slice(1,token_1.length-1);
+	token =token_1.slice(1,token_1.length-1);
+	store.set({token_id: {token}});
 	// this.req.session.token_id=$token_id;
-	console.log("$token from response : " + $token_id);
+	console.log("$token from response : " + {token});
 	
 		 goto('/');
   })
@@ -98,5 +101,5 @@ async function checkStatus(response) {
 			</div>
 		</div>
 	</div>
-	<p>Token is {$token_id} and authorization is {$authenticated}</p>
+	<p>Token is {token_1} and authorization is </p>
 </div>

@@ -1,7 +1,7 @@
 <script>
 import * as api from '../../api/api.js';
-import {onMount} from 'svelte';
-import { goto } from '@sapper/app';
+import {onMount,  goto} from 'svelte';
+// import { goto } from 'svelte';
 export let id;
 export let base;
 const idd = id.slice(1,id.length);
