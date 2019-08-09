@@ -1,19 +1,19 @@
 import * as sapper from '@sapper/app';
-import { Store } from 'svelte/store.js';
-import useLocalStorage from './useLocalStorage.js';
+// import { Store } from '@sapper/app';
+// import useLocalStorage from './useLocalStorage.js';
 
-export const store = new Store({
-	token_id: 'Gurmeet'
-});
+// export const store = new Store({
+// 	token_id: 'Gurmeet'
+// });
 
-window.store = store;
+// window.store = store;
 
-// save data to localStorage every time our state changes
-useLocalStorage(store, 'my-app');
+// // save data to localStorage every time our state changes
+// useLocalStorage(store, 'my-app');
 
-// export store;
+// // export store;
 
 sapper.start({
-	target: document.querySelector('#sapper'),
-	store
+	target: document.querySelector('#sapper')
+	// store
 });

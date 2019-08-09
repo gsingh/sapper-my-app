@@ -1,4 +1,8 @@
 module.exports = {
+  variants: {
+    tableLayout: ['responsive', 'hover', 'focus'],
+  },
+
   theme: {
     screens: {
       sm: '640px',

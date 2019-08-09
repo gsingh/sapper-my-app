@@ -1,90 +1,42 @@
-<script context="module" >
-// import {token, authenticated} from '../../store/stores.js';
+<script context = "module">
+import Select from 'svelte-select';
+import {token, authenticated} from '../../store/stores.js';
 import * as api from '../../api/api.js';
 import {onMount} from 'svelte';
+import { goto, stores } from '@sapper/app'; 
 
-// export let productions = '';
-// let token_1 = $token.slice(1,$token.length-1);
-// console.log("token_1 : " + token_1);
-	// const baseUrl = `http://localhost:9000/api`
-	// const path = `productions`
-// const myHeader = new Headers();
-// console.log('$token : ' + $token);
-// console.log('Bearer : ' + $token);
-// myHeader.append('Authorization', 'Bearer ' + $token);
-// const myAuth = $token;
-// console.log("myAuth :" + myAuth);
-// async function checkStatus(response) {
-// 	if (response.ok) {
-// 		console.log("from checkstatus response: " + response.checkStatus);
-// 	  return response;
-// 	} else {
-// 	  var error = new Error(response.statusText);
-// 	  error.response = response;
-// 	  console.log(error);
-// 	  return error;
-// 	}
-//   }
-	export async function preload(page, session, params) {
-		const productions = await api.get('productions', true);
+	export async function preload(page, session) {
+		const {path, params,query} = page;
+		// if(!session.user) return this.redirect(302, 'login');
+
+		const productions = await api.get('productions', true );
 		return {productions};
 
+		const managers = await api.get('shift-managers', true);
+			return {managers};
+
 	}
-	// onMount(async ()=> {
-	// 		productions = await api.get('productions', true);
-	// 	return {productions};
-	// 	console.log("fron onmount()");
-	// 	}
-	// 	);
-		// fetch(`${baseUrl}/${path}`, {
-		// 	method: 'GET',
-		// 	headers: {
-		// 		'Authorization': $token,
-		// 		'Content-Type': 'application/json',
-		// 		'Accept': 'application/json',
-		// 		'credentials': 'include'
-		// 	}
-		// headers: {
-		//   'Content-Type': 'application/json',
-		// //   'credentials': 'include',
-		// 'cache': 'no-cache'
-		//   "password": password,
-		// 	"rememberMe": true,
-		// 	"username": username 
 
-		// }).then(checkStatus)
-		
-		// .then(data => {
-		// 		// console.log(JSON.stringify(productions));
-		// 	{productions} = data.json();
-		// 	return {productions};
-		// })
-		// .catch((error) => {
-		// 	console.log(error + ': from fetch !')
-		// });
-		// productions =  res.json();
-		// console.log(JSON.stringify(productions));
-		// return {productions};
-	// }
-
-	// console.log(JSON.stringify())
 	
-// $: console.log(JSON.stringify({productions}));
-// import {token, authenticated} from '../../store/stores.js';
-
 </script>
-
 <script>
+		export let selected;
 		export let productions;
+		export let managers;
 		export let id;
 		import Getter from '../_CRUD/_Getter.svelte';
 		import Delete from '../_CRUD/_Delete.svelte';
+		
+		$: managers = api.get('shift-managers', true);
+		
 		onMount(async ()=> {
-			productions = await api.get('productions', true);
-		return {productions};
-		console.log("fron onmount()");
+		const managers = await api.get('shift-managers', true);
+			return {managers};
+			console.log("fron onmount()");
 		}
 		);
+		
+
 </script>
 
 <!-- <style>
@@ -105,20 +57,37 @@ import {onMount} from 'svelte';
 	</button> -->
 
 	<!-- <pre>{productions}</pre> -->
- <ul>
+ <table class="table-auto">
 	{#each productions as production}
 		<!-- we're using the non-standard `rel=prefetch` attribute to
 				tell Sapper to load the data for the page as soon as
 				the user hovers over the link or taps it, instead of
 				waiting for the 'click' event -->
-		 <li>{production.prodTonnage}</li>
+		 <tr>
+		 <td class="table-cell">
+		  {production.prodTonnage}</td>
 		 <!-- <li><button class="btn btn-lg pull-xs-right btn-primary" type="button" disabled={inProgress} on:click={publish}>
 							Publish Article
 						</button>
 		 </li> -->
+		 <!-- {#await onMount()}
+		 	<p>...waiting</p>
+{:then managers} -->
+
+
+		 
 		 <!-- <li><a rel='prefetch' href='productions/${production.id}'>{production.prodDate}</a></li> -->
-		  <li><Getter base='productions' id='${production.id}' date={production.prodDate}></Getter></li>
-		  <li><Delete base='productions/' id='${production.id}'></Delete></li>
+	<td class="table-cell">	 <select bind:value={selected}  >
+		  	{#each managers as manager}
+			 <option value={manager}>
+			 {manager.name}
+			 </option>
+			 {/each}
+			</select></td>
+		 <!-- {/await} -->
+		<td class="table-cell">  <Getter base='productions' id='{production.id}' ></Getter></td>
+		<td class="table-cell">  <Delete base='productions/' id='{production.id}'></Delete></td>
+		</tr>
 	{/each}
- </ul>  
+ </table>
  {/if}

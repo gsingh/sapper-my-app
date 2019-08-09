@@ -15,14 +15,14 @@ import * as api from '../../api/api.js';
 		console.log("from [id].svelte:  " );
 		console.log("from [id].svelte: page.params.id " + page.params.id);
 		const _id = page.params.id;
-		// const _idd = _id.slice(1,_id.length);
-		console.log("from [id].svelte: _idd " + _id);
-		const production = await api.get(`productions/` + _id, true);
+		const _idd = _id.slice(1,_id.length);
+		console.log("from [id].svelte: _idd " + _idd);
+		const manager = await api.get(`shift-managers/` + _idd, true);
 		
-		// const production = res.json();
+		// const manager = res.json();
 return {
-			id: _id,
-			production
+			id: _idd,
+			manager
 		};
 		
 
@@ -36,7 +36,7 @@ return {
 	// }
 </script>
 <script>
-	export let production;
+	export let manager;
 	export let id;
 	// export let getter, deleter,putter, creater;
 	
@@ -79,11 +79,11 @@ return {
 </style> -->
 
 <svelte:head>
-	<title>{production.prodDate}</title>
+	<title>{manager.name}</title>
 </svelte:head>
 
-<h1>{production.prodDate}</h1>
-<h2>{production.prodTonnage}</h2>
+<h1>{manager.mobileNumber}</h1>
+<h2>{manager.designation}</h2>
 <!-- <div class='content'>
 	{@html post.html}
 </div> -->
