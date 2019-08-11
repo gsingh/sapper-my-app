@@ -1,4 +1,6 @@
-import { token_id } from '../store/stores';
+// import { token_id } from '../store/stores';
+// import { stores } from '@sapper/app';
+// const { session } = stores();
 const base = 'http://localhost:8080/api';
 
 
@@ -11,18 +13,18 @@ console.log("from api.js");
 		opts.body = JSON.stringify(data);
 	}
 
-	let token_value;
+	// let token_value;
 
-	const unsubscribe = token_id.subscribe(value => {
-		token_value = value;
+	// const unsubscribe = token_id.subscribe(value => {
+	// 	token_value = value;
 
-		// onDestroy(unsubscribe);
-	var token_derived = JSON.stringify(token_id);
-	});
+	// 	// onDestroy(unsubscribe);
+	// var token_derived = JSON.stringify(token_id);
+	// });
 
 	if (token) {
-			console.log("$token from api.js : " + token_value);
-		opts.headers['Authorization'] = token_value;
+			console.log("$token from api.js : " + $session.token_id);
+		opts.headers['Authorization'] = $session.token_id;
 		
 	}
 	return fetch(`${base}/${path}`, opts)

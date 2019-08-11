@@ -1,3 +1,16 @@
+<script context="module">
+export function preload(page, { user }) {
+        return { user };
+    };
+</script>
+<script>
+import { stores } from '@sapper/app';
+const { session } = stores();
+
+export let user;
+        // $token= "123456";
+</script> 
+
  <style>
 	h1, figure, p {
 		text-align: center;
@@ -45,7 +58,7 @@
 <!-- <p>Token is : {$token}</p> -->
 <!-- <p>Authenticated is {$authenticated}</p> -->
 
-{#if ($authenticated == true)}
+{#if user}
     <p>You are logged in !</p>
  {:else}
 
@@ -58,11 +71,7 @@
 <p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
 <p>Fine playig along, Gurmeet !!!</p> 
 <!-- <p>Token is {$token} and authorization is {$authenticated}</p> -->
-<script>
-import { authenticated } from '../store/stores.js';
 
-        // $token= "123456";
-</script> 
 
 
 <!-- 

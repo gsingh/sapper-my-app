@@ -4,7 +4,7 @@
 	// import ListErrors from '../components/ListErrors.svelte';
 	// import { post } from '../auth/login.js';
 	// const fetch =require('node-fetch');
-	import {token_id, authenticated} from '../../store/stores.js';
+	// import {token_id, authenticated} from '../../store/stores.js';
 	
 	const { session } = stores();
 	
@@ -58,16 +58,19 @@ async function checkStatus(response) {
 	
 	token_1 =  JSON.stringify(response.headers.get("Authorization"));
 	token =token_1.slice(1,token_1.length-1);
-	$token_id = token;
+	// $token_id = token;
 		// stores.setItem({authenticated: true});
 	// this.req.session.token_id=$token_id;
 	console.log("$token from response : " + {token});
 	console.log("$token from body : " + JSON.stringify(response.body.id_token));
 	console.log("id_token from body : " + JSON.stringify(response.body.id_token));
-	if (response.user) {
-			$session.user = response.body.id_token;
-			
-		}
+	// if (response.user) {
+			session.set({token_id: response.body.id_token});
+			session.set({user: true});
+			session.set({authenticated: true});
+		// }
+		console.log("session.token_id:  " + $session.token_id);
+		console.log("session.token_id:  " + $session.authenticated);
 		goto('/'); 
   })
 
@@ -77,7 +80,7 @@ async function checkStatus(response) {
       });
 
 	}
-	$: console.log($session)
+	// $: console.log($session)
 </script>
 
 <svelte:head>
@@ -119,5 +122,5 @@ async function checkStatus(response) {
 			</div>
 		</div>
 	</div>
-	<p>Token is {$token_id} and authorization is {$authenticated} </p>
+	<p>Token is {$session.token_id} and authorization is {$session.authenticated} </p>
 </div>

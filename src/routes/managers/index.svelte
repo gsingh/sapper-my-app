@@ -1,5 +1,5 @@
 <script context = "module">
-import {token, authenticated} from '../../store/stores.js';
+// import {token, authenticated} from '../../store/stores.js';
 import * as api from '../../api/api.js';
 import {onMount} from 'svelte';
 import { goto, stores } from '@sapper/app'; 
@@ -30,7 +30,7 @@ import { goto, stores } from '@sapper/app';
 	export async function preload(page, session, params) {
 		const managers = await api.get('shift-managers', true );
 		return {managers};
-
+		
 	}
 	// onMount(async ()=> {
 	// 		productions = await api.get('productions', true);

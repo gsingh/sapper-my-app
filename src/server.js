@@ -18,7 +18,8 @@ express()
 		// store: new FileStore(fileStoreOptions),
 		secret: 'keyboard cat',
 		resave: false,
-		saveUninitialized: true,
+		// 
+		rolling: true,
 		cookie: {
 			maxAge: 31536000
 		},
@@ -26,12 +27,20 @@ express()
 			path: process.env.NOW ? `/tmp/sessions` : `.sessions`
 	  })
 	})) // You can also use Express
+	.use(function(req, res, next) {
+		console.log(req.session.user);
+		console.log(req.session.token_id);
+		if (typeof req.session.user === 'undefined') {
+			req.session.user = false;
+		}
+		next()
+	})
 	.use(
 		compression({ threshold: 0 }),
 		sirv('static', { dev }),
 		sapper.middleware({
 			session: (req, res) => ({
-				user: res.session && res.session.user
+				user: req.session.user
 			})
 		})
 	)
