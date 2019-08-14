@@ -4,7 +4,7 @@
 const base = 'http://localhost:8080/api';
 
 
-function send({ method, path, data, token }) {
+async function send({ method, path, data, token }) {
 	const fetch = process.browser ? window.fetch : require('node-fetch').default;
 console.log("from api.js");
 	const opts = { method, headers: {} };

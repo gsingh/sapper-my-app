@@ -2,84 +2,102 @@
 	import { goto, stores } from '@sapper/app';
 	// import { store } from '../../client.js'
 	// import ListErrors from '../components/ListErrors.svelte';
-	// import { post } from '../auth/login.js';
+	import { post } from '../../api/utils.js';
 	// const fetch =require('node-fetch');
 	// import {token_id, authenticated} from '../../store/stores.js';
 	
 	const { session } = stores();
 	
-	fetch = process.browser ? window.fetch : require('node-fetch').default;
-	let authenticationError = null;
 	let username = '';
 	let password = '';
 	let errors = null;
-	let rememberMe = true;
-	let token_1 = '';
-	let token = '';
-	const baseUrl = `http://localhost:8080/api`
-	const path = `authenticate`
-async function checkStatus(response) {
-	if (response.ok) {
-		console.log("from checkstatus response: " + response.statusText);
-		console.log("from checkstatus response: " + JSON.stringify(response.body));
-	  return response;
-	} else {
-	  var error = new Error(response.statusText + '-' + response.baseUrl)
-	  error.response = response
-	  console.log(error);
-	  return error;
-	}
-  }
+// 	fetch = process.browser ? window.fetch : require('node-fetch').default;
+// 	let authenticationError = null;
+// 	let username = '';
+// 	let password = '';
+// 	let errors = null;
+// 	let rememberMe = true;
+// 	let token_1 = '';
+// 	let token = '';
+// 	const baseUrl = `http://localhost:8080/api`
+// 	const path = `authenticate`
+// async function checkStatus(response) {
+// 	if (response.ok) {
+// 		console.log("from checkstatus response: " + response.statusText);
+// 		console.log("from checkstatus response: " + JSON.stringify(response.body));
+// 	  return response;
+// 	} else {
+// 	  var error = new Error(response.statusText + '-' + response.baseUrl)
+// 	  error.response = response
+// 	  console.log(error);
+// 	  return error;
+// 	}
+//   }
   
-  async function parseJSON(response) {
-	  console.log("from parseJson response: " + response.statusText);
-	return response.json();
-  }
+//   async function parseJSON(response) {
+// 	  console.log("from parseJson response: " + response.statusText);
+// 	return response.json();
+//   }
 	async function submit(event) {
-	 	await fetch(`${baseUrl}/${path}`, {
-		method: 'POST',
-		headers: {
-		  'Content-Type': 'application/json',
-		//   'credentials': 'include',
-		'cache': 'no-cache'
-		},
-		body: JSON.stringify({
-			 "password": password,
-			"rememberMe": true,
-			"username": username 
-		})
-	  }) 
-
-	.then(checkStatus)
-//   .then(parseJSON)
-  .then((response) => 
-  {
-	  console.log('From response Authorization: ' + JSON.stringify(response.headers.get("Authorization")));
-	
-	token_1 =  JSON.stringify(response.headers.get("Authorization"));
-	token =token_1.slice(1,token_1.length-1);
-	// $token_id = token;
-		// stores.setItem({authenticated: true});
-	// this.req.session.token_id=$token_id;
-	console.log("$token from response : " + {token});
-	console.log("$token from body : " + JSON.stringify(response.body.id_token));
-	console.log("id_token from body : " + JSON.stringify(response.body.id_token));
-	// if (response.user) {
-			session.set({token_id: response.body.id_token});
-			session.set({user: true});
-			session.set({authenticated: true});
-		// }
-		console.log("session.token_id:  " + $session.token_id);
-		console.log("session.token_id:  " + $session.authenticated);
-		goto('/'); 
-  })
-
-	   .catch((error) => {
-	
-		console.log("Ther was an error while fetching token_id: "  + error);
-      });
-
+		const response = await post(`/login`, { username, password });
+		
+		// TODO handle network errors
+		errors = response.errors;
+// if (response.status === 201) {
+// 	const data = await response.json();
+//             req.session.user = true;
+// 			req.session.token_id = data.id_token;
+// 			response.end();
+// }
+		if (response.user) {
+			$session.user = response.user;
+			goto('/');
+		}
 	}
+// 	 	await fetch(`${baseUrl}/${path}`, {
+// 		method: 'POST',
+// 		headers: {
+// 		  'Content-Type': 'application/json',
+// 		//   'credentials': 'include',
+// 		'cache': 'no-cache'
+// 		},
+// 		body: JSON.stringify({
+// 			 "password": password,
+// 			"rememberMe": true,
+// 			"username": username 
+// 		})
+// 	  }) 
+
+// 	.then(checkStatus)
+// //   .then(parseJSON)
+//   .then((response) => 
+//   {
+// 	  console.log('From response Authorization: ' + JSON.stringify(response.headers.get("Authorization")));
+	
+// 	token_1 =  JSON.stringify(response.headers.get("Authorization"));
+// 	token =token_1.slice(1,token_1.length-1);
+// 	// $token_id = token;
+// 		// stores.setItem({authenticated: true});
+// 	// this.req.session.token_id=$token_id;
+// 	console.log("$token from response : " + {token});
+// 	console.log("$token from body : " + JSON.stringify(response.body.id_token));
+// 	console.log("id_token from body : " + JSON.stringify(response.body.id_token));
+// 	// if (response.user) {
+// 			session.set({token_id: response.body.id_token});
+// 			session.set({user: true});
+// 			session.set({authenticated: true});
+// 		// }
+// 		console.log("session.token_id:  " + $session.token_id);
+// 		console.log("session.token_id:  " + $session.authenticated);
+// 		goto('/'); 
+//   })
+
+// 	   .catch((error) => {
+	
+// 		console.log("Ther was an error while fetching token_id: "  + error);
+//       });
+
+// 	}
 	// $: console.log($session)
 </script>
 
@@ -122,5 +140,5 @@ async function checkStatus(response) {
 			</div>
 		</div>
 	</div>
-	<p>Token is {$session.token_id} and authorization is {$session.authenticated} </p>
+	<!-- <p>Token is {$session.token_id} and authorization is {$session.authenticated} </p> -->
 </div>

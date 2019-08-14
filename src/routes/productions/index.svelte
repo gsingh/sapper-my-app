@@ -1,6 +1,6 @@
 <script context = "module">
-import Select from 'svelte-select';
-import {token, authenticated} from '../../store/stores.js';
+// import Select from 'svelte-select';
+// import {token, authenticated} from '../../store/stores.js';
 import * as api from '../../api/api.js';
 import {onMount} from 'svelte';
 import { goto, stores } from '@sapper/app'; 
@@ -77,13 +77,13 @@ import { goto, stores } from '@sapper/app';
 
 		 
 		 <!-- <li><a rel='prefetch' href='productions/${production.id}'>{production.prodDate}</a></li> -->
-	<td class="table-cell">	 <select bind:value={selected}  >
+	<!-- <td class="table-cell">	 <select bind:value={selected}  >
 		  	{#each managers as manager}
 			 <option value={manager}>
 			 {manager.name}
 			 </option>
 			 {/each}
-			</select></td>
+			</select></td> -->
 		 <!-- {/await} -->
 		<td class="table-cell">  <Getter base='productions' id='{production.id}' ></Getter></td>
 		<td class="table-cell">  <Delete base='productions/' id='{production.id}'></Delete></td>
