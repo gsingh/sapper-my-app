@@ -9,10 +9,10 @@ import { goto, stores } from '@sapper/app';
 		const {path, params,query} = page;
 		// if(!session.user) return this.redirect(302, 'login');
 
-		const productions = await api.get('productions', true );
+		const productions = await api.get('productions', session.token_id );
 		return {productions};
 
-		const managers = await api.get('shift-managers', true);
+		const managers = await api.get('shift-managers', session.token_id);
 			return {managers};
 
 	}

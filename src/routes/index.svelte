@@ -58,7 +58,7 @@ export let user;
 <!-- <p>Token is : {$token}</p> -->
 <!-- <p>Authenticated is {$authenticated}</p> -->
 
-{#if user}
+{#if session.token_id}
     <p>You are logged in !</p>
  {:else}
 

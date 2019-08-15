@@ -8,7 +8,8 @@ export async function post(req, res) {
 		// res.setHeader('Content-Type', 'application/json');
 		console.log("after api.post : login.js");
 		// res.end(JSON.stringify(response));
-		 req.session.token_id = response.id_token;
+		req.session.user = true;
+		req.session.token_id = response.id_token;
 			console.log("token_id from response.json : " + response.id_token );
 			console.log("response from response.json : " + JSON.stringify(response ));
 			// req.session.token_id = response.json().id_token;	
