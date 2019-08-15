@@ -1,18 +1,20 @@
 // import { token_id } from '../store/stores';
 // import { stores } from '@sapper/app';
 // const { session } = stores();
-const fetch =require('node-fetch');
+// const fetch =require('node-fetch');
 
 const base = 'http://localhost:8080/api';
 
 
 async function send({ method, path, data, token }) {
-	fetch = process.browser ? window.fetch : require('node-fetch').default;
+	const fetch = process.browser ? window.fetch : require('node-fetch').default;
 	const opts = { method, headers: {} };
+	console.log("from api.js send: " + JSON.stringify(data.user));
 	if (data) {
+		console.log("from api.js send: after data check " + JSON.stringify(data.user));
 		opts.headers['Content-Type'] = 'application/json';
 		opts.headers['Accept'] = 'application/json';
-		opts.body = JSON.stringify(data);
+		opts.body = JSON.stringify(data.user);
 	}
 
 	// let token_value;
@@ -25,8 +27,8 @@ async function send({ method, path, data, token }) {
 	// });
 
 	if (token) {
-			console.log("$token from api.js : " + req.session.token_id);
-		opts.headers['Authorization'] = req.session.token_id;
+			// console.log("$token from api.js : " + req.session.token_id);
+			opts.headers['Authorization'] = `Bearer ${token}`;
 		
 	}
 	return fetch(`${base}/${path}`, opts)
@@ -48,7 +50,7 @@ export function del(path, token) {
 	return send({ method: 'DELETE', path, token });
 }
 
-export function post(path, data, token) {
+export async function post(path, data, token) {
 	console.log("from api.js post") ;
 	return send({ method: 'POST', path, data, token });
 }

@@ -11,15 +11,19 @@
 	let errors = null;
 
 	async function submit(event) {
-		const response = await post(`/login`, { username, password }, null);
+		console.log(event);
+        console.log(event.target);
+        console.log(username);
+        console.log(password);
+		const response = await post(`auth/login`, { username, password });
 		
 		// TODO handle network errors
 		errors = response.errors;
 
-		// if (response.id_token) {
-			// $session.token_id = response.token_id;
-			// goto('/');
-		// }
+		if (response.user) {
+			$session.user = response.user;
+			goto('/');
+		}
 	}
 
 </script>
