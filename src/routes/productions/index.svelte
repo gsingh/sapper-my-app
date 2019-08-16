@@ -1,25 +1,26 @@
-<script context = "module">
+<script>
 // import Select from 'svelte-select';
 // import {token, authenticated} from '../../store/stores.js';
 import * as api from '../../api/api.js';
 import {onMount} from 'svelte';
 import { goto, stores } from '@sapper/app'; 
 
-	export async function preload(page, session) {
-		const {path, params,query} = page;
-		// if(!session.user) return this.redirect(302, 'login');
+const { session } = stores();
 
-		const productions = await api.get('productions', session.token_id );
-		return {productions};
+	// export async function preload(page, session) {
+	// 	const {path, params,query} = page;
+	// 	// if(!session.user) return this.redirect(302, 'login');
 
-		const managers = await api.get('shift-managers', session.token_id);
-			return {managers};
+	// 	const productions = await api.get('productions', true );
+	// 	return {productions};
 
-	}
+	// 	const managers = await api.get('shift-managers', true);
+	// 		return {managers};
+
+	// }
 
 	
-</script>
-<script>
+
 		export let selected;
 		export let productions;
 		export let managers;
@@ -30,11 +31,22 @@ import { goto, stores } from '@sapper/app';
 		$: managers = api.get('shift-managers', true);
 		
 		onMount(async ()=> {
-		const managers = await api.get('shift-managers', true);
-			return {managers};
+			console.log("token_id" + $session.token_id);
+			productions = await api.get('productions', $session.token_id );
+			console.log("productions" + productions);
+		return {productions};
+
 			console.log("fron onmount()");
+		
+			 managers = await api.get('shift-managers', $session.token_id);
+			console.log("managers" + managers);
+			return {managers};
+
 		}
 		);
+
+		// export productions;
+
 		
 
 </script>

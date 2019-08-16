@@ -1,10 +1,14 @@
-<script context = "module">
+<script>
 // import {token, authenticated} from '../../store/stores.js';
 import * as api from '../../api/api.js';
 import {onMount} from 'svelte';
 import { goto, stores } from '@sapper/app'; 
+export let managers;
+export let id;
+import Getter from '../_CRUD/_Getter.svelte';
+import Delete from '../_CRUD/_Delete.svelte';
 
-// const { session } = stores();
+const { session } = stores();
 // export let productions = '';
 // let token_1 = $token.slice(1,$token.length-1);
 // console.log("token_1 : " + token_1);
@@ -27,17 +31,17 @@ import { goto, stores } from '@sapper/app';
 // 	  return error;
 // 	}
 //   }
-	export async function preload(page, session, params) {
-		const managers = await api.get('shift-managers', true );
-		return {managers};
+	// export async function preload(page, session, params) {
+	// 	const managers = await api.get('shift-managers', true );
+	// 	return {managers};
 		
-	}
-	// onMount(async ()=> {
-	// 		productions = await api.get('productions', true);
-	// 	return {productions};
-	// 	console.log("fron onmount()");
-	// 	}
-	// 	);
+	// }
+	onMount(async ()=> {
+			productions = await api.get('shift-managers', $session.token_id);
+		return {productions};
+		console.log("fron onmount(): managers");
+		}
+		);
 		// fetch(`${baseUrl}/${path}`, {
 		// 	method: 'GET',
 		// 	headers: {
@@ -73,19 +77,18 @@ import { goto, stores } from '@sapper/app';
 	
 // $: console.log(JSON.stringify({productions}));
 // import {token, authenticated} from '../../store/stores.js';
-</script>
-<script>
 
-		export let managers;
-		export let id;
-		import Getter from '../_CRUD/_Getter.svelte';
-		import Delete from '../_CRUD/_Delete.svelte';
-		onMount(async ()=> {
-			managers = await api.get('shift-managers', true);
-		return {managers};
-		console.log("fron onmount()");
-		}
-		);
+
+		// export let managers;
+		// export let id;
+		// import Getter from '../_CRUD/_Getter.svelte';
+		// import Delete from '../_CRUD/_Delete.svelte';
+		// onMount(async ()=> {
+		// 	managers = await api.get('shift-managers', true);
+		// return {managers};
+		// console.log("fron onmount()");
+		// }
+		// );
 </script>
 
 <!-- <style>

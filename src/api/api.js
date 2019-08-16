@@ -9,7 +9,7 @@ const base = 'http://localhost:8080/api';
 async function send({ method, path, data, token }) {
 	const fetch = process.browser ? window.fetch : require('node-fetch').default;
 	const opts = { method, headers: {} };
-	console.log("from api.js send: " + JSON.stringify(data.user));
+	// console.log("from api.js send: " + JSON.stringify(data.user));
 	if (data) {
 		console.log("from api.js send: after data check " + JSON.stringify(data.user));
 		opts.headers['Content-Type'] = 'application/json';
@@ -27,6 +27,7 @@ async function send({ method, path, data, token }) {
 	// });
 
 	if (token) {
+		// let token_id = req.session.token_id;
 			// console.log("$token from api.js : " + req.session.token_id);
 			opts.headers['Authorization'] = `Bearer ${token}`;
 		
