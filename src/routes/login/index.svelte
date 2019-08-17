@@ -20,8 +20,9 @@
 		// TODO handle network errors
 		errors = response.errors;
 
-		if (response.user) {
-			$session.user = response.user;
+		if ($session.user) {
+			console.log("$session.user from index login : " + $session.user);
+			// $session.user = response.user;
 			goto('/');
 		}
 	}
