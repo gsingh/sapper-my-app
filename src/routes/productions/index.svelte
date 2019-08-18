@@ -1,14 +1,21 @@
-<script>
+<script context = "module">
 // import Select from 'svelte-select';
 // import {token, authenticated} from '../../store/stores.js';
 import * as api from '../../api/api.js';
-import {onMount} from 'svelte';
-import { goto, stores } from '@sapper/app'; 
+import { get } from '../../api/utils.js';
+// import {onMount} from 'svelte';
+// import { stores } from '@sapper/app'; 
 
-const { session } = stores();
+// const { session } = stores();
 
-	// export async function preload(page, session) {
-	// 	const {path, params,query} = page;
+	export async function preload(page, session) {
+	const res = await get(`productions/get`);
+	const productions = await res.json();
+
+		return { productions };
+	}
+
+// 	const {path, params,query} = page;
 	// 	// if(!session.user) return this.redirect(302, 'login');
 
 	// 	const productions = await api.get('productions', true );
@@ -17,8 +24,9 @@ const { session } = stores();
 	// 	const managers = await api.get('shift-managers', true);
 	// 		return {managers};
 
-	// }
-
+	
+</script>
+<script>
 	
 
 		export let selected;
@@ -28,22 +36,22 @@ const { session } = stores();
 		import Getter from '../_CRUD/_Getter.svelte';
 		import Delete from '../_CRUD/_Delete.svelte';
 		
-		$: managers = api.get('shift-managers', true);
+		// $: managers = api.get('shift-managers', true);
 		
-		onMount(async ()=> {
-			console.log("token_id" + $session.token_id);
-			productions = await api.get('productions', $session.token_id );
-			console.log("productions" + productions);
-		return {productions};
+		// onMount(async ()=> {
+		// 	console.log("token_id" + $session.token_id);
+		// 	productions = await api.get('productions', $session.token_id );
+		// 	console.log("productions" + productions);
+		// return {productions};
 
-			console.log("fron onmount()");
+		// 	console.log("fron onmount()");
 		
-			 managers = await api.get('shift-managers', $session.token_id);
-			console.log("managers" + managers);
-			return {managers};
+		// 	 managers = await api.get('shift-managers', $session.token_id);
+		// 	console.log("managers" + managers);
+		// 	return {managers};
 
-		}
-		);
+		// }
+		// );
 
 		// export productions;
 

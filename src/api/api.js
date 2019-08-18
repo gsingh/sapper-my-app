@@ -27,8 +27,8 @@ async function send({ method, path, data, token }) {
 	// });
 
 	if (token) {
-		// let token_id = req.session.token_id;
-			// console.log("$token from api.js : " + req.session.token_id);
+		// let token_id = $session.token_id;
+			console.log("$token from api.js :token check  " + token);
 			opts.headers['Authorization'] = `Bearer ${token}`;
 		
 	}
