@@ -8,7 +8,7 @@ import * as api from '../../api/api.js';
 export async function get(req, res, next) {
 
     console.log("token_id from get(req,res) : " + req.session.token_id);
-	const managers = await api.get('managers', req.session.token_id );
+	const managers = await api.get('shift-managers', req.session.token_id );
             console.log("managers" + managers);
             // console.log("token_id from get(req,res) : " + $session.token_id);
 			// productions = await api.get('productions', true );

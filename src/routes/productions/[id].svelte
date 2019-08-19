@@ -2,7 +2,7 @@
 import * as api from '../../api/api.js';
 	import Getter from '../_CRUD/_Getter.svelte';
 	import Delete from '../_CRUD/_Delete.svelte';
-	import { goto, stores } from '@sapper/app';
+	import { goto } from '@sapper/app';
 	// export async function preload({ params, query }) {
 	// 	// the `slug` parameter is available because
 	// 	// this file is called [slug].html
@@ -17,7 +17,8 @@ import * as api from '../../api/api.js';
 		const _id = page.params.id;
 		// const _idd = _id.slice(1,_id.length);
 		console.log("from [id].svelte: _idd " + _id);
-		const production = await api.get(`productions/` + _id, true);
+		console.log("from [id].svelte: session.token_id " + session.token_id);
+		const production = await api.get(`productions/` + _id, session.token_id);
 		
 		// const production = res.json();
 return {
@@ -34,8 +35,13 @@ return {
 		// 	this.error(res.status, data.message);
 		// }
 	// }
-</script>
-<script>
+	</script>
+	<script>
+
+import { stores } from '@sapper/app';
+
+  const { page, preloading, session } = stores();
+
 	export let production;
 	export let id;
 	// export let getter, deleter,putter, creater;

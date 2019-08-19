@@ -1,7 +1,8 @@
-// import { token_id } from '../store/stores';
+// import { token_id } from '$session';
 // import { stores } from '@sapper/app';
 // const { session } = stores();
 // const fetch =require('node-fetch');
+import { token_id } from '../store/stores';
 
 const base = 'http://localhost:8080/api';
 
@@ -17,19 +18,20 @@ async function send({ method, path, data, token }) {
 		opts.body = JSON.stringify(data.user);
 	}
 
-	// let token_value;
+	let token_value;
 
-	// const unsubscribe = token_id.subscribe(value => {
-	// 	token_value = value;
+	const unsubscribe = token_id.subscribe(value => {
+		token_value = value;
 
-	// 	// onDestroy(unsubscribe);
-	// var token_derived = JSON.stringify(token_id);
-	// });
+		// onDestroy(unsubscribe);
+	var token_derived = JSON.stringify(token_id);
+	});
 
 	if (token) {
 		// let token_id = $session.token_id;
 			console.log("$token from api.js :token check  " + token);
-			opts.headers['Authorization'] = `Bearer ${token}`;
+			console.log("token_value from api.js :token check  " + token_value);
+			opts.headers['Authorization'] = `Bearer ${token_value}`;
 		
 	}
 	return fetch(`${base}/${path}`, opts)

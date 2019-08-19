@@ -28,7 +28,9 @@ import { get } from '../../api/utils.js';
 </script>
 <script>
 	
+		import { stores } from '@sapper/app';
 
+  const { page, preloading, session } = stores();
 		export let selected;
 		export let productions;
 		export let managers;
