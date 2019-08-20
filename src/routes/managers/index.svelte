@@ -33,7 +33,7 @@ import { goto, stores } from '@sapper/app';
 // 	}
 //   }
 	export async function preload(page, session, params) {
-		const res = await get(`managers/get`);
+		const res = await api.get(`shift-managers`);
 		const managers = await res.json();
 
 		return {managers};
