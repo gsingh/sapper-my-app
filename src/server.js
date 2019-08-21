@@ -28,8 +28,8 @@ express()
 	  })
 	})) // You can also use Express
 	.use(function(req, res, next) {
-		console.log(req.session.user);
-		console.log(req.session.token_id);
+		// console.log(req.session.user);
+		// console.log(req.session.token_id);
 		if (typeof req.session.user === 'undefined') {
 			req.session.user = false;
 		}

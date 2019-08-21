@@ -12,13 +12,13 @@ import * as api from '../../api/api.js';
 
 	export async function preload(page, session, params) {
 		// const {slug} = page.params;
-		console.log("from [id].svelte:  " );
+		// console.log("from [id].svelte:  " );
 		console.log("from [id].svelte: page.params.id " + page.params.id);
 		const _id = page.params.id;
 		// const _idd = _id.slice(1,_id.length);
-		console.log("from [id].svelte: _idd " + _id);
-		console.log("from [id].svelte: session.token_id " + session.token_id);
-		const production = await api.get(`productions/` + _id, session.token_id);
+		console.log("from [id].svelte: _id " + _id);
+		// console.log("from [id].svelte: session.token_id ");
+		const production = await api.get(`productions/` + _id);
 		
 		// const production = res.json();
 return {

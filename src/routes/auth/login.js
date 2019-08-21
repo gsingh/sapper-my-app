@@ -19,8 +19,8 @@ export async function post(req, res) {
 		// res.end(JSON.stringify(response));
 		req.session.user = true;
 		req.session.token_id = response.id_token;
-		token_value = req.session.token_id;
-		console.log("token_value : login.js  " + token_value);
+		token_id.set(req.session.token_id);
+		console.log("token_id : login.js  " + {token_id});
 			console.log("token_id from response.json : " + response.id_token );
 			console.log("response from response.json : " + JSON.stringify(response ));
 			// req.session.token_id = response.json().id_token;	

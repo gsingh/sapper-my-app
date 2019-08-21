@@ -21,7 +21,7 @@ async function send({ method, path, data, token }) {
 	const opts = { method, headers: {} };
 	// console.log("from api.js send: " + JSON.stringify(data.user));
 	if (data) {
-		console.log("from api.js send: after data check " + JSON.stringify(data.user));
+		// console.log("from api.js send: after data check " + JSON.stringify(data.user));
 		opts.headers['Content-Type'] = 'application/json';
 		opts.headers['Accept'] = 'application/json';
 		opts.body = JSON.stringify(data.user);
