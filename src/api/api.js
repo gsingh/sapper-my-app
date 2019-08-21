@@ -40,7 +40,7 @@ async function send({ method, path, data, token }) {
 		// let token_id = $session.token_id;
 			console.log("$token from api.js :token check  " + token);
 			console.log("token_value from api.js :token check  " + token_id);
-			opts.headers['Authorization'] = `Bearer ${token_id}`;
+			opts.headers['Authorization'] = `Bearer ${token}`;
 		
 	}
 	return fetch(`${base}/${path}`, opts)

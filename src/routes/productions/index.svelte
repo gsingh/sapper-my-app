@@ -9,8 +9,8 @@ import { get } from '../../api/utils.js';
 // const { session } = stores();
 
 	export async function preload(page, session) {
-	const res = await get(`productions/get`);
-	const productions = await res.json();
+	const productions = await api.get(`productions`);
+	// const productions = await res.json();
 
 		return { productions };
 	}
