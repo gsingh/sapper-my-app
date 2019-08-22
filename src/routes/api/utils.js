@@ -29,3 +29,19 @@ export function get(endpoint) {
 	// .then(r => r.json());
 
 }
+
+export function del(endpoint, id) {
+	console.log("from utils: del" + endpoint);
+	// console.log("from utils.js : " + JSON.stringify(data));
+	return fetch(endpoint, {
+		method: 'GET',
+		credentials: 'include',
+		body: JSON.stringify(data),
+		headers: {
+			'Content-Type': 'application/json'
+			// 'cache': 'no-cache'
+		}
+	})
+	// .then(r => r.json());
+
+}

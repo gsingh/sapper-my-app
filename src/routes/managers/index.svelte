@@ -1,7 +1,7 @@
 <script context="module">
 // import {token, authenticated} from '../../store/stores.js';
-import * as api from '../../api/api.js';
-import { get } from '../../api/utils.js';
+import * as api from '../api/api.js';
+import { get } from '../api/utils.js';
 import {onMount} from 'svelte';
 import { goto, stores } from '@sapper/app'; 
 // export let managers;

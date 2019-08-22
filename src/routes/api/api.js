@@ -2,7 +2,7 @@
 // import { stores } from '@sapper/app';
 // const { session } = stores();
 // const fetch =require('node-fetch');
-import { token_id } from '../store/stores';
+import { token_id } from '../../store/stores';
 
 const base = 'http://localhost:8080/api';
 

@@ -1,4 +1,4 @@
-import * as api from '../../api/api.js';
+import * as api from '../api/api.js';
 
 export function post(req, res) {
 	const user = req.body;

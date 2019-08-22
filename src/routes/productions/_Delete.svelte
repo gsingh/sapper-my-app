@@ -1,5 +1,5 @@
 <script>
-import * as api from '../../api/api.js';
+import * as api from '../api/api.js';
 import { goto } from 'svelte';
 export let id;
 const idd = id.slice(1,id.length);

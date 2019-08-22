@@ -1,5 +1,5 @@
 <script context="module">
-import * as api from '../../api/api.js';
+import * as api from '../api/api.js';
 	import Getter from '../_CRUD/_Getter.svelte';
 	import Delete from '../_CRUD/_Delete.svelte';
 	import { goto } from '@sapper/app';
