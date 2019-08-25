@@ -6,8 +6,9 @@ import { del } from '../api/utils'
 // import { goto } from 'svelte';
 export let id;
 export let base;
-let token_value;
-const { session } = stores();
+export let target;
+// let token_value;
+// const { session } = stores();
 //  token_value = JSON.stringify($session.token_id);
 
 	// const unsubscribe = token_id.subscribe(value => {
@@ -23,7 +24,7 @@ let data = {"endpoint" : base + id};
 async function remove() {
 	// console.log("store.token_id : " + 	JSON.stringify(token_value));
 	// console.log("$session.token_id : " + $session.token_id);
-		await del('productions/del', data);
+		await del(target, data);
 
 		goto('/');
 	}

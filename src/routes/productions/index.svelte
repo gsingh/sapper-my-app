@@ -108,7 +108,7 @@ import { get } from '../api/utils.js';
 			</select></td> -->
 		 <!-- {/await} -->
 		<td class="table-cell">  <Getter base='productions' id='{production.id}' ></Getter></td>
-		<td class="table-cell">  <Delete base='productions/' id='{production.id}'></Delete></td>
+		<td class="table-cell">  <Delete target= 'productions/del' base='productions/' id='{production.id}'></Delete></td>
 		</tr>
 	{/each}
  </table>
