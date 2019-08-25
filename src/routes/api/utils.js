@@ -30,11 +30,11 @@ export function get(endpoint) {
 
 }
 
-export function del(endpoint, id) {
-	console.log("from utils: del" + endpoint);
+export function del(endpoint, data) {
+	console.log("from utils: del data : " + data + "  endpoint :  " + endpoint);
 	// console.log("from utils.js : " + JSON.stringify(data));
 	return fetch(endpoint, {
-		method: 'GET',
+		method: 'DELETE',
 		credentials: 'include',
 		body: JSON.stringify(data),
 		headers: {

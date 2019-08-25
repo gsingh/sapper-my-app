@@ -8,7 +8,7 @@ export let id;
 export let base;
 let token_value;
 const { session } = stores();
-token_value = JSON.stringify($session.token_id);
+//  token_value = JSON.stringify($session.token_id);
 
 	// const unsubscribe = token_id.subscribe(value => {
 	// 	token_value = value;
@@ -17,12 +17,13 @@ token_value = JSON.stringify($session.token_id);
 	// var token_derived = JSON.stringify(token_id);
 	// });
 
-$: console.log("$session.token_id : " + $session.token_id);
+// $: console.log("$session.token_id : " + $session.token_id);
 // const idd = id.slice(1,id.length);
+let data = {"endpoint" : base + id};
 async function remove() {
-	console.log("store.token_id : " + 	JSON.stringify(token_value));
+	// console.log("store.token_id : " + 	JSON.stringify(token_value));
 	// console.log("$session.token_id : " + $session.token_id);
-		await del('productions/del', base + id);
+		await del('productions/del', data);
 
 		goto('/');
 	}

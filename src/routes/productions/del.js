@@ -6,9 +6,10 @@ import * as api from '../api/api.js';
 
 
 export async function del(req, res, next) {
-
+    const endpoint = req.body.endpoint;
+    console.log("endpoint : " + endpoint);
     console.log("token_id from del(req,res) : " + req.session.token_id);
-	const productions = await api.get('productions', req.session.token_id );
+	const productions = await api.del(endpoint, req.session.token_id );
             console.log("productions" + productions);
             // console.log("token_id from get(req,res) : " + $session.token_id);
 			// productions = await api.get('productions', true );
