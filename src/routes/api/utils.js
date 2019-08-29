@@ -45,3 +45,19 @@ export function del(endpoint, data) {
 	// .then(r => r.json());
 
 }
+
+export function logout(endpoint) {
+	console.log("from utils: del logout :  endpoint :  " + endpoint);
+	// console.log("from utils.js : " + JSON.stringify(data));
+	return fetch(endpoint, {
+		method: 'DELETE',
+		credentials: 'include',
+		// body: JSON.stringify(data),
+		headers: {
+			'Content-Type': 'application/json'
+			// 'cache': 'no-cache'
+		}
+	})
+	// .then(r => r.json());
+
+}

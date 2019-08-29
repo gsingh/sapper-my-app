@@ -1,4 +1,5 @@
 export function post(req, res) {
-	delete req.session.user;
+	req.session.user=false;
+	delete req.session.token_id;
 	res.end(JSON.stringify({ ok: true }));
 }

@@ -5,8 +5,9 @@ export function preload(page, { user }) {
 </script>
 <script>
 import { stores } from '@sapper/app';
+// import {logout} from './api/utils';
+import Logout from './_CRUD/Logout.svelte';
 const { session } = stores();
-
 export let user;
         // $token= "123456";
 </script> 
@@ -60,6 +61,7 @@ export let user;
 
 {#if $session.user}
     <p>You are logged in !</p>
+    <Logout target = 'auth/logout' ></Logout>
  {:else}
 
     <p>Please log in.
