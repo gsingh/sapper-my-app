@@ -38,6 +38,7 @@ import { get } from '../api/utils.js';
 		import Getter from '../_CRUD/_Getter.svelte';
 		import Delete from '../_CRUD/_Delete.svelte';
 		
+		// const { session } = stores();
 		// $: managers = api.get('shift-managers', true);
 		
 		// onMount(async ()=> {
@@ -108,7 +109,9 @@ import { get } from '../api/utils.js';
 			</select></td> -->
 		 <!-- {/await} -->
 		<td class="table-cell">  <Getter base='productions' id='{production.id}' ></Getter></td>
+		{#if $session.user}
 		<td class="table-cell">  <Delete target= 'productions/del' base='productions/' id='{production.id}'></Delete></td>
+		{/if}
 		</tr>
 	{/each}
  </table>

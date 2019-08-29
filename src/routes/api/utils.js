@@ -50,7 +50,7 @@ export function logout(endpoint) {
 	console.log("from utils: del logout :  endpoint :  " + endpoint);
 	// console.log("from utils.js : " + JSON.stringify(data));
 	return fetch(endpoint, {
-		method: 'DELETE',
+		method: 'POST',
 		credentials: 'include',
 		// body: JSON.stringify(data),
 		headers: {
