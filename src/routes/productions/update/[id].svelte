@@ -1,11 +1,47 @@
+<script context="module">
+import * as api from '../../api/api.js';
+	// import Getter from '../_CRUD/_Getter.svelte';
+	// import Delete from '../_CRUD/_Delete.svelte';
+	import { goto } from '@sapper/app';
+	
+	export async function preload(page, session, params) {
+		// const {slug} = page.params;
+		// console.log("from [id].svelte:  " );
+		console.log("from [id].svelte: page.params.id " + page.params.id);
+		const _id = page.params.id;
+		// const _idd = _id.slice(1,_id.length);
+		console.log("from [id].svelte: _id " + _id);
+		// console.log("from [id].svelte: session.token_id ");
+		const production = await api.get(`productions/` + _id);
+		
+		// const production = res.json();
+return {
+			id: _id,
+			production
+		};
+		
+
+    }
+    
+
+</script>
 <script>
 
+import { stores } from '@sapper/app';
+
+  const { page, preloading, session } = stores();
+
+	export let production;
+	export let id;
+	// export let getter, deleter,putter, creater;
+    
+    
 </script>
 
 <div>
     <div>
        <h1>Edit Production</h1>
-       <form on:submit|preventDefault="{update}">
+       <form on:submit|preventDefault="">
         <div>
              <label class="block" for="id">
              <span class="text-gray-700">ID</span></label>
@@ -19,12 +55,12 @@
         <div>
             <label for="noOfPlates">
             <span class="text-gray-700">No Of Plates</span></label>
-            <input class="form-input mt-1 block w-full" type="noOfPlates" name="noOfPlates" id="noOfPlates" bind:value={production.noOfPlates}>
+            <input class="form-input mt-1 block w-full" type="text" name="noOfPlates" id="noOfPlates" bind:value={production.noOfPlates}>
         </div>
         <div>
             <label for="prodTonnage">
             <span class="text-gray-700">Tonnage</span></label>
-            <input class="form-input mt-1 block w-full" type="prodTonnage" name="prodTonnage" id="prodTonnage" bind:value={production.prodTonnage}>
+            <input class="form-input mt-1 block w-full" type="text" name="prodTonnage" id="prodTonnage" bind:value={production.prodTonnage}>
         </div>
         <div>
             <label for="shift">

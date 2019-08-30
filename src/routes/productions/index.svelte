@@ -37,7 +37,7 @@ import { get } from '../api/utils.js';
 		export let id;
 		import Getter from '../_CRUD/_Getter.svelte';
 		import Delete from '../_CRUD/_Delete.svelte';
-		
+		import Update from '../_CRUD/_Update.svelte';
 		// const { session } = stores();
 		// $: managers = api.get('shift-managers', true);
 		
@@ -111,6 +111,9 @@ import { get } from '../api/utils.js';
 		<td class="table-cell">  <Getter base='productions' id='{production.id}' ></Getter></td>
 		{#if $session.user}
 		<td class="table-cell">  <Delete target= 'productions/del' base='productions/' id='{production.id}'></Delete></td>
+		{/if}
+		{#if $session.user}
+		<td class="table-cell">  <Update base='productions/update' id='{production.id}' ></Update></td>
 		{/if}
 		</tr>
 	{/each}

@@ -15,13 +15,13 @@ import * as api from '../api/api.js';
 		console.log("from [id].svelte:  " );
 		console.log("from [id].svelte: page.params.id " + page.params.id);
 		const _id = page.params.id;
-		const _idd = _id.slice(1,_id.length);
-		console.log("from [id].svelte: _idd " + _idd);
-		const manager = await api.get(`shift-managers/` + _idd, true);
+		// const _idd = _id.slice(1,_id.length);
+		// console.log("from [id].svelte: _idd " + _idd);
+		const manager = await api.get(`shift-managers/` + _id, true);
 		
 		// const manager = res.json();
 return {
-			id: _idd,
+			id: _id,
 			manager
 		};
 		

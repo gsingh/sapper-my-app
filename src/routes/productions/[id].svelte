@@ -159,8 +159,8 @@ import { stores } from '@sapper/app';
 
 
 
-<h1>{production.prodDate}</h1>
-<h2>{production.prodTonnage}</h2>
+<!-- <h1>{production.prodDate}</h1>
+<h2>{production.prodTonnage}</h2> -->
 <!-- <div class='content'>
 	{@html post.html}
 </div> -->
