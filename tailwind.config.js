@@ -1,6 +1,9 @@
 module.exports = {
+  plugins: [
+    require('@tailwindcss/custom-forms'),
+  ],
   variants: {
-    tableLayout: ['responsive', 'hover', 'focus'],
+  tableLayout: ['responsive', 'hover', 'focus'],
   },
 
   theme: {
@@ -13,12 +16,12 @@ module.exports = {
     fontFamily: {
       display: ['Gilroy', 'sans-serif'],
       body: ['Graphik', 'sans-serif'],
+      '4': '4px',
     },
     borderWidth: {
       default: '1px',
       '0': '0',
       '2': '2px',
-      '4': '4px',
     },
     extend: {
       colors: {
@@ -29,5 +32,7 @@ module.exports = {
         '128': '32rem',
       }
     }
+   
   }
+  
   }

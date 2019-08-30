@@ -1,4 +1,53 @@
-<form name="editForm" role="form" novalidate on:submit|preventDefault="{save}" >
+<script>
+
+</script>
+
+<div>
+    <div>
+       <h1>Edit Production</h1>
+       <form on:submit|preventDefault="{update}">
+        <div>
+             <label class="block" for="id">
+             <span class="text-gray-700">ID</span></label>
+            <input class="form-input mt-1 block w-full" type="text" name="id" id="id" bind:value={production.id}>
+        </div>
+        <div>
+            <label for="prodDate">
+            <span class="text-gray-700">Last Name</span></label>
+            <input class="form-input mt-1 block w-full" type="text" name="prodDate" id="prodDate" bind:value={production.prodDate}>
+        </div>
+        <div>
+            <label for="noOfPlates">
+            <span class="text-gray-700">No Of Plates</span></label>
+            <input class="form-input mt-1 block w-full" type="noOfPlates" name="noOfPlates" id="noOfPlates" bind:value={production.noOfPlates}>
+        </div>
+        <div>
+            <label for="prodTonnage">
+            <span class="text-gray-700">Tonnage</span></label>
+            <input class="form-input mt-1 block w-full" type="prodTonnage" name="prodTonnage" id="prodTonnage" bind:value={production.prodTonnage}>
+        </div>
+        <div>
+            <label for="shift">
+            <span class="text-gray-700">Shift</span></label>  
+            <select class="form-select mt-1 block w-full" type="text" name="shift" id="shift" bind:value={production.shift}>
+                 <option value="A" >A</option>
+                 <option value="B" >B</option>
+                 <option value="C" >C</option>
+            </select>
+        </div>
+        <div>
+            <label for="manager">
+            <span class="text-gray-700">Shift Manager</span></label>
+            <input class="form-select mt-1 block w-full" type="text" name="manager" id="manager" bind:value={production.manager}>
+        </div>
+            <button type="submit">Save</button>
+       </form>
+    </div>
+  </div>
+
+
+
+<!-- <form name="editForm" role="form" novalidate on:submit|preventDefault="{save}" >
                 <h2 id="pmillApp.production.home.createOrEditLabel">Create or edit a Production</h2>
                 <div>
                 {#if {production.id}
@@ -18,21 +67,21 @@
                             <small class="form-text text-danger" v-if="!$v.production.prodDate.required">
                                 This field is required.
                             </small> -->
-                        </div>
-                    </div>
+                        <!-- </div> -->
+                    <!-- </div>
                     <div class="form-group">
                         <label class="form-control-label" for="production-shift">Shift</label>
                         <select class="form-control" name="shift" bind.value={shift} id="production-shift"  required>
                             <option value="A" >A</option>
                             <option value="B" >B</option>
                             <option value="C" >C</option>
-                        </select>
+                        </select> -->
                         <!-- <div v-if="$v.production.shift.$anyDirty && $v.production.shift.$invalid">
                             <small class="form-text text-danger" v-if="!$v.production.shift.required">
                                 This field is required.
                             </small>
                         </div> -->
-                    </div>
+                    <!-- </div>
                     <div class="form-group">
                         <label class="form-control-label" for="production-noOfPlates">No Of Plates</label>
                         <input type="number" class="form-control" name="noOfPlates" id="production-noOfPlates"
@@ -85,5 +134,5 @@ let selected = '';
         });
     }
   }
-</script>
+</script> -->
 

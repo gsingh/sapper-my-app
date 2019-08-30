@@ -1,6 +1,6 @@
 <script>
 	import { goto, stores } from '@sapper/app';
-	
+	import ListErrors from '../../components/ListErrors'
 	import { post } from '../api/utils.js';
 	
 	
@@ -42,7 +42,7 @@
 					<a href="/register">Need an account?</a>
 				</p>
 
-				<!-- <ListErrors {errors}/> -->
+				<ListErrors {errors}/>
 
 				<form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"   on:submit|preventDefault={submit}>
 					<div class="mb-4">
