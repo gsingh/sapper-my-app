@@ -2,7 +2,8 @@
 import * as api from '../../api/api.js';
 	// import Getter from '../_CRUD/_Getter.svelte';
 	// import Delete from '../_CRUD/_Delete.svelte';
-	import { goto } from '@sapper/app';
+    import { goto } from '@sapper/app';
+    import { put } from '../../api/utils'
 	
 	export async function preload(page, session, params) {
 		// const {slug} = page.params;
@@ -22,6 +23,8 @@ return {
 		
 
     }
+
+  
     
 
 </script>
@@ -34,18 +37,21 @@ import { stores } from '@sapper/app';
 	export let production;
 	export let id;
 	// export let getter, deleter,putter, creater;
-    
+   
+     async function update() {
+        await put('productions/update/update', {production});
+    } 
     
 </script>
 
 <div>
     <div>
        <h1>Edit Production</h1>
-       <form on:submit|preventDefault="">
+       <form on:submit|preventDefault="{update}">
         <div>
              <label class="block" for="id">
              <span class="text-gray-700">ID</span></label>
-            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="id" id="id" bind:value={production.id}>
+            <input readonly  class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="id" id="id" bind:value={production.id}>
         </div>
         <div>
             <label for="prodDate">
@@ -76,7 +82,7 @@ import { stores } from '@sapper/app';
             <span class="text-gray-700">Shift Manager</span></label>
             <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="manager" id="manager" bind:value={production.manager.name}>
         </div>
-            <button type="submit">Save</button>
+            <button class="inline-block border border-blue-500 rounded py-1 px-3 bg-blue-500 text-white" type="submit">Save</button>
        </form>
     </div>
   </div>

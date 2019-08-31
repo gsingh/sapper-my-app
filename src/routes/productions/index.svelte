@@ -95,7 +95,7 @@ import { get } from '../api/utils.js';
 		<td class="table-cell">  <Delete target= 'productions/del' base='productions/' id='{production.id}'></Delete></td>
 		{/if}
 		{#if $session.user}
-		<td class="table-cell">  <Update base='productions/update' id='{production.id}' ></Update></td>
+				<td class="table-cell">  <Update base='productions/update' id='{production.id}' ></Update></td>
 		{/if}
 		</tr>
 	{/each}
