@@ -105,14 +105,15 @@ import { stores } from '@sapper/app';
           <td class="py-4 px-6 border-b border-grey-light">{production.id}</td>
 		  <td class="py-4 px-6 border-b border-grey-light">{production.prodDate}</td>
   		  <td class="py-4 px-6 border-b border-grey-light">{production.shift}</td>
+		  <td class="py-4 px-6 border-b border-grey-light">{production.noOfPlates}</td>			
 		  <td class="py-4 px-6 border-b border-grey-light">{production.prodTonnage}</td>
-		  <td class="py-4 px-6 border-b border-grey-light">{production.manager}</td>
+		  <td class="py-4 px-6 border-b border-grey-light">{production.manager.name}</td>
 
 
 
 
           <td class="py-4 px-6 border-b border-grey-light">
-            <a href="#" class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
+            <a href='productions/update/{production.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
             <a href="#" class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-blue hover:bg-blue-dark">View</a>
           </td>
         </tr>

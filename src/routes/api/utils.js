@@ -62,3 +62,17 @@ export function logout(endpoint) {
 
 }
 
+export function put(endpoint, data) {
+	console.log("from utils: post" + endpoint);
+	console.log("from utils.js : " + JSON.stringify(data));
+	return fetch(endpoint, {
+		method: 'PUT',
+		credentials: 'include',
+		body: JSON.stringify(data),
+		headers: {
+			'Content-Type': 'application/json'
+			// 'cache': 'no-cache'
+		}
+	}).then(r => r.json());
+
+}

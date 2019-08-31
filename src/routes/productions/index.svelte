@@ -89,25 +89,7 @@ import { get } from '../api/utils.js';
 		 <tr>
 		 <td class="table-cell">
 		  {production.prodTonnage}</td>
-		 <!-- <li><button class="btn btn-lg pull-xs-right btn-primary" type="button" disabled={inProgress} on:click={publish}>
-							Publish Article
-						</button>
-		 </li> -->
-		 <!-- {#await onMount()}
-		 	<p>...waiting</p>
-{:then managers} -->
-
-
 		 
-		 <!-- <li><a rel='prefetch' href='productions/${production.id}'>{production.prodDate}</a></li> -->
-	<!-- <td class="table-cell">	 <select bind:value={selected}  >
-		  	{#each managers as manager}
-			 <option value={manager}>
-			 {manager.name}
-			 </option>
-			 {/each}
-			</select></td> -->
-		 <!-- {/await} -->
 		<td class="table-cell">  <Getter base='productions' id='{production.id}' ></Getter></td>
 		{#if $session.user}
 		<td class="table-cell">  <Delete target= 'productions/del' base='productions/' id='{production.id}'></Delete></td>
