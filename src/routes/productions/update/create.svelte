@@ -80,7 +80,7 @@ import { stores } from '@sapper/app';
         <div>
             <label for="shift">
             <span class="text-gray-700">Shift</span></label>  
-            <select class="form-select mt-1 block w-full" type="text" name="shift" id="shift" bind:value={production.shift}>
+            <select class="form-select mt-1 block w-full" name="shift" id="shift" bind:value={production.shift}>
                  <option value="A" >A</option>
                  <option value="B" >B</option>
                  <option value="C" >C</option>
@@ -89,7 +89,7 @@ import { stores } from '@sapper/app';
         <div>
             <label for="manager">
             <span class="text-gray-700">Shift Manager</span></label>
-            <select class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="manager" id="manager" bind:value={production.manager}>
+            <select class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" name="manager" id="manager" bind:value={production.manager}>
                 {#each managers as manager}
 			<option value={manager}>
 				{manager.name}

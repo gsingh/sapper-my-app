@@ -65,7 +65,7 @@ import { stores } from '@sapper/app';
         <div>
             <label for="prodDate">
             <span class="text-gray-700">Last Name</span></label>
-            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="prodDate" id="prodDate" bind:value={production.prodDate}>
+            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="date" name="prodDate" id="prodDate" bind:value={production.prodDate}>
         </div>
         <div>
             <label for="noOfPlates">

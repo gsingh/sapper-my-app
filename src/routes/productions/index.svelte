@@ -51,8 +51,47 @@ import { get } from '../api/utils.js';
 <h1>Recent posts</h1>
 <div>
 <Creater base="productions/update/create" ></Creater>
-<div>
 {#if {productions}}
+ <div class="w-2/3 mx-auto">
+  <div class="bg-white shadow-md rounded my-6">
+    <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
+      <thead>
+        <tr>
+          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">ID</th>
+          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Date</th>
+		  <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Shift</th>
+          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">No Of Plates</th>
+		  <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tonnage</th>
+          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Shift Manager</th>
+        </tr>
+      </thead>
+      <tbody>
+	  {#each productions as production}
+        <tr class="hover:bg-grey-lighter">
+          <td class="py-4 px-6 border-b border-grey-light">{production.id}</td>
+		  <td class="py-4 px-6 border-b border-grey-light">{production.prodDate}</td>
+  		  <td class="py-4 px-6 border-b border-grey-light">{production.shift}</td>
+		  <td class="py-4 px-6 border-b border-grey-light">{production.noOfPlates}</td>			
+		  <td class="py-4 px-6 border-b border-grey-light">{production.prodTonnage}</td>
+		  <td class="py-4 px-6 border-b border-grey-light">{production.manager.name}</td>
+
+
+
+
+          <td class="py-4 px-6 border-b border-grey-light">
+            <a href='productions/update/{production.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
+            <Getter base='productions' id='{production.id}' ></Getter>
+			<Delete target= 'productions/del' base='productions/' id='{production.id}'></Delete>
+          </td>
+        </tr>
+       {/each}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div>
+
 
  <table class="table-auto">
 	{#each productions as production}
@@ -74,8 +113,9 @@ import { get } from '../api/utils.js';
 		</tr>
 	{/each}
  </table>
- {/if}
- </div>
 
+
+ </div>
+ {/if}
  </div>
  
