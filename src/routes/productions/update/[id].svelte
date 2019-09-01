@@ -34,12 +34,19 @@ import { stores } from '@sapper/app';
 
   const { page, preloading, session } = stores();
 
-	export let production;
+	export let production= {
+        id: "",
+        prodDate: "",
+        noOfPlates: "",
+        prodTonnage: "",
+        shift: "",
+        manager: ""
+    };
 	export let id;
 	// export let getter, deleter,putter, creater;
    
      async function update() {
-        await put('productions/update/update', {production});
+        await put('productions/update/update', {...production});
     } 
     
 </script>

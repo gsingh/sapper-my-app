@@ -6,16 +6,16 @@
 	
 	const { session } = stores();
 	
-	let username = '';
-	let password = '';
+  	export let user = {username: '',
+				password: ''};
 	let errors = null;
 
 	async function submit(event) {
 		console.log(event);
         console.log(event.target);
-        console.log(username);
-        console.log(password);
-		const response = await post(`auth/login`, { username, password });
+        console.log(user.username);
+        console.log(user.password);
+		const response = await post(`auth/login`, { ...user });
 		
 		// TODO handle network errors
 		errors = response.errors;
@@ -49,18 +49,18 @@
 					 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
         				Username
       				</label>
-						<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="user name" bind:value={username}>
+						<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="user name" bind:value={user.username}>
 					</div>
 					<div class="mb-6">
 						<label class="block text-gray-700 text-sm font-bold mb-2" for="password">
         					Password
       					</label>
 					
-						<input class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Password" bind:value={password}>
+						<input class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Password" bind:value={user.password}>
 						<p class="text-red-500 text-xs italic">Please choose a password.</p>
     				</div>
 					<div class="flex items-center justify-between">
-					<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" disabled='{!username || !password}' >
+					<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" disabled='{!user.username || !user.password}' >
 						Sign in
 					</button>
 					</div>

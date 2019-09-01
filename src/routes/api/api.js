@@ -24,7 +24,8 @@ async function send({ method, path, data, token }) {
 		// console.log("from api.js send: after data check " + JSON.stringify(data.user));
 		opts.headers['Content-Type'] = 'application/json';
 		opts.headers['Accept'] = 'application/json';
-		opts.body = JSON.stringify(data.user);
+		opts.body = JSON.stringify(data);
+		
 	}
 
 	// let token_value;
@@ -63,7 +64,7 @@ export function del(path, token) {
 }
 
 export async function post(path, data, token) {
-	console.log("from api.js post") ;
+	// console.log("from api.js post") ;
 	return send({ method: 'POST', path, data, token });
 }
 
