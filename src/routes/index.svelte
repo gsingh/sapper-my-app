@@ -4,9 +4,8 @@ export function preload(page, { user }) {
     };
 </script>
 <script>
-import { stores } from '@sapper/app';
-// import {logout} from './api/utils';
 import Logout from './_CRUD/Logout.svelte';
+import { stores } from '@sapper/app';
 const { session } = stores();
 export let user;
         // $token= "123456";

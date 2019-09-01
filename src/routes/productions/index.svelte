@@ -10,21 +10,8 @@ import { get } from '../api/utils.js';
 
 	export async function preload(page, session) {
 	const productions = await api.get(`productions`);
-	// const productions = await res.json();
-
-		return { productions };
+			return { productions };
 	}
-
-// 	const {path, params,query} = page;
-	// 	// if(!session.user) return this.redirect(302, 'login');
-
-	// 	const productions = await api.get('productions', true );
-	// 	return {productions};
-
-	// 	const managers = await api.get('shift-managers', true);
-	// 		return {managers};
-
-	
 </script>
 <script>
 	
@@ -35,7 +22,7 @@ import { get } from '../api/utils.js';
 		export let selected;
 		export let productions;
 		export let managers;
-		export let id;
+		// export let id;
 		import Getter from '../_CRUD/_Getter.svelte';
 		import Delete from '../_CRUD/_Delete.svelte';
 		import Update from '../_CRUD/_Update.svelte';
@@ -79,10 +66,12 @@ import { get } from '../api/utils.js';
 
 
           <td class="py-4 px-6 border-b border-grey-light">
-            <a href='productions/update/{production.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
             <Getter base='productions' id='{production.id}' ></Getter>
+	{#if $session.user}
+			<a href='productions/update/{production.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
 			<Delete target= 'productions/del' base='productions/' id='{production.id}'></Delete>
-          </td>
+	{/if}
+		  </td>
         </tr>
        {/each}
       </tbody>

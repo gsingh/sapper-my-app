@@ -1,31 +1,17 @@
 <script context="module">
 import * as api from '../../api/api.js';
-	// import Getter from '../_CRUD/_Getter.svelte';
-	// import Delete from '../_CRUD/_Delete.svelte';
+	
     import { goto } from '@sapper/app';
     import { post } from '../../api/utils'
 	
 	export async function preload(page, session, params) {
 	
-		// console.log("from [id].svelte: page.params.id " + page.params.id);
-		// const _id = page.params.id;
-		// // const _idd = _id.slice(1,_id.length);
-		// console.log("from [id].svelte: _id " + _id);
-		// const production = await api.get(`productions/` + _id);
-		const managers = await api.get(`shift-managers`);
-		// const production = res.json();
-return {
-			// id: _id,
-            // production,
-            managers
-		};
+				const managers = await api.get(`shift-managers`);
 		
-
-    }
-
-  
-    
-
+return {
+		  managers
+		};
+}
 </script>
 <script>
 
@@ -43,12 +29,11 @@ import { stores } from '@sapper/app';
     };
     export let managers;
     
-    // export let id;
-    // let selected;
-	// export let getter, deleter,putter, creater;
+    
    
      async function create(event) {
         await post('productions/update/create', {...production});
+        goto('productions'); 
     } 
     
 </script>
