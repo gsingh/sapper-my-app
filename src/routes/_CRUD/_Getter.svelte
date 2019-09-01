@@ -7,4 +7,4 @@ $: link = base + {id};
 $: console.log("from _CRUD/getter: " + link);
 </script>
 
-<a class="inline-block border border-blue-500 rounded py-1 px-3 bg-blue-500 text-white" rel='prefetch' href='{base}/{id}'>Get</a>
+<a class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark" rel='prefetch' href='{base}/{id}'>Get</a>

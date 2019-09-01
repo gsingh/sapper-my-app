@@ -30,7 +30,7 @@ async function remove() {
 	}
 	
 </script>
-<button class="inline-block border border-blue-500 rounded py-1 px-3 bg-blue-500 text-white" on:click='{remove}'>
+<button class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark" on:click='{remove}'>
 <!-- <button class="btn btn-outline-danger btn-sm" on:click='{remove}'> -->
 				Delete 
 			</button>
