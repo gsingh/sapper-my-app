@@ -29,6 +29,7 @@ import { get } from '../api/utils.js';
 <script>
 	
 		import { stores } from '@sapper/app';
+		import Creater from '../_CRUD/_Creater'
 
   const { page, preloading, session } = stores();
 		export let selected;
@@ -38,48 +39,21 @@ import { get } from '../api/utils.js';
 		import Getter from '../_CRUD/_Getter.svelte';
 		import Delete from '../_CRUD/_Delete.svelte';
 		import Update from '../_CRUD/_Update.svelte';
-		// const { session } = stores();
-		// $: managers = api.get('shift-managers', true);
 		
-		// onMount(async ()=> {
-		// 	console.log("token_id" + $session.token_id);
-		// 	productions = await api.get('productions', $session.token_id );
-		// 	console.log("productions" + productions);
-		// return {productions};
-
-		// 	console.log("fron onmount()");
-		
-		// 	 managers = await api.get('shift-managers', $session.token_id);
-		// 	console.log("managers" + managers);
-		// 	return {managers};
-
-		// }
-		// );
-
-		// export productions;
-
 		
 
 </script>
-
-<!-- <style>
-	ul {
-		margin: 0 0 1em 0;
-		line-height: 1.5;
-	}
-</style> -->
 
 <svelte:head>
 	<title>Production</title>
 </svelte:head>
 
 <h1>Recent posts</h1>
+<div>
+<Creater base="productions/update/create" ></Creater>
+<div>
 {#if {productions}}
-<!-- <button on:click= {preload} >
-	load data
-	</button> -->
 
-	<!-- <pre>{productions}</pre> -->
  <table class="table-auto">
 	{#each productions as production}
 		<!-- we're using the non-standard `rel=prefetch` attribute to
@@ -101,3 +75,7 @@ import { get } from '../api/utils.js';
 	{/each}
  </table>
  {/if}
+ </div>
+
+ </div>
+ 

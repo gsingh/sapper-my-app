@@ -3,20 +3,20 @@ import * as api from '../../api/api.js';
 	// import Getter from '../_CRUD/_Getter.svelte';
 	// import Delete from '../_CRUD/_Delete.svelte';
     import { goto } from '@sapper/app';
-    import { put } from '../../api/utils'
+    import { post } from '../../api/utils'
 	
 	export async function preload(page, session, params) {
 	
-		console.log("from [id].svelte: page.params.id " + page.params.id);
-		const _id = page.params.id;
-		// const _idd = _id.slice(1,_id.length);
-		console.log("from [id].svelte: _id " + _id);
-		const production = await api.get(`productions/` + _id);
+		// console.log("from [id].svelte: page.params.id " + page.params.id);
+		// const _id = page.params.id;
+		// // const _idd = _id.slice(1,_id.length);
+		// console.log("from [id].svelte: _id " + _id);
+		// const production = await api.get(`productions/` + _id);
 		const managers = await api.get(`shift-managers`);
 		// const production = res.json();
 return {
-			id: _id,
-            production,
+			// id: _id,
+            // production,
             managers
 		};
 		
@@ -43,20 +43,20 @@ import { stores } from '@sapper/app';
     };
     export let managers;
     
-    export let id;
-    let selected;
+    // export let id;
+    // let selected;
 	// export let getter, deleter,putter, creater;
    
-     async function update() {
-        await put('productions/update/update', {...production});
+     async function create(event) {
+        await post('productions/update/create', {...production});
     } 
     
 </script>
 
 <div>
     <div>
-       <h1>Edit Production</h1>
-       <form on:submit|preventDefault="{update}">
+       <h1>Add Production Data</h1>
+       <form on:submit|preventDefault="{create}">
         <div>
              <label class="block" for="id">
              <span class="text-gray-700">ID</span></label>
@@ -64,8 +64,8 @@ import { stores } from '@sapper/app';
         </div>
         <div>
             <label for="prodDate">
-            <span class="text-gray-700">Last Name</span></label>
-            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="prodDate" id="prodDate" bind:value={production.prodDate}>
+            <span class="text-gray-700">Production Date</span></label>
+            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="date" name="prodDate" id="prodDate" bind:value={production.prodDate}>
         </div>
         <div>
             <label for="noOfPlates">
@@ -96,7 +96,7 @@ import { stores } from '@sapper/app';
 			</option>
 		{/each}
         </div>
-            <button class="inline-block border border-blue-500 rounded py-1 px-3 bg-blue-500 text-white" type="submit">Save</button>
+            <button class="inline-block border border-blue-500 rounded py-1 px-3 bg-blue-500 text-white" type="submit">Create</button>
        </form>
     </div>
   </div>
