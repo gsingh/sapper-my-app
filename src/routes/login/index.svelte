@@ -11,21 +11,33 @@
 				password: ''};
 	let errors = null;
 	let notifications;
+	let message; 
 	async function submit(event) {
 		console.log(event);
         console.log(event.target);
         console.log(user.username);
         console.log(user.password);
-		const response = await post(`auth/login`, { ...user });
-		
+		const data = await post(`auth/login`, { ...user });
+		const response = data;
+		console.log(response.status);
+		notify();
+	
 		// TODO handle network errors
 		errors = response.errors;
 		 
 
   function notify () {
-    const message = {errors};
+	  if (response.id_token) {
+	console.log('Login Ok.' );
+		message = 'Login Ok ';
+		const displayTimeMs = 1000;
+		notifications.success(message, displayTimeMs)
+  } else{
+    		message = 'Looks like there was a problem. Status Code: ' +
+          response.status;
     const displayTimeMs = 7000
     notifications.danger(message, displayTimeMs)
+  }
   }
 		if ($session.user) {
 			console.log("$session.user from index login : " + $session.user);
