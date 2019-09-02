@@ -19,13 +19,7 @@ return {
             production,
             managers
 		};
-		
-
     }
-
-  
-    
-
 </script>
 <script>
 
@@ -45,7 +39,6 @@ import { stores } from '@sapper/app';
     
     export let id;
     let selected;
-	// export let getter, deleter,putter, creater;
    
      async function update() {
         await put('productions/update/update', {...production});

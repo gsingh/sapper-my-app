@@ -3,38 +3,18 @@ import * as api from '../api/api.js';
 	import Getter from '../_CRUD/_Getter.svelte';
 	import Delete from '../_CRUD/_Delete.svelte';
 	import { goto } from '@sapper/app';
-	// export async function preload({ params, query }) {
-	// 	// the `slug` parameter is available because
-	// 	// this file is called [slug].html
-	// 	const res = await this.fetch(`blog/${params.slug}.json`);
-	// 	const data = await res.json();
-	// const { session } = stores();
-
+	
 	export async function preload(page, session, params) {
-		// const {slug} = page.params;
-		// console.log("from [id].svelte:  " );
 		console.log("from [id].svelte: page.params.id " + page.params.id);
 		const _id = page.params.id;
-		// const _idd = _id.slice(1,_id.length);
 		console.log("from [id].svelte: _id " + _id);
-		// console.log("from [id].svelte: session.token_id ");
 		const production = await api.get(`productions/` + _id);
 		
-		// const production = res.json();
 return {
 			id: _id,
 			production
 		};
-		
-
 	}
-
-		// if (res.status === 200) {
-		// 	return { post: data };
-		// } else {
-		// 	this.error(res.status, data.message);
-		// }
-	// }
 	</script>
 	<script>
 
@@ -44,8 +24,6 @@ import { stores } from '@sapper/app';
 
 	export let production;
 	export let id;
-	// export let getter, deleter,putter, creater;
-	
 </script>
 
 

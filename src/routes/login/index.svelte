@@ -2,14 +2,15 @@
 	import { goto, stores } from '@sapper/app';
 	import ListErrors from '../../components/ListErrors'
 	import { post } from '../api/utils.js';
-	
+	import Notifications from '@beyonk/svelte-notifications';
+
 	
 	const { session } = stores();
 	
   	export let user = {username: '',
 				password: ''};
 	let errors = null;
-
+	let notifications;
 	async function submit(event) {
 		console.log(event);
         console.log(event.target);
@@ -19,7 +20,13 @@
 		
 		// TODO handle network errors
 		errors = response.errors;
+		 
 
+  function notify () {
+    const message = {errors};
+    const displayTimeMs = 7000
+    notifications.danger(message, displayTimeMs)
+  }
 		if ($session.user) {
 			console.log("$session.user from index login : " + $session.user);
 			// $session.user = response.user;
@@ -43,7 +50,7 @@
 				</p>
 
 				<ListErrors {errors}/>
-
+			<Notifications bind:this={notifications} />
 				<form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"   on:submit|preventDefault={submit}>
 					<div class="mb-4">
 					 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">

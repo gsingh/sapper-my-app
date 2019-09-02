@@ -8,7 +8,12 @@ import bodyParser from 'body-parser';
 
 const FileStore = sessionFileStore(session);
 
-
+// Log every request
+function logger(req, res, next) {
+	console.log(`~> Received ${req.method} on ${req.url}`);
+	next(); // move on
+  }
+  
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
 var fileStoreOptions = {};
@@ -38,6 +43,7 @@ express()
 	.use(
 		compression({ threshold: 0 }),
 		sirv('static', { dev }),
+		logger,
 		sapper.middleware({
 			session: (req, res) => ({
 				user: req.session.user

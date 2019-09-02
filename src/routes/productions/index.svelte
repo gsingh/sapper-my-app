@@ -35,11 +35,12 @@ import { get } from '../api/utils.js';
 	<title>Production</title>
 </svelte:head>
 
-<h1>Recent posts</h1>
+
 <div>
-<Creater base="productions/update/create" ></Creater>
+ <h1 class="text-center font-serif text-lg text-grey-800 shadow-md pb-4" >Production</h1>
 {#if {productions}}
- <div class="w-2/3 mx-auto">
+ <div class="w-4/5 mx-auto pt-4">
+ <Creater base="productions/update/create" ></Creater>
   <div class="bg-white shadow-md rounded my-6">
     <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
       <thead>
@@ -78,33 +79,6 @@ import { get } from '../api/utils.js';
     </table>
   </div>
 </div>
-
-<div>
-
-
- <table class="table-auto">
-	{#each productions as production}
-		<!-- we're using the non-standard `rel=prefetch` attribute to
-				tell Sapper to load the data for the page as soon as
-				the user hovers over the link or taps it, instead of
-				waiting for the 'click' event -->
-		 <tr>
-		 <td class="table-cell">
-		  {production.prodTonnage}</td>
-		 
-		<td class="table-cell">  <Getter base='productions' id='{production.id}' ></Getter></td>
-		{#if $session.user}
-		<td class="table-cell">  <Delete target= 'productions/del' base='productions/' id='{production.id}'></Delete></td>
-		{/if}
-		{#if $session.user}
-				<td class="table-cell">  <Update base='productions/update' id='{production.id}' ></Update></td>
-		{/if}
-		</tr>
-	{/each}
- </table>
-
-
- </div>
- {/if}
- </div>
+{/if}
+</div>
  
