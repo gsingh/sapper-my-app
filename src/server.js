@@ -46,7 +46,7 @@ express()
 		logger,
 		sapper.middleware({
 			session: (req, res) => ({
-				user: req.session.user
+				user: req.session && req.session.user
 			})
 		})
 	)

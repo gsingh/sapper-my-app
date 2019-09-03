@@ -47,8 +47,8 @@ import Notifications from '@beyonk/svelte-notifications';
         notifications.success(message, displayTimeMs)
          goto('productions'); 
   } else{
-    		message = 'Looks like there was a problem. Status Code: ' +
-          response.status;
+    		message = 'Looks like there was a problem. Status:  ' +
+          response.statusText;
     const displayTimeMs = 7000
     notifications.danger(message, displayTimeMs)
   }

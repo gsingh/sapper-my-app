@@ -13,6 +13,7 @@ export async function post(req, res, next) {
 		if (response.id_token){
 		req.session.token_id = response.id_token;
 		req.session.user = true;
+		req.session.userName = req.body.username;
 		
 			console.log("token_id from response.json : " + response.id_token );
 			console.log("response from response.json : " + JSON.stringify(response ));

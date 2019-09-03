@@ -12,6 +12,7 @@
 	let errors = null;
 	let notifications;
 	let message; 
+	export let count = 0;
 	async function submit(event) {
 		console.log(event);
         console.log(event.target);
@@ -21,7 +22,8 @@
 		const response = data;
 		console.log(response.status);
 		notify();
-	
+		count = count +1;
+
 		// TODO handle network errors
 		errors = response.errors;
 		 
@@ -30,15 +32,20 @@
 	  if (response.id_token) {
 	console.log('Login Ok.' );
 		message = 'Login Ok ';
-		const displayTimeMs = 1000;
-		notifications.success(message, displayTimeMs)
+		const displayTimeMs = 7000;
+		notifications.success(message, displayTimeMs);
+		// goto('/');
   } else{
-    		message = 'Looks like there was a problem. Status Code: ' +
-          response.status;
-    const displayTimeMs = 7000
+    		message = 'Looks like there was a problem. Status : ' +
+		  response.title;
+		  console.log('Response' + JSON.stringify(response));
+    const displayTimeMs = 9000
     notifications.danger(message, displayTimeMs)
   }
-  }
+  }		
+		if (response.user) {
+			$session.user = response.user;
+		}
 		if ($session.user) {
 			console.log("$session.user from index login : " + $session.user);
 			// $session.user = response.user;

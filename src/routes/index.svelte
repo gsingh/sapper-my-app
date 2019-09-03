@@ -4,10 +4,13 @@ export function preload(page, { user }) {
     };
 </script>
 <script>
-import Logout from './_CRUD/Logout.svelte';
+import Logout from './_CRUD/_Logout.svelte';
 import { stores } from '@sapper/app';
 const { session } = stores();
 export let user;
+$: {user = $session.user;
+	console.log("user : " + user);
+}
         // $token= "123456";
 </script> 
 
@@ -58,12 +61,13 @@ export let user;
 <!-- <p>Token is : {$token}</p> -->
 <!-- <p>Authenticated is {$authenticated}</p> -->
 
-{#if $session.user}
-    <p>You are logged in !</p>
+{#if user}
+    <p>Logged in is {user}! </p>
+	<p>You are logged in as  {$session.userName}! </p>
     <Logout target = 'auth/logout' ></Logout>
  {:else}
 
-    <p>Please log in.
+    <p>Your log in is {user}. Please log in.
     <a href="/login"> Log In</a> 
     </p> 
       
