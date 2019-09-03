@@ -42,8 +42,8 @@ import Notifications from '@beyonk/svelte-notifications';
      function notify () {
 	  if (!response.status) {
 	console.log('Login Ok.' );
-		message = 'Login Ok ';
-		const displayTimeMs = 1000;
+		message = 'Record created !! ';
+		const displayTimeMs = 8000;
         notifications.success(message, displayTimeMs)
          goto('productions'); 
   } else{
