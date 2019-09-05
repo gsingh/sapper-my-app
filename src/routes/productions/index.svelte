@@ -73,7 +73,7 @@ import {onMount} from 'svelte';
             <Getter base='productions' id='{production.id}' ></Getter>
 	{#if $session.user}
 			<a href='productions/update/{production.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
-			<Delete target= 'productions/del' base='productions/' id='{production.id}'></Delete>
+			<Delete target= 'mutate/del' base='productions/' id='{production.id}'></Delete>
 	{/if}
 		  </td>
         </tr>

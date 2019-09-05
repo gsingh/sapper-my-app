@@ -34,7 +34,7 @@ import Notifications from '@beyonk/svelte-notifications';
     
    
      async function create(event) {
-     const response =  await post('productions/update/create', {...production},'productions');
+     const response =  await post('mutate/create', {...production},'productions');
      
     notify();
   

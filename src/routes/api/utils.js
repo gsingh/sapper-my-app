@@ -8,7 +8,7 @@ export function post(endpoint, data, route) {
 		body: JSON.stringify(data),
 		headers: {
 			'Content-Type': 'application/json',
-			'route': route,
+			'route': route
 			// 'cache': 'no-cache'
 		}
 	}).then(r => r.json());
@@ -63,7 +63,7 @@ export function logout(endpoint) {
 
 }
 
-export function put(endpoint, data) {
+export function put(endpoint, data, route) {
 	console.log("from utils: post" + endpoint);
 	console.log("from utils.js : " + JSON.stringify(data));
 	return fetch(endpoint, {
@@ -71,7 +71,8 @@ export function put(endpoint, data) {
 		credentials: 'include',
 		body: JSON.stringify(data),
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			'route': route
 			// 'cache': 'no-cache'
 		}
 	}).then(r => r.json());
