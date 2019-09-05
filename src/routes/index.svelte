@@ -1,5 +1,5 @@
 <script context="module">
-export function preload(page, { user }) {
+export function preload(page, { user } ) {
         return { user };
     };
 </script>
@@ -8,6 +8,9 @@ import Logout from './_CRUD/_Logout.svelte';
 import { stores } from '@sapper/app';
 const { session } = stores();
 export let user;
+export let  userName;
+export let token_id;
+
 $: {user = $session.user;
 	console.log("user : " + user);
 }
@@ -61,9 +64,9 @@ $: {user = $session.user;
 <!-- <p>Token is : {$token}</p> -->
 <!-- <p>Authenticated is {$authenticated}</p> -->
 
-{#if user}
+{#if $session.user}
     <p>Logged in is {user}! </p>
-	<p>You are logged in as  {$session.userName}! </p>
+	<p>You are logged in as  {$session.userName}! Your token_id is {$session.token_id}. Your login is {user}. </p>
     <Logout target = 'auth/logout' ></Logout>
  {:else}
 

@@ -1,3 +1,8 @@
+<!-- <script context="module">
+export function preload(page, {user} ) {
+        return { user };
+    };
+</script> -->
 <script>
 	import { goto, stores } from '@sapper/app';
 	import ListErrors from '../../components/ListErrors'
@@ -12,17 +17,25 @@
 	let errors = null;
 	let notifications;
 	let message; 
-	export let count = 0;
+	export let userName;
+		export let token_id;
+
 	async function submit(event) {
 		console.log(event);
         console.log(event.target);
-        console.log(user.username);
-        console.log(user.password);
+        console.log({userName});
+        console.log({token_id});
 		const data = await post(`auth/login`, { ...user });
 		const response = data;
 		console.log(response.status);
 		notify();
-		count = count +1;
+		// count = count +1;
+		// if ($session.user) {
+			console.log("$session.token_id from index login : " + $session.token_id);
+			console.log("$session.userName from index login : " + $session.userName);
+			// $session.user = response.user;
+			// goto('/');
+		// }
 
 		// TODO handle network errors
 		errors = response.errors;
@@ -47,9 +60,10 @@
 			$session.user = response.user;
 		}
 		if ($session.user) {
-			console.log("$session.user from index login : " + $session.user);
+			console.log("$session.token_id from index login : " + $session.token_id);
+			console.log("$session.userName from index login : " + $session.userName);
 			// $session.user = response.user;
-			goto('/');
+			// goto('/');
 		}
 	}
 
@@ -94,5 +108,5 @@
 			</div>
 		</div>
 	</div>
-	<!-- <p>Token is {$session.token_id} and authorization is {$session.authenticated} </p> -->
+	<p>Token is {$session.token_id} and user  is {$session.userName} </p>
 </div>
