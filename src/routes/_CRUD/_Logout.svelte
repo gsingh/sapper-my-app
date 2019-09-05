@@ -8,7 +8,7 @@ export let id;
 export let base;
 export let target;
 // let token_value;
-// const { session } = stores();
+const { session } = stores();
 //  token_value = JSON.stringify($session.token_id);
 
 	// const unsubscribe = token_id.subscribe(value => {
@@ -25,7 +25,9 @@ async function log_out() {
 	// console.log("store.token_id : " + 	JSON.stringify(token_value));
 	// console.log("$session.token_id : " + $session.token_id);
 		await logout(target);
-
+		$session.user = false;
+		$session.token_id = undefined;
+		$session.userName = undefined;
 		goto('/');
 	}
 </script>

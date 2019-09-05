@@ -44,10 +44,11 @@ export function preload(page, {user} ) {
   function notify () {
 	  if (response.id_token) {
 	console.log('Login Ok.' );
+		$session.user = true;
 		message = 'Login Ok ';
 		const displayTimeMs = 7000;
 		notifications.success(message, displayTimeMs);
-		// goto('/');
+		goto('/');
   } else{
     		message = 'Looks like there was a problem. Status : ' +
 		  response.title;
@@ -108,5 +109,5 @@ export function preload(page, {user} ) {
 			</div>
 		</div>
 	</div>
-	<p>Token is {$session.token_id} and user  is {$session.userName} </p>
+	<!-- <p>Token is {$session.token_id} and user  is {$session.userName} </p> -->
 </div>

@@ -34,7 +34,7 @@ import Notifications from '@beyonk/svelte-notifications';
     
    
      async function create(event) {
-     const response =  await post('productions/update/create', {...production});
+     const response =  await post('productions/update/create', {...production},'productions');
      
     notify();
   
@@ -87,6 +87,7 @@ import Notifications from '@beyonk/svelte-notifications';
             <label for="shift">
             <span class="text-gray-700">Shift</span></label>  
             <select class="form-select mt-1 block w-full" name="shift" id="shift" bind:value={production.shift}>
+                 <option>Select Shift</option>
                  <option value="A" >A</option>
                  <option value="B" >B</option>
                  <option value="C" >C</option>
@@ -96,7 +97,8 @@ import Notifications from '@beyonk/svelte-notifications';
             <label for="manager">
             <span class="text-gray-700">Shift Manager</span></label>
             <select class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" name="manager" id="manager" bind:value={production.manager}>
-                {#each managers as manager}
+            <option>Select Shift Manager</option>    
+            {#each managers as manager}
 			<option value={manager}>
 				{manager.name}
 			</option>

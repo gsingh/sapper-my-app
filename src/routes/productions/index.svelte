@@ -3,7 +3,7 @@
 // import {token, authenticated} from '../../store/stores.js';
 import * as api from '../api/api.js';
 import { get } from '../api/utils.js';
-// import {onMount} from 'svelte';
+import {onMount} from 'svelte';
 // import { stores } from '@sapper/app'; 
 
 // const { session } = stores();
@@ -17,17 +17,20 @@ import { get } from '../api/utils.js';
 	
 		import { stores } from '@sapper/app';
 		import Creater from '../_CRUD/_Creater'
-
+		// const { session } = stores();
   const { page, preloading, session } = stores();
-		export let selected;
+		// export let selected;
 		export let productions;
-		export let managers;
+		// export let managers;
 		// export let id;
 		import Getter from '../_CRUD/_Getter.svelte';
 		import Delete from '../_CRUD/_Delete.svelte';
 		import Update from '../_CRUD/_Update.svelte';
 		
-		
+	onMount(async () => {
+		 productions  = await api.get('productions');
+		 return productions;
+	});	
 
 </script>
 
@@ -79,6 +82,8 @@ import { get } from '../api/utils.js';
     </table>
   </div>
 </div>
+{:else}
+      <h4>Loading...</h4> 
 {/if}
 </div>
  

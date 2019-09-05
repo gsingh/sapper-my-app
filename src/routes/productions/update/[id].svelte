@@ -24,9 +24,11 @@ return {
 <script>
 
 import { stores } from '@sapper/app';
+import Notifications from '@beyonk/svelte-notifications';
 
   const { page, preloading, session } = stores();
-
+    let notifications;
+	let message; 
 	export let production= {
         id: "",
         prodDate: "",
@@ -41,7 +43,24 @@ import { stores } from '@sapper/app';
     let selected;
    
      async function update() {
-        await put('productions/update/update', {...production});
+       const response = await put('productions/update/update', {...production});
+        notify();
+  
+     
+     function notify () {
+	  if (!response.status) {
+	console.log('Login Ok.' );
+		message = 'Production updated !! ';
+		const displayTimeMs = 8000;
+        notifications.success(message, displayTimeMs)
+         goto('productions'); 
+     } else{
+    		message = 'Looks like there was a problem. Status:  ' +
+          response.statusText;
+    const displayTimeMs = 7000
+    notifications.danger(message, displayTimeMs)
+  }
+  }
     } 
     
 </script>
@@ -49,6 +68,7 @@ import { stores } from '@sapper/app';
 <div>
     <div>
        <h1>Edit Production</h1>
+        <Notifications bind:this={notifications} />
        <form on:submit|preventDefault="{update}">
         <div>
              <label class="block" for="id">
