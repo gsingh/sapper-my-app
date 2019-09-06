@@ -36,29 +36,25 @@ import { stores } from '@sapper/app';
     <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
       <thead>
         <tr>
-          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">ID</th>
-          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Date</th>
-		  <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Shift</th>
-          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">No Of Plates</th>
-		  <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tonnage</th>
-          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Shift Manager</th>
+          <th class="py-2 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">ID</th>
+          <th class="py-2 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Date</th>
+		  <th class="py-2 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Shift</th>
+          <th class="py-2 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">No Of Plates</th>
+		  <th class="py-2 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tonnage</th>
+          <th class="py-2 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Shift Manager</th>
         </tr>
       </thead>
       <tbody>
         <tr class="hover:bg-grey-lighter">
-          <td class="py-4 px-6 border-b border-grey-light">{production.id}</td>
-		  <td class="py-4 px-6 border-b border-grey-light">{production.prodDate}</td>
-  		  <td class="py-4 px-6 border-b border-grey-light">{production.shift}</td>
-		  <td class="py-4 px-6 border-b border-grey-light">{production.noOfPlates}</td>			
-		  <td class="py-4 px-6 border-b border-grey-light">{production.prodTonnage}</td>
-		  <td class="py-4 px-6 border-b border-grey-light">{production.manager.name}</td>
-
-
-
-
-          <td class="py-4 px-6 border-b border-grey-light">
-            <a href='productions/update/{production.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
-            <a href="#" class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-blue hover:bg-blue-dark">View</a>
+          <td class="py-2 px-6 border-b border-grey-light">{production.id}</td>
+		  <td class="py-2 px-6 border-b border-grey-light">{production.prodDate}</td>
+  		  <td class="py-2 px-6 border-b border-grey-light">{production.shift}</td>
+		  <td class="py-2 px-6 border-b border-grey-light">{production.noOfPlates}</td>			
+		  <td class="py-2 px-6 border-b border-grey-light">{production.prodTonnage}</td>
+		  <td class="py-2 px-6 border-b border-grey-light">{production.manager.name}</td>
+          <td class="py-2 px-6 border-b border-grey-light">
+            <a href='productions/update/{production.id}' class="text-grey-lighter font-bold py-2 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
+            <!-- <a href="productions/{production.id}" class="text-grey-lighter font-bold py-2 px-3 rounded text-xs bg-blue hover:bg-blue-dark">View</a> -->
           </td>
         </tr>
        

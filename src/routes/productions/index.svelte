@@ -43,7 +43,9 @@ import {onMount} from 'svelte';
  <h1 class="text-center font-serif text-lg text-grey-800 shadow-md pb-4" >Production</h1>
 {#if {productions}}
  <div class="w-4/5 mx-auto pt-4">
+ {#if $session.user}
  <Creater base="productions/update/create" ></Creater>
+ {/if}
   <div class="bg-white shadow-md rounded my-6">
     <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
       <thead>
@@ -54,7 +56,7 @@ import {onMount} from 'svelte';
           <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">No Of Plates</th>
 		  <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tonnage</th>
           <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Shift Manager</th>
-        </tr>
+		</tr>
       </thead>
       <tbody>
 	  {#each productions as production}
@@ -64,11 +66,7 @@ import {onMount} from 'svelte';
   		  <td class="py-4 px-6 border-b border-grey-light">{production.shift}</td>
 		  <td class="py-4 px-6 border-b border-grey-light">{production.noOfPlates}</td>			
 		  <td class="py-4 px-6 border-b border-grey-light">{production.prodTonnage}</td>
-		  <td class="py-4 px-6 border-b border-grey-light">{production.manager.name}</td>
-
-
-
-
+		  <td class="py-4 px-8 border-b border-grey-light">{production.manager.name}</td>
           <td class="py-4 px-6 border-b border-grey-light">
             <Getter base='productions' id='{production.id}' ></Getter>
 	{#if $session.user}

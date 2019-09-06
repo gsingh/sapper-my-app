@@ -43,7 +43,7 @@ import Notifications from '@beyonk/svelte-notifications';
     let selected;
    
      async function update() {
-       const response = await put('productions/update/update', {...production}, 'productions');
+       const response = await put('mutate/update', {...production}, 'productions');
         notify();
   
      

@@ -17,6 +17,7 @@ return {
 
 import { stores } from '@sapper/app';
 import Notifications from '@beyonk/svelte-notifications';
+import { fly, fade } from 'svelte/transition';
 
   const { page, preloading, session } = stores();
     	let notifications;
@@ -30,7 +31,7 @@ import Notifications from '@beyonk/svelte-notifications';
         manager: ""
     };
     export let managers;
-    
+    let visible = true;
     
    
      async function create(event) {
@@ -44,7 +45,8 @@ import Notifications from '@beyonk/svelte-notifications';
 	console.log('Login Ok.' );
 		message = 'Record created !! ';
 		const displayTimeMs = 8000;
-        notifications.success(message, displayTimeMs)
+        notifications.success(message, displayTimeMs);
+        visible = false;
          goto('productions'); 
   } else{
     		message = 'Looks like there was a problem. Status:  ' +
@@ -62,7 +64,8 @@ import Notifications from '@beyonk/svelte-notifications';
     <div>
        <h1>Add Production Data</h1>
        <Notifications bind:this={notifications} />
-       <form on:submit|preventDefault="{create}">
+      {#if visible }
+       <form in:fly="{{ x: 150, duration: 3000 }}" out:fade on:submit|preventDefault="{create}">
         <div>
              <label class="block" for="id">
              <span class="text-gray-700">ID</span></label>
@@ -106,6 +109,7 @@ import Notifications from '@beyonk/svelte-notifications';
         </div>
             <button class="inline-block border border-blue-500 rounded py-1 px-3 bg-blue-500 text-white" type="submit">Create</button>
        </form>
+       {/if}
     </div>
   </div>
 
