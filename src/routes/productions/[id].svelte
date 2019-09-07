@@ -24,6 +24,7 @@ import { stores } from '@sapper/app';
 
 	export let production;
 	export let id;
+	
 </script>
 
 

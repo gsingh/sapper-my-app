@@ -23,15 +23,17 @@ import {onMount} from 'svelte';
 		export let productions;
 		// export let managers;
 		// export let id;
+		let count =0;
 		import Getter from '../_CRUD/_Getter.svelte';
 		import Delete from '../_CRUD/_Delete.svelte';
 		import Update from '../_CRUD/_Update.svelte';
-		
+
+
 	onMount(async () => {
 		 productions  = await api.get('productions');
 		 return productions;
 	});	
-
+$: productions  =  api.get('productions');
 </script>
 
 <svelte:head>
@@ -41,7 +43,9 @@ import {onMount} from 'svelte';
 
 <div>
  <h1 class="text-center font-serif text-lg text-grey-800 shadow-md pb-4" >Production</h1>
-{#if {productions}}
+{#await {productions}}
+<p>waiting for the promise to resolve...</p>
+{:then}
  <div class="w-4/5 mx-auto pt-4">
  {#if $session.user}
  <Creater base="productions/update/create" ></Creater>
@@ -71,7 +75,9 @@ import {onMount} from 'svelte';
             <Getter base='productions' id='{production.id}' ></Getter>
 	{#if $session.user}
 			<a href='productions/update/{production.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
-			<Delete target= 'mutate/del' base='productions/' id='{production.id}'></Delete>
+			<Delete target= 'mutate/del' base='productions/' id='{production.id}' count={count+1}>
+				<!-- <p>{count+1}</p> -->
+			</Delete>
 	{/if}
 		  </td>
         </tr>
@@ -80,8 +86,7 @@ import {onMount} from 'svelte';
     </table>
   </div>
 </div>
-{:else}
-      <h4>Loading...</h4> 
-{/if}
+
+{/await}
 </div>
  

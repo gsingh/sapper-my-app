@@ -8,21 +8,10 @@ import Notifications from '@beyonk/svelte-notifications';
 export let id;
 export let base;
 export let target;
+export let count;
 let notifications;
 let message; 
-// let token_value;
-// const { session } = stores();
-//  token_value = JSON.stringify($session.token_id);
 
-	// const unsubscribe = token_id.subscribe(value => {
-	// 	token_value = value;
-
-	// 	// onDestroy(unsubscribe);
-	// var token_derived = JSON.stringify(token_id);
-	// });
-
-// $: console.log("$session.token_id : " + $session.token_id);
-// const idd = id.slice(1,id.length);
 let data = {"endpoint" : base + id};
 async function remove() {
 	// console.log("store.token_id : " + 	JSON.stringify(token_value));
@@ -37,6 +26,7 @@ async function remove() {
 		message = 'Record deleted !! ';
 		const displayTimeMs = 8000;
         notifications.success(message, displayTimeMs);
+		count += 1;
         //  goto('productions'); 
   } else{
     		message = 'Looks like there was a problem. Status:  ' +
@@ -55,3 +45,4 @@ async function remove() {
 <!-- <button class="btn btn-outline-danger btn-sm" on:click='{remove}'> -->
 				Delete 
 			</button>
+			<slot></slot>
