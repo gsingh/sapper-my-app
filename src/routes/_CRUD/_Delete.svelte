@@ -8,7 +8,7 @@ import Notifications from '@beyonk/svelte-notifications';
 export let id;
 export let base;
 export let target;
-export let count;
+// export let count;
 let notifications;
 let message; 
 
