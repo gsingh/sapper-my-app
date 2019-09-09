@@ -25,7 +25,7 @@ import {onMount} from 'svelte';
 		// export let id;
 		let count =0;
 		import Getter from '../_CRUD/_Getter.svelte';
-		import DeleteDialog from '../productions/update/_Delete-dialog';
+		import Delete from '../_CRUD/_Delete.svelte';
 		import Update from '../_CRUD/_Update.svelte';
 
 
@@ -75,9 +75,9 @@ $: productions  =  api.get('productions');
             <Getter base='productions' id='{production.id}' ></Getter>
 	{#if $session.user}
 			<a href='productions/update/{production.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
-			<DeleteDialog target= 'mutate/del' base='productions/' id='{production.id}'>
+			<Delete target= 'mutate/del' base='productions/' id='{production.id}'>
 				<!-- <p>{count+1}</p> -->
-			</DeleteDialog>
+			</Delete>
 	{/if}
 		  </td>
         </tr>

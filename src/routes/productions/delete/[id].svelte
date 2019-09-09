@@ -1,21 +1,16 @@
 <script>
-import * as api from '../api/api.js';
+import Delete from '../../_CRUD/_Delete';
+import * as api from '../../api/api.js';
 import {stores,  goto} from '@sapper/app';
-import { del } from '../api/utils';
+import { del } from '../../api/utils';
 import Notifications from '@beyonk/svelte-notifications';
-// import { token_id } from '../../store/stores';
-// import { goto } from 'svelte';
-export let id;
-export let base;
 export let target;
-// export let count;
-let notifications;
-let message; 
-
+export let base;
+export let id;
+let doDelete= false;
 let data = {"endpoint" : base + id};
-async function remove() {
-	// console.log("store.token_id : " + 	JSON.stringify(token_value));
-	// console.log("$session.token_id : " + $session.token_id);
+async function remove (){
+	doDelete = true;
 		const response = await del(target, data);
 		 notify();
   
@@ -36,9 +31,26 @@ async function remove() {
   }
   }
 
-		// goto('/');
+		goto('productions');
 	}
-	
+	function cancel(){
+		message = 'Deleted cancelled !! ';
+		const displayTimeMs = 8000;
+        notifications.info(message, displayTimeMs);
+		goto('productions');
+	}
+
 </script>
-<Notifications bind:this={notifications} />
-<a class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark" rel='prefetch' href='productions/delete/{id}'>Delete</a>
+<p>Do you really want to delete ?</p>
+
+<button on:click="{remove}"> yes</button>
+<button on:click="{cancel}"> cancel</button>
+
+<!-- {#if doDelete}
+<Delete target= {target} base={base} id={id} >
+				<!-- <p>{count+1}</p> -->
+			<!-- </Delete> --> -->
+<!-- {:else} -->
+goto('productions');
+
+<!-- {/if} -->
