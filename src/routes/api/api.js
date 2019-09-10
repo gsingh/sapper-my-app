@@ -60,6 +60,7 @@ export function get(path, token) {
 }
 
 export function del(path, token) {
+	console.log("path + token :  " + path + "   " + token);
 	return send({ method: 'DELETE', path, token });
 }
 

@@ -6,19 +6,19 @@ import * as api from '../api/api.js';
 
 
 export async function del(req, res, next) {
-    const endpoint = req.body.endpoint;
-    // console.log("endpoint : " + endpoint);
+    const del_data = req.body.data;
+    console.log("del_data : " + del_data);
     // console.log("token_id from del(req,res) : " + req.session.token_id);
-	const productions = await api.del(endpoint, req.session.token_id );
-            console.log("productions" + productions);
+	const data = await api.del(del_data, req.session.token_id );
+            console.log("data" + data);
             // console.log("token_id from get(req,res) : " + $session.token_id);
 			// productions = await api.get('productions', true );
 			// console.log("productions" + productions);
 		// return {productions};
 
-        if (productions !== null) {
+        if (data !== null) {
             res.setHeader('Content-Type', 'application/json');
-            res.end(JSON.stringify(productions));
+            res.end(JSON.stringify(data));
         } else {
             next();
         }
