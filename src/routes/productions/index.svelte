@@ -35,6 +35,15 @@ import {onMount} from 'svelte';
 	});	
 $: productions  =  api.get('productions');
 </script>
+<style>
+    .modal {
+      transition: opacity 0.25s ease;
+    }
+    body.modal-active {
+      overflow-x: hidden;
+      overflow-y: visible !important;
+    }
+  </style>
 
 <svelte:head>
 	<title>Production</title>
@@ -43,9 +52,7 @@ $: productions  =  api.get('productions');
 
 <div>
  <h1 class="text-center font-serif text-lg text-grey-800 shadow-md pb-4" >Production</h1>
-{#await {productions}}
-<p>waiting for the promise to resolve...</p>
-{:then}
+
  <div class="w-4/5 mx-auto pt-4">
  {#if $session.user}
  <Creater base="productions/update/create" ></Creater>
@@ -75,6 +82,7 @@ $: productions  =  api.get('productions');
             <Getter base='productions' id='{production.id}' ></Getter>
 	{#if $session.user}
 			<a href='productions/update/{production.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
+			
 			<Delete target= 'mutate/del' base='productions/' id='{production.id}'>
 				<!-- <p>{count+1}</p> -->
 			</Delete>
@@ -87,6 +95,5 @@ $: productions  =  api.get('productions');
   </div>
 </div>
 
-{/await}
 </div>
  

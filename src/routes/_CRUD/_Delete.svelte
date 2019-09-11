@@ -40,5 +40,14 @@ async function remove() {
 	}
 	
 </script>
+ <style>
+    .modal {
+      transition: opacity 0.25s ease;
+    }
+    body.modal-active {
+      overflow-x: hidden;
+      overflow-y: visible !important;
+    }
+  </style>
 <Notifications bind:this={notifications} />
-<a class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark" rel='prefetch' href='productions/delete/{id}'>Delete</a>
+<a class="modal-open bg-transparent border border-gray-500 hover:border-indigo-500 text-gray-500 hover:text-indigo-500 font-bold py-2 px-4 rounded-full" href='productions/delete/{id}'>Delete</a>
