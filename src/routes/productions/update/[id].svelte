@@ -3,7 +3,7 @@ import * as api from '../../api/api.js';
 	// import Getter from '../_CRUD/_Getter.svelte';
 	// import Delete from '../_CRUD/_Delete.svelte';
     import { goto } from '@sapper/app';
-    import { put } from '../../api/utils'
+    import { put } from '../../api/utils';
 	
 	export async function preload(page, session, params) {
 	
@@ -22,9 +22,14 @@ return {
     }
 </script>
 <script>
+    import { notice } from '../../../store/stores';
 
 import { stores } from '@sapper/app';
 import Notifications from '@beyonk/svelte-notifications';
+import { fade } from 'svelte/transition';
+
+
+
 
   const { page, preloading, session } = stores();
     let notifications;
@@ -50,25 +55,31 @@ import Notifications from '@beyonk/svelte-notifications';
      function notify () {
 	  if (!response.status) {
 	console.log('Login Ok.' );
-		message = 'Production updated !! ';
-		const displayTimeMs = 8000;
-        notifications.success(message, displayTimeMs)
-         goto('productions'); 
+        notice.set({message: 'Production updated !! ', status: "success"});
+        // notice.status = "success";
+        const displayTimeMs = 10000;
+        // notifications.success(message, displayTimeMs)
+        // //  goto('productions'); 
      } else{
-    		message = 'Looks like there was a problem. Status:  ' +
+             notice.message = 'update failed !! ';
+        notice.status = "danger";
+            message = 'Looks like there was a problem. Status:  ' +
           response.statusText;
     const displayTimeMs = 7000
-    notifications.danger(message, displayTimeMs)
+    // notifications.danger(message, displayTimeMs)
   }
   }
     } 
+ async function cancel(){
+     goto('productions');
+ }   
     
 </script>
 
-<div>
+<div transition:fade>
     <div>
-       <h1>Edit Production</h1>
-        <Notifications bind:this={notifications} />
+       <h1 class="text-center font-serif text-lg text-grey-800 shadow-md pb-4" >Edit Production</h1>
+        <!-- <Notifications bind:this={notifications} /> -->
        <form on:submit|preventDefault="{update}">
         <div>
              <label class="block" for="id">
@@ -109,7 +120,14 @@ import Notifications from '@beyonk/svelte-notifications';
 			</option>
 		{/each}
         </div>
-            <button class="inline-block border border-blue-500 rounded py-1 px-3 bg-blue-500 text-white" type="submit">Save</button>
+        <div class="flex left-auto">
+        <div class="pr12">
+            <button class="inline-block border border-green-500 rounded py-1 px-3 bg-red-700 text-white" type="submit">save</button>
+        </div>
+        <div class="pl-12">    
+            <button class="inline-block border border-blue-500 rounded py-1 px-3 bg-green-500 text-white" type="submit" on:click={cancel}>Cancel</button>
+        </div>
+        </div>
        </form>
     </div>
   </div>

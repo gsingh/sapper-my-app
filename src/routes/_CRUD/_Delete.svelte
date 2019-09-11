@@ -18,8 +18,7 @@ async function remove() {
 	// console.log("$session.token_id : " + $session.token_id);
 		const response = await del(target, data);
 		 notify();
-  
-     
+       
      function notify () {
 	  if (response.status >= 200 && response.status <= 300) {
 	console.log( 'Record deleted !! ' );
@@ -44,10 +43,6 @@ async function remove() {
     .modal {
       transition: opacity 0.25s ease;
     }
-    body.modal-active {
-      overflow-x: hidden;
-      overflow-y: visible !important;
-    }
   </style>
 <Notifications bind:this={notifications} />
-<a class="modal-open bg-transparent border border-gray-500 hover:border-indigo-500 text-gray-500 hover:text-indigo-500 font-bold py-2 px-4 rounded-full" href='productions/delete/{id}'>Delete</a>
+<a class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark" href='productions/delete/{id}'>Delete</a>

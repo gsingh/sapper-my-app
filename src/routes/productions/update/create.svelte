@@ -14,9 +14,9 @@ return {
 }
 </script>
 <script>
-
+import { notice } from '../../../store/stores';
 import { stores } from '@sapper/app';
-import Notifications from '@beyonk/svelte-notifications';
+// import Notifications from '@beyonk/svelte-notifications';
 import { fly, fade } from 'svelte/transition';
 
   const { page, preloading, session } = stores();
@@ -45,14 +45,17 @@ import { fly, fade } from 'svelte/transition';
 	console.log('Login Ok.' );
 		message = 'Record created !! ';
 		const displayTimeMs = 8000;
-        notifications.success(message, displayTimeMs);
+        // notifications.success(message, displayTimeMs);
         visible = false;
+        notice.set({message: 'Production created !! ', status: "success"});
          goto('productions'); 
   } else{
     		message = 'Looks like there was a problem. Status:  ' +
           response.statusText;
     const displayTimeMs = 7000
-    notifications.danger(message, displayTimeMs)
+            notice.set({message: message, status: "danger"});
+
+    // notifications.danger(message, displayTimeMs)
   }
   }
     
@@ -63,7 +66,7 @@ import { fly, fade } from 'svelte/transition';
 <div>
     <div>
        <h1>Add Production Data</h1>
-       <Notifications bind:this={notifications} />
+       <!-- <Notifications bind:this={notifications} /> -->
       {#if visible }
        <form in:fly="{{ x: 150, duration: 3000 }}" out:fade on:submit|preventDefault="{create}">
         <div>

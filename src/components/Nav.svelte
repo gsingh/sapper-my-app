@@ -1,5 +1,35 @@
 <script>
+	import { notice } from '../store/stores';
+	import Notifications from '@beyonk/svelte-notifications';
 	export let segment;
+	let notifications;
+	let notice_value;
+
+	const unsubscribe = notice.subscribe(value => {
+		notice_value = value;
+	});
+	 $: {var notification = notice_value.message;
+	 		console.log('store.notice : ' + notification);
+		 	 var status=notice_value.status;
+	 		console.log('store.status : ' + status);
+
+const displayTimeMs=10000;
+			 switch (status){
+				 case 'success':
+					notifications.success(notification, displayTimeMs);	
+					notice.set({message: '', status: ""});
+					break;
+				case 'danger':
+					notifications.danger(notification, displayTimeMs);	
+					break;
+
+				default:
+    				console.log('Sorry, we are out of ' + status + '.' );
+			 }
+			 
+		 }
+	 
+
 </script>
 
 <style>
@@ -49,6 +79,8 @@
 </style>
 
 <nav>
+	<p>{$notice.message}{$notice.status}</p>
+	 <Notifications bind:this={notifications} />
 	<ul class="flex border-b">
 		<li class="-mb-px mr-1"><a class='{segment === undefined ? "selected" : ""} bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' href='.'>home</a></li>
 		<li><a class='{segment === "about" ? "selected" : ""} bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' href='about'>about</a></li>

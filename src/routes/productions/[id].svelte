@@ -3,6 +3,7 @@ import * as api from '../api/api.js';
 	import Getter from '../_CRUD/_Getter.svelte';
 	import Delete from '../_CRUD/_Delete.svelte';
 	import { goto } from '@sapper/app';
+	import { fade, fly } from 'svelte/transition';
 	
 	export async function preload(page, session, params) {
 		console.log("from [id].svelte: page.params.id " + page.params.id);
@@ -34,7 +35,7 @@ import { stores } from '@sapper/app';
 </svelte:head>
 <div class="w-2/3 mx-auto">
   <div class="bg-white shadow-md rounded my-6">
-    <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
+    <table in:fade out:fade class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
       <thead>
         <tr>
           <th class="py-2 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">ID</th>
