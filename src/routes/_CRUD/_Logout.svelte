@@ -1,7 +1,8 @@
 <script>
 import * as api from '../api/api.js';
 import {stores,  goto} from '@sapper/app';
-import { logout } from '../api/utils'
+import { logout } from '../api/utils';
+import { notice } from '../../store/stores';
 // import { token_id } from '../../store/stores';
 // import { goto } from 'svelte';
 export let id;
@@ -28,6 +29,8 @@ async function log_out() {
 		$session.user = false;
 		$session.token_id = undefined;
 		$session.userName = undefined;
+		        notice.set({message: 'You have successfully logged out !! ', status: "success"});
+
 		goto('/');
 	}
 </script>

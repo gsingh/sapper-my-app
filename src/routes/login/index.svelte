@@ -7,7 +7,9 @@ export function preload(page, {user} ) {
 	import { goto, stores } from '@sapper/app';
 	import ListErrors from '../../components/ListErrors'
 	import { post } from '../api/utils.js';
-	import Notifications from '@beyonk/svelte-notifications';
+	    import { notice } from '../../store/stores';
+
+	// import Notifications from '@beyonk/svelte-notifications';
 
 	
 	const { session } = stores();
@@ -47,14 +49,18 @@ export function preload(page, {user} ) {
 		$session.user = true;
 		message = 'Login Ok ';
 		const displayTimeMs = 7000;
-		notifications.success(message, displayTimeMs);
+		        notice.set({message: 'You have successfully logged in !! ', status: "success"});
+
+		// notifications.success(message, displayTimeMs);
 		goto('/');
   } else{
     		message = 'Looks like there was a problem. Status : ' +
 		  response.title;
 		  console.log('Response' + JSON.stringify(response));
-    const displayTimeMs = 9000
-    notifications.danger(message, displayTimeMs)
+	const displayTimeMs = 9000;
+	        notice.set({message: 'Login is unsuccessful !! ', status: "danger"});
+
+    // notifications.danger(message, displayTimeMs)
   }
   }		
 		if (response.user) {
@@ -84,7 +90,7 @@ export function preload(page, {user} ) {
 				</p>
 
 				<ListErrors {errors}/>
-			<Notifications bind:this={notifications} />
+			<!-- <Notifications bind:this={notifications} /> -->
 				<form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"   on:submit|preventDefault={submit}>
 					<div class="mb-4">
 					 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">

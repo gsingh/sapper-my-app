@@ -25,7 +25,7 @@ return {
     import { notice } from '../../../store/stores';
 
 import { stores } from '@sapper/app';
-import Notifications from '@beyonk/svelte-notifications';
+// import Notifications from '@beyonk/svelte-notifications';
 import { fade } from 'svelte/transition';
 
 
@@ -58,26 +58,30 @@ import { fade } from 'svelte/transition';
         notice.set({message: 'Production updated !! ', status: "success"});
         // notice.status = "success";
         const displayTimeMs = 10000;
+        
         // notifications.success(message, displayTimeMs)
-        // //  goto('productions'); 
+         goto('productions'); 
      } else{
-             notice.message = 'update failed !! ';
+            notice.message = 'update failed !! ';
         notice.status = "danger";
             message = 'Looks like there was a problem. Status:  ' +
           response.statusText;
-    const displayTimeMs = 7000
+    const displayTimeMs = 7000;
+    notice.set({message: message, status: "danger"});
     // notifications.danger(message, displayTimeMs)
   }
   }
     } 
  async function cancel(){
+     message = "update cancelled";
+     notice.set({message: message, status: "info"});
      goto('productions');
  }   
     
 </script>
 
 <div transition:fade>
-    <div>
+    <div  class="p-3 font-medium border-green-300">
        <h1 class="text-center font-serif text-lg text-grey-800 shadow-md pb-4" >Edit Production</h1>
         <!-- <Notifications bind:this={notifications} /> -->
        <form on:submit|preventDefault="{update}">

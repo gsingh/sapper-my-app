@@ -17,8 +17,9 @@ import Delete from '../../_CRUD/_Delete';
 import * as api from '../../api/api.js';
 import {stores,  goto} from '@sapper/app';
 import { del } from '../../api/utils';
-import Notifications from '@beyonk/svelte-notifications';
+// import Notifications from '@beyonk/svelte-notifications';
 import { fade } from 'svelte/transition';
+ import { notice } from '../../../store/stores';
 
 // export let target;
 // export let base;
@@ -41,14 +42,18 @@ async function remove(){
 	  if (response.status >= 200 && response.status <= 300) {
 	console.log( 'Record deleted !! ' );
 		message = 'Record deleted !! ';
-		const displayTimeMs = 8000;
-        notifications.success(message, displayTimeMs);
-        //  goto('productions'); 
+    const displayTimeMs = 8000;
+            notice.set({message: message, status: "success"});
+
+        // notifications.success(message, displayTimeMs);
+         goto('productions'); 
   } else{
     		message = 'Looks like there was a problem. Status:  ' +
           response.statusText;
-    const displayTimeMs = 7000
-    notifications.danger(message, displayTimeMs)
+    const displayTimeMs = 7000;
+            notice.set({message: message, status: "danger"});
+
+    // notifications.danger(message, displayTimeMs)
   }
   }
 
@@ -56,8 +61,10 @@ async function remove(){
 	}
 	function cancel(){
 		message = 'Deleted cancelled !! ';
-		const displayTimeMs = 8000;
-        notifications.info(message, displayTimeMs);
+    const displayTimeMs = 8000;
+            notice.set({message: message, status: "info"});
+
+        // notifications.info(message, displayTimeMs);
 		goto('productions');
 	}
 
@@ -71,7 +78,7 @@ async function remove(){
       overflow-y: visible !important;
     }
   </style>
- <Notifications bind:this={notifications} />
+ <!-- <Notifications bind:this={notifications} /> -->
  <!--Modal-->
 <!-- <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
     <div class="modal-overlay absolute w-full h-full bg-red-900 opacity-50"></div>

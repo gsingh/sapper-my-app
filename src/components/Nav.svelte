@@ -13,7 +13,7 @@
 		 	 var status=notice_value.status;
 	 		console.log('store.status : ' + status);
 
-const displayTimeMs=10000;
+const displayTimeMs=6000;
 			 switch (status){
 				 case 'success':
 					notifications.success(notification, displayTimeMs);	
@@ -21,7 +21,12 @@ const displayTimeMs=10000;
 					break;
 				case 'danger':
 					notifications.danger(notification, displayTimeMs);	
+					notice.set({message: '', status: ""});
 					break;
+				case 'info':
+					notifications.info(notification, displayTimeMs);	
+					notice.set({message: '', status: ""});
+					break;	
 
 				default:
     				console.log('Sorry, we are out of ' + status + '.' );
