@@ -4,13 +4,14 @@
 import * as api from '../api/api.js';
 import { get } from '../api/utils.js';
 import {onMount} from 'svelte';
+
 // import { stores } from '@sapper/app'; 
 
 // const { session } = stores();
 
 	export async function preload(page, session) {
-	const productions = await api.get(`productions`);
-			return { productions };
+	const pictureOfEvents = await api.get(`picture-of-events`);
+			return { pictureOfEvents };
 	}
 </script>
 <script>
@@ -18,11 +19,11 @@ import {onMount} from 'svelte';
 		import { stores } from '@sapper/app';
 		import Creater from '../_CRUD/_Creater';
 		import { fadeIn, fadeOut } from "../../components/pageFade";
-
+		// import Image from "svelte-image";
 		// const { session } = stores();
   const { page, preloading, session } = stores();
 		// export let selected;
-		export let productions;
+		export let pictureOfEvents;
 		// export let managers;
 		// export let id;
 		let count =0;
@@ -32,10 +33,10 @@ import {onMount} from 'svelte';
 
 
 	onMount(async () => {
-		 productions  = await api.get('productions');
-		 return productions;
+		 pictureOfEvents  = await api.get('picture-of-events');
+		 return pictureOfEvents;
 	});	
-$: productions  =  api.get('productions');
+$: pictureOfEvents  =  api.get('pictureOfEvents');
 </script>
 <style>
     .modal {
@@ -57,7 +58,7 @@ $: productions  =  api.get('productions');
 
  <div class="w-4/5 mx-auto pt-4">
  {#if $session.user}
- <Creater base="productions/update/create" ></Creater>
+ <Creater base="pictureOfEvents/update/create" ></Creater>
  {/if}
   <div in:fadeIn out:fadeOut class="bg-white shadow-md rounded my-6">
     <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
@@ -65,27 +66,23 @@ $: productions  =  api.get('productions');
         <tr>
           <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">ID</th>
           <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Date</th>
-		  <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Shift</th>
-          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">No Of Plates</th>
-		  <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tonnage</th>
-          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Shift Manager</th>
+		  <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Image Type</th>
+          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Image</th>
 		</tr>
       </thead>
       <tbody>
-	  {#each productions as production}
+	  {#each pictureOfEvents as pictureOfEvent}
         <tr class="hover:bg-grey-lighter">
-          <td class="py-4 px-6 border-b border-grey-light">{production.id}</td>
-		  <td class="py-4 px-6 border-b border-grey-light">{production.prodDate}</td>
-  		  <td class="py-4 px-6 border-b border-grey-light">{production.shift}</td>
-		  <td class="py-4 px-6 border-b border-grey-light">{production.noOfPlates}</td>			
-		  <td class="py-4 px-6 border-b border-grey-light">{production.prodTonnage}</td>
-		  <td class="py-4 px-8 border-b border-grey-light">{production.manager.name}</td>
+          <td class="py-4 px-6 border-b border-grey-light">{pictureOfEvent.id}</td>
+		  <td class="py-4 px-6 border-b border-grey-light">{pictureOfEvent.picDate}</td>
+  		  <td class="py-4 px-6 border-b border-grey-light">{pictureOfEvent.imgType}</td>
+		  <td class="py-4 px-6 border-b border-grey-light"><img src="data:image/png;base64,{pictureOfEvent.imgFile}" alt='picture of event'/></td>			
           <td class="py-4 px-6 border-b border-grey-light">
-            <Getter base='productions' id='{production.id}' ></Getter>
+            <Getter base='picture-of-events' id='{pictureOfEvent.id}' ></Getter>
 	{#if $session.user}
-			<a href='productions/update/{production.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
+			<a href='pictureOfEvents/update/{pictureOfEvent.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
 			
-			<Delete target= 'mutate/del' base='productions/' id='{production.id}'>
+			<Delete target= 'mutate/del' base='picture-of-events/' id='{pictureOfEvent.id}'>
 				<!-- <p>{count+1}</p> -->
 			</Delete>
 	{/if}
