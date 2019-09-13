@@ -27,7 +27,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from 'svelte-feather-icons';
     <ChevronLeftIcon />
   </span>
   {#each pictureOfEvents as picture}
-  <div class="slide-content">{picture.imgFile}</div>
+  <div class="slide-content"><img src="data:image/png;base64,{picture.imgFile}" alt='picture of event'/></div>
   {/each}
    <!-- <div class="slide-content">slide 2</div>
  
