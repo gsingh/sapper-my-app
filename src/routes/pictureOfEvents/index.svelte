@@ -60,6 +60,8 @@ $: pictureOfEvents  =  api.get('pictureOfEvents');
  {#if $session.user}
  <Creater base="pictureOfEvents/update/create" ></Creater>
  {/if}
+ 			<a class="inline-block border border-blue-500 rounded py-1 px-3 bg-blue-500 text-white" rel='prefetch' href='/pictureOfEvents/carousel'>Carousel</a>
+
   <div in:fadeIn out:fadeOut class="bg-white shadow-md rounded my-6">
     <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
       <thead>
