@@ -1,15 +1,15 @@
 <script context = "module">
 // import Select from 'svelte-select';
 // import {token, authenticated} from '../../store/stores.js';
-import * as api from '../api/api.js';
-import { get } from '../api/utils.js';
+// import { get } from '../api/utils.js';
+import { get } from '../api/utils';
 import {onMount} from 'svelte';
 // import { stores } from '@sapper/app'; 
 
 // const { session } = stores();
 
 	export async function preload(page, session) {
-	const productions = await api.get(`productions`);
+	const productions = await get('mutate/get','productions');
 			return { productions };
 	}
 </script>
@@ -32,10 +32,10 @@ import {onMount} from 'svelte';
 
 
 	onMount(async () => {
-		 productions  = await api.get('productions');
+		 productions  = await get('mutate/get', 'productions');
 		 return productions;
 	});	
-$: productions  =  api.get('productions');
+$: productions  =  get('mutate/get', 'productions');
 </script>
 <style>
     .modal {
@@ -81,7 +81,7 @@ $: productions  =  api.get('productions');
 		  <td class="py-4 px-6 border-b border-grey-light">{production.prodTonnage}</td>
 		  <td class="py-4 px-8 border-b border-grey-light">{production.manager.name}</td>
           <td class="py-4 px-6 border-b border-grey-light">
-            <Getter base='productions' id='{production.id}' ></Getter>
+            <!-- <Getter base='productions' id='{production.id}' ></Getter> -->
 	{#if $session.user}
 			<a href='productions/update/{production.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
 			

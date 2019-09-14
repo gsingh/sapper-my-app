@@ -15,19 +15,21 @@ export function post(endpoint, data, route) {
 
 }
 
-export function get(endpoint) {
-	console.log("from utils: get" + endpoint);
-	// console.log("from utils.js : " + JSON.stringify(data));
+export function get(endpoint, route) {
+	console.log("from utils: get :  " + endpoint);
+	
+	console.log("from utils.js : " + JSON.stringify(route));
 	return fetch(endpoint, {
 		method: 'GET',
 		credentials: 'include',
-		// body: JSON.stringify(data),
+		// body: JSON.stringify(target),
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			'route': route 
 			// 'cache': 'no-cache'
 		}
 	})
-	// .then(r => r.json());
+	.then(r => r.json());
 
 }
 
