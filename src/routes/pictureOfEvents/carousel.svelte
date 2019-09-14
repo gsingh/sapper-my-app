@@ -21,6 +21,15 @@ import { ChevronLeftIcon, ChevronRightIcon } from 'svelte-feather-icons';
 
 
 </script>
+<!-- <style>
+  .control :global(svg) {
+		width: 150%;
+		height: 150%;
+		color: #fff;
+		border: 2px solid #fff;
+		border-radius: 32px;
+	}
+  </style> -->
 
 <Carousel>
   <span class="control" slot="left-control">

@@ -38,15 +38,7 @@ import {onMount} from 'svelte';
 	});	
 $: pictureOfEvents  =  api.get('pictureOfEvents');
 </script>
-<style>
-    .modal {
-      transition: opacity 0.25s ease;
-    }
-    body.modal-active {
-      overflow-x: hidden;
-      overflow-y: visible !important;
-    }
-  </style>
+
 
 <svelte:head>
 	<title>Production</title>
