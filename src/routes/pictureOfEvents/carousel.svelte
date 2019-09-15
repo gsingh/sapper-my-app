@@ -10,7 +10,7 @@ import {onMount} from 'svelte';
 // const { session } = stores();
 
 	export async function preload(page, session) {
-	const pictureOfEvents = await api.get(`picture-of-events`);
+	const pictureOfEvents = await get('mutate/get', `picture-of-events`);
 			return { pictureOfEvents };
 	}
 </script>

@@ -74,9 +74,9 @@ $: {user = $session.user;
     <Logout target = 'auth/logout' ></Logout>
  {:else}
 
-    <p>Your log in is {user}. Please log in.
-    <a href="/login"> Log In</a> 
-    </p> 
+    <p>Your log in is {user}. Please log in.</p>
+    <a class="inline-block border border-blue-500 rounded py-1 px-3 bg-blue-500 text-white" href="/login"> Log In</a> 
+    
       
 {/if}
 

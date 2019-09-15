@@ -27,7 +27,7 @@ export let id;
 let notifications;
 	let message; 
 let doDelete= false;
-let data =  {data: `productions/` + id};
+let data =  {data: `picture-of-events/` + id};
 console.log( 'endpoint :   ' + data);
 
 async function remove(){
@@ -46,7 +46,7 @@ async function remove(){
             notice.set({message: message, status: "success"});
 
         // notifications.success(message, displayTimeMs);
-         goto('productions'); 
+         goto('pictureOfEvents'); 
   } else{
     		message = 'Looks like there was a problem. Status:  ' +
           response.statusText;
@@ -57,7 +57,7 @@ async function remove(){
   }
   }
 
-		goto('productions');
+		goto('pictureOfEvents');
 	}
 	function cancel(){
 		message = 'Deleted cancelled !! ';
@@ -65,19 +65,11 @@ async function remove(){
             notice.set({message: message, status: "info"});
 
         // notifications.info(message, displayTimeMs);
-		goto('productions');
+		goto('pictureOfEvents');
 	}
 
 </script>
- <style>
-    .modal {
-      transition: opacity 0.25s ease;
-    }
-    body.modal-active {
-      overflow-x: hidden;
-      overflow-y: visible !important;
-    }
-  </style>
+
  <!-- <Notifications bind:this={notifications} /> -->
  <!--Modal-->
 <!-- <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
@@ -135,6 +127,6 @@ async function remove(){
 				<!-- <p>{count+1}</p> -->
 			<!-- </Delete> --> 
 <!-- {:else} -->
-<!-- goto('productions'); -->
+<!-- goto('pictureOfEvents'); -->
 
 <!-- {/if} -->

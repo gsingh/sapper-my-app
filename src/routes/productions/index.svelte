@@ -37,15 +37,7 @@ import {onMount} from 'svelte';
 	});	
 $: productions  =  get('mutate/get', 'productions');
 </script>
-<style>
-    .modal {
-      transition: opacity 0.25s ease;
-    }
-    body.modal-active {
-      overflow-x: hidden;
-      overflow-y: visible !important;
-    }
-  </style>
+
 
 <svelte:head>
 	<title>Production</title>
@@ -81,7 +73,7 @@ $: productions  =  get('mutate/get', 'productions');
 		  <td class="py-4 px-6 border-b border-grey-light">{production.prodTonnage}</td>
 		  <td class="py-4 px-8 border-b border-grey-light">{production.manager.name}</td>
           <td class="py-4 px-6 border-b border-grey-light">
-            <!-- <Getter base='productions' id='{production.id}' ></Getter> -->
+            <Getter base='productions' id='{production.id}'></Getter>
 	{#if $session.user}
 			<a href='productions/update/{production.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
 			

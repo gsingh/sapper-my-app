@@ -91,6 +91,7 @@ const displayTimeMs=6000;
 		<li><a class='{segment === "about" ? "selected" : ""} bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' href='about'>about</a></li>
 		<li><a rel=prefetch class='{segment === "productions" ? "selected" : ""} bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' href='productions'>production</a></li>
 		<li><a rel=prefetch class='{segment === "managers" ? "selected" : ""} bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' href='managers'>shift-manager</a></li>
+		<li><a rel=prefetch class='{segment === "pictureOfEvents" ? "selected" : ""} bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' href='pictureOfEvents'>Pictures</a></li>
 
 		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
 		     the blog data when we hover over the link or tap it on a touchscreen -->

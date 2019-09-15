@@ -1,12 +1,12 @@
 <script context="module">
-import * as api from '../../api/api.js';
+import { get } from '../../api/utils.js';
 	
     import { goto } from '@sapper/app';
     import { post } from '../../api/utils'
 	
 	export async function preload(page, session, params) {
 	
-				const managers = await api.get(`shift-managers`);
+				const managers = await get('mutate/get', `shift-managers`);
 		
 return {
 		  managers

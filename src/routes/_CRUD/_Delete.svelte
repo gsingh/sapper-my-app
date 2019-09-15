@@ -39,10 +39,6 @@ async function remove() {
 	}
 	
 </script>
- <style>
-    .modal {
-      transition: opacity 0.25s ease;
-    }
-  </style>
+ 
 <Notifications bind:this={notifications} />
 <a class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark" href='productions/delete/{id}'>Delete</a>

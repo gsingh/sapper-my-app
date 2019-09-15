@@ -1,5 +1,5 @@
 <script context="module">
-import * as api from '../../api/api.js';
+import { get } from '../../api/utils.js';
 	// import Getter from '../_CRUD/_Getter.svelte';
 	// import Delete from '../_CRUD/_Delete.svelte';
     import { goto } from '@sapper/app';
@@ -11,8 +11,8 @@ import * as api from '../../api/api.js';
 		const _id = page.params.id;
 		// const _idd = _id.slice(1,_id.length);
 		console.log("from [id].svelte: _id " + _id);
-		const production = await api.get(`productions/` + _id);
-		const managers = await api.get(`shift-managers`);
+		const production = await get('mutate/get', `productions/` + _id);
+		const managers = await get('mutate/get', `shift-managers`);
 		// const production = res.json();
 return {
 			id: _id,

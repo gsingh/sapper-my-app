@@ -1,6 +1,6 @@
 <script context="module">
 // import {token, authenticated} from '../../store/stores.js';
-import * as api from '../api/api.js';
+// import { get } from '../api/utils.js';
 import { get } from '../api/utils.js';
 import {onMount} from 'svelte';
 
@@ -33,7 +33,7 @@ import {onMount} from 'svelte';
 // 	}
 //   }
 	export async function preload(page, session, params) {
-		const managers = await api.get(`shift-managers`);
+		const managers = await get('mutate/get', `shift-managers`);
 		// const managers = await res.json();
 
 		return {managers};
@@ -88,12 +88,12 @@ const { session } = stores();
 		export let id;
 		import Getter from '../_CRUD/_Getter.svelte';
 		import Delete from '../_CRUD/_Delete.svelte';
-		// onMount(async ()=> {
-		// 	managers = await api.get('shift-managers', true);
-		// return {managers};
-		// console.log("fron onmount()");
-		// }
-		// );
+		onMount(async ()=> {
+			managers = await get('mutate/get', 'shift-managers');
+		return {managers};
+		console.log("fron onmount()");
+		}
+		);
 </script>
 
 <!-- <style>

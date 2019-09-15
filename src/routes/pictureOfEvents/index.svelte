@@ -1,7 +1,6 @@
 <script context = "module">
 // import Select from 'svelte-select';
 // import {token, authenticated} from '../../store/stores.js';
-import * as api from '../api/api.js';
 import { get } from '../api/utils.js';
 import {onMount} from 'svelte';
 
@@ -10,7 +9,7 @@ import {onMount} from 'svelte';
 // const { session } = stores();
 
 	export async function preload(page, session) {
-	const pictureOfEvents = await api.get(`picture-of-events`);
+	const pictureOfEvents = await get('mutate/get', `picture-of-events`);
 			return { pictureOfEvents };
 	}
 </script>
@@ -33,10 +32,10 @@ import {onMount} from 'svelte';
 
 
 	onMount(async () => {
-		 pictureOfEvents  = await api.get('picture-of-events');
+		 pictureOfEvents  = await get('mutate/get', 'picture-of-events');
 		 return pictureOfEvents;
 	});	
-$: pictureOfEvents  =  api.get('pictureOfEvents');
+$: pictureOfEvents  =  get('mutate/get', 'picture-of-events');
 </script>
 
 
