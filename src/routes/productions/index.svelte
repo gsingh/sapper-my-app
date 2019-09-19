@@ -8,8 +8,8 @@ import {onMount} from 'svelte';
 
 
 	export async function preload(page, session) {
-	const productions = await get('mutate/get','productions');
-			return { productions };
+	const jsonResponse = await get('mutate/get','productions');
+			return { jsonResponse };
 	}
 </script>
 <script>
@@ -28,13 +28,29 @@ import {onMount} from 'svelte';
 		import Getter from '../_CRUD/_Getter.svelte';
 		import Delete from '../_CRUD/_Delete.svelte';
 		import Update from '../_CRUD/_Update.svelte';
+		let searchTerm;
+		const regex = new RegExp(searchTerm, "gi");
+		export let jsonResponse;
+$:	productions = searchTerm
+    ? jsonResponse.filter(element => element.prodDate.match(regex))
+    : jsonResponse;
 
+function handleSubmit(event) {
+	// do stuff
+	   productions = searchTerm
+    ? jsonResponse.filter(element => element.prodDate.includes(searchTerm))
+    : jsonResponse;
+  }
 
 	onMount(async () => {
-		 productions  = await get('mutate/get', 'productions');
-		 return productions;
-	});	
-$: productions  =  get('mutate/get', 'productions');
+		 productions  =searchTerm
+    ? jsonResponse.filter(element => element.prodDate.includes(searchTerm))
+    : jsonResponse;
+  });
+
+$: productions  =  searchTerm  ? jsonResponse.filter(element => element.prodDate.includes(searchTerm))
+	: jsonResponse;
+	
 </script>
 
 
@@ -45,13 +61,22 @@ $: productions  =  get('mutate/get', 'productions');
 
 <div>
  <h1 class="text-center font-serif text-lg text-grey-800 shadow-md pb-4" >Production</h1>
-<SearchForm />
+<!-- <SearchForm /> -->
+<div class="w-4/5 mx-auto pt-4">
+<form on:submit|preventDefault={handleSubmit}>
+  <label for="search">Search:</label>
+  <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-400 rounded-lg mt-1 block w-full" type="search" id="search" bind:value={searchTerm}  required />
+  <button class="inline-block border border-blue-500 rounded py-1 px-3 bg-blue-400 text-white" type="submit">Search</button>
+</form>
+</div>
+
  <div class="w-4/5 mx-auto pt-4">
  {#if $session.user}
  <Creater base="productions/update/create" ></Creater>
  {/if}
   <div class="bg-white shadow-md rounded my-6">
   <main>
+  {#if {productions}}
     <table  out:send="{{key: 'table'}}" in:receive="{{key: 'table'}}" class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
       <thead>
         <tr>
@@ -86,6 +111,7 @@ $: productions  =  get('mutate/get', 'productions');
        {/each}
       </tbody>
     </table>
+	{/if}
 	</main>
   </div>
 </div>

@@ -1,6 +1,8 @@
 <script>
 export let handleSubmit=function(event) {
     // do stuff
+     const { value } = this.elements.search;
+    searchTerm = value;
   }
    $: regex = new RegExp(searchTerm, "gi");
   $: data = searchTerm
