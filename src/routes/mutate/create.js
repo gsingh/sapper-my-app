@@ -16,9 +16,11 @@ export async function post(req, res, next) {
             console.log("data " + JSON.stringify(data));
         
         if (data !== null) {
+            // res.status(200).send({"status" : "200", "statusText": "OK"});
             res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify(data));
         } else {
+            // res.status(500).send({"statusText": "There was a problem in creating record"});
             next();
         }
 

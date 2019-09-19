@@ -20,6 +20,7 @@ import { del } from '../../api/utils';
 // import Notifications from '@beyonk/svelte-notifications';
 import { fade } from 'svelte/transition';
  import { notice } from '../../../store/stores';
+//  import { notify } from '../../mutate/_notify';
 
 // export let target;
 // export let base;
@@ -69,7 +70,7 @@ async function remove(){
 	}
 
 </script>
- <style>
+ <!-- <style>
     .modal {
       transition: opacity 0.25s ease;
     }
@@ -77,7 +78,7 @@ async function remove(){
       overflow-x: hidden;
       overflow-y: visible !important;
     }
-  </style>
+  </style> -->
  <!-- <Notifications bind:this={notifications} /> -->
  <!--Modal-->
 <!-- <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">

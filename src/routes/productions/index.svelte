@@ -6,7 +6,6 @@ import { get } from '../api/utils';
 import {onMount} from 'svelte';
 // import { stores } from '@sapper/app'; 
 
-// const { session } = stores();
 
 	export async function preload(page, session) {
 	const productions = await get('mutate/get','productions');
@@ -17,10 +16,10 @@ import {onMount} from 'svelte';
 	
 		import { stores } from '@sapper/app';
 		import Creater from '../_CRUD/_Creater';
-		import { fadeIn, fadeOut } from "../../components/pageFade";
+		import { send, receive } from "../../components/crossFade";
+		import SearchForm from '../_CRUD/SearchForm';
+		const { session } = stores();
 
-		// const { session } = stores();
-  const { page, preloading, session } = stores();
 		// export let selected;
 		export let productions;
 		// export let managers;
@@ -46,13 +45,14 @@ $: productions  =  get('mutate/get', 'productions');
 
 <div>
  <h1 class="text-center font-serif text-lg text-grey-800 shadow-md pb-4" >Production</h1>
-
+<SearchForm />
  <div class="w-4/5 mx-auto pt-4">
  {#if $session.user}
  <Creater base="productions/update/create" ></Creater>
  {/if}
-  <div in:fadeIn out:fadeOut class="bg-white shadow-md rounded my-6">
-    <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
+  <div class="bg-white shadow-md rounded my-6">
+  <main>
+    <table  out:send="{{key: 'table'}}" in:receive="{{key: 'table'}}" class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
       <thead>
         <tr>
           <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">ID</th>
@@ -86,6 +86,7 @@ $: productions  =  get('mutate/get', 'productions');
        {/each}
       </tbody>
     </table>
+	</main>
   </div>
 </div>
 

@@ -4,96 +4,31 @@
 import { get } from '../api/utils.js';
 import {onMount} from 'svelte';
 
-// export let managers;
-// export let id;
-// import Getter from '../_CRUD/_Getter.svelte';
-// import Delete from '../_CRUD/_Delete.svelte';
 
-// const { session } = stores();
-// export let productions = '';
-// let token_1 = $token.slice(1,$token.length-1);
-// console.log("token_1 : " + token_1);
-	// const baseUrl = `http://localhost:9000/api`
-	// const path = `productions`
-// const myHeader = new Headers();
-// console.log('$token : ' + $token);
-// console.log('Bearer : ' + $token);
-// myHeader.append('Authorization', 'Bearer ' + $token);
-// const myAuth = $token;
-// console.log("myAuth :" + myAuth);
-// async function checkStatus(response) {
-// 	if (response.ok) {
-// 		console.log("from checkstatus response: " + response.checkStatus);
-// 	  return response;
-// 	} else {
-// 	  var error = new Error(response.statusText);
-// 	  error.response = response;
-// 	  console.log(error);
-// 	  return error;
-// 	}
-//   }
 	export async function preload(page, session, params) {
-		const managers = await get('mutate/get', `shift-managers`);
-		// const managers = await res.json();
-
-		return {managers};
+		const managers = await get('mutate/get', 'shift-managers');
+		return { managers };
 		
 	}
-	// onMount(async ()=> {
-	// 		productions = await api.get('shift-managers', true);
-	// 	return {productions};
-	// 	console.log("fron onmount(): managers");
-	// 	}
-	// 	);
-		// fetch(`${baseUrl}/${path}`, {
-		// 	method: 'GET',
-		// 	headers: {
-		// 		'Authorization': $token,
-		// 		'Content-Type': 'application/json',
-		// 		'Accept': 'application/json',
-		// 		'credentials': 'include'
-		// 	}
-		// headers: {
-		//   'Content-Type': 'application/json',
-		// //   'credentials': 'include',
-		// 'cache': 'no-cache'
-		//   "password": password,
-		// 	"rememberMe": true,
-		// 	"username": username 
-
-		// }).then(checkStatus)
-		
-		// .then(data => {
-		// 		// console.log(JSON.stringify(productions));
-		// 	{productions} = data.json();
-		// 	return {productions};
-		// })
-		// .catch((error) => {
-		// 	console.log(error + ': from fetch !')
-		// });
-		// productions =  res.json();
-		// console.log(JSON.stringify(productions));
-		// return {productions};
-	// }
-
-	// console.log(JSON.stringify())
-	</script>
-	<script>
+</script>
+<script>
 // $: console.log(JSON.stringify({productions}));
 // import {token, authenticated} from '../../store/stores.js';
-import { goto, stores } from '@sapper/app'; 
-const { session } = stores();
+import { stores } from '@sapper/app'; 
+import Creater from '../_CRUD/_Creater';
 
+const { page, preloading, session } = stores();
 		export let managers;
 		export let id;
 		import Getter from '../_CRUD/_Getter.svelte';
 		import Delete from '../_CRUD/_Delete.svelte';
+		import Update from '../_CRUD/_Update.svelte';
+
 		onMount(async ()=> {
 			managers = await get('mutate/get', 'shift-managers');
 		return {managers};
-		console.log("fron onmount()");
-		}
-		);
+		});
+$: managers = get('mutate/get', 'shift-managers')		
 </script>
 
 <!-- <style>
@@ -114,6 +49,9 @@ const { session } = stores();
 	</button> -->
 
 	<!-- <pre>{productions}</pre> -->
+	{#if $session.user}
+ <Creater base="managers/update/create" ></Creater>
+ {/if}
  <table class="table table-auto bg-gray-100">
 	<tbody>
 	{#each managers as manager}
@@ -136,7 +74,9 @@ const { session } = stores();
 		 <!-- <li><a rel='prefetch' href='productions/${production.id}'>{production.prodDate}</a></li> -->
 		  <td class="table-cell text-gray-700 text-center underline hover:text-gray-900 bg-gray-400 px-4 py-2 m-2"><Getter base='managers' id='{manager.id}'></Getter></td>
 		 {#if $session.user}
-		  <td class="table-cell text-gray-700 text-center underline hover:text-gray-900 bg-gray-400 px-4 py-2 m-2"><Delete target= 'managers/del' base='shift-managers/' id='{manager.id}'></Delete>
+		  <td class="table-cell text-gray-700 text-center underline hover:text-gray-900 bg-gray-400 px-4 py-2 m-2"><Delete target= 'mutate/del' base='managers/' id='{manager.id}'></Delete>
+		  <a href='managers/update/{manager.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
+
 		  </td>
 		  {/if}
 		</tr>

@@ -16,8 +16,9 @@ return {
 <script>
 import { notice } from '../../../store/stores';
 import { stores } from '@sapper/app';
+import { notify } from '../../mutate/_notify'
 // import Notifications from '@beyonk/svelte-notifications';
-import { fly, fade } from 'svelte/transition';
+import { send, receive } from '../../../components/crossFade';
 
   const { page, preloading, session } = stores();
     	let notifications;
@@ -36,28 +37,28 @@ import { fly, fade } from 'svelte/transition';
    
      async function create(event) {
      const response =  await post('mutate/create', {...production},'productions');
-     
-    notify();
+     console.log("response from create.js : " + response);
+    notify(response, 'productions');
   
      
-     function notify () {
-	  if (!response.status) {
-	console.log('Login Ok.' );
-		message = 'Record created !! ';
-		const displayTimeMs = 8000;
-        // notifications.success(message, displayTimeMs);
-        visible = false;
-        notice.set({message: message, status: "success"});
-         goto('productions'); 
-  } else{
-    		message = 'Looks like there was a problem. Status:  ' +
-          response.statusText;
-    const displayTimeMs = 7000
-            notice.set({message: message, status: "danger"});
+//      function notify () {
+// 	  if (!response.status) {
+// 	// console.log('Login Ok.' );
+// 		message = 'Record created !! ';
+// 		const displayTimeMs = 8000;
+//         // notifications.success(message, displayTimeMs);
+//         visible = false;
+//         notice.set({message: message, status: "success"});
+//          goto('productions'); 
+//   } else{
+//     		message = 'Looks like there was a problem. Status:  ' +
+//           response.statusText;
+//     const displayTimeMs = 7000
+//             notice.set({message: message, status: "danger"});
 
-    // notifications.danger(message, displayTimeMs)
-  }
-  }
+//     // notifications.danger(message, displayTimeMs)
+//   }
+//   }
     
     } 
 async function cancel(){
@@ -72,7 +73,7 @@ async function cancel(){
        <h1 class="text-center font-serif text-lg text-grey-800 shadow-md pb-4">Add Production Data</h1>
        <!-- <Notifications bind:this={notifications} /> -->
       {#if visible }
-       <form in:fly="{{ x: 150, duration: 3000 }}" out:fade on:submit|preventDefault="{create}">
+       <form out:send="{{key: 'form'}}" in:receive="{{key: 'form'}}" on:submit|preventDefault="{create}">
         <div class="p-3 font-medium border-orange-200">
              <label class="block" for="id">
              <span class="text-gray-700">ID</span></label>

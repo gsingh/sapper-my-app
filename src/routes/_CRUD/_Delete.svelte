@@ -11,8 +11,10 @@ export let target;
 // export let count;
 let notifications;
 let message; 
-
+let a_target = base + 'delete/' + id;
 let data = {"endpoint" : base + id};
+
+
 async function remove() {
 	// console.log("store.token_id : " + 	JSON.stringify(token_value));
 	// console.log("$session.token_id : " + $session.token_id);
@@ -41,4 +43,4 @@ async function remove() {
 </script>
  
 <Notifications bind:this={notifications} />
-<a class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark" href='productions/delete/{id}'>Delete</a>
+<a class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark" href={a_target}>Delete</a>

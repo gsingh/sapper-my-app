@@ -10,7 +10,7 @@ export async function del(req, res, next) {
     console.log("del_data : " + del_data);
     // console.log("token_id from del(req,res) : " + req.session.token_id);
 	const data = await api.del(del_data, req.session.token_id );
-            console.log("data" + data);
+            console.log("data" + JSON.stringify(data));
             // console.log("token_id from get(req,res) : " + $session.token_id);
 			// productions = await api.get('productions', true );
 			// console.log("productions" + productions);

@@ -5,6 +5,7 @@ export function preload(page, { user } ) {
 </script>
 <script>
 import Logout from './_CRUD/_Logout.svelte';
+import {send, receive} from '../components/crossFade';
 import { stores } from '@sapper/app';
 import { onMount } from 'svelte';
 const { session } = stores();

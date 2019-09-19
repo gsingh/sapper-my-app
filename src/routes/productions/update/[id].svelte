@@ -26,7 +26,8 @@ return {
 
 import { stores } from '@sapper/app';
 // import Notifications from '@beyonk/svelte-notifications';
-import { fade } from 'svelte/transition';
+		import { send, receive } from "../../../components/crossFade";
+import { notify } from '../../mutate/_notify'
 
 
 
@@ -80,11 +81,11 @@ import { fade } from 'svelte/transition';
     
 </script>
 
-<div transition:fade>
+<!-- <div transition:fade> -->
     <div  class="p-3 font-medium border-green-300">
        <h1 class="text-center font-serif text-lg text-grey-800 shadow-md pb-4" >Edit Production</h1>
         <!-- <Notifications bind:this={notifications} /> -->
-       <form on:submit|preventDefault="{update}">
+       <form out:send="{{key: 'form'}}" in:receive="{{key: 'form'}}" on:submit|preventDefault="{update}">
         <div>
              <label class="block" for="id">
              <span class="text-gray-700">ID</span></label>
@@ -134,7 +135,7 @@ import { fade } from 'svelte/transition';
         </div>
        </form>
     </div>
-  </div>
+  <!-- </div> -->
 
 
 
