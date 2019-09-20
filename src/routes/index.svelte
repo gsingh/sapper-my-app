@@ -8,6 +8,7 @@ import Logout from './_CRUD/_Logout.svelte';
 import {send, receive} from '../components/crossFade';
 import { stores } from '@sapper/app';
 import { onMount } from 'svelte';
+import Clock from '../components/Clock'
 const { session } = stores();
 export let user;
 // export let  userName;
@@ -62,10 +63,7 @@ $: {user = $session.user;
 
 <h1>Great success!</h1>
 
-<figure>
-	<img alt='Borat' src='great-success.png'>
-	<figcaption>HIGH FIVE!</figcaption>
-</figure>
+<Clock />
 <!-- <p>Token is : {$token}</p> -->
 <!-- <p>Authenticated is {$authenticated}</p> -->
 

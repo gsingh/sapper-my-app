@@ -18,6 +18,13 @@ import {onMount} from 'svelte';
 		import Creater from '../_CRUD/_Creater';
 		import { send, receive } from "../../components/crossFade";
 		import SearchForm from '../_CRUD/SearchForm';
+// 		 import FusionCharts from 'fusioncharts/core';
+//   		 import Charts from 'fusioncharts/fusioncharts.charts';
+//   import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+//   import SvelteFC, { fcRoot } from 'svelte-fusioncharts';
+// 		 // Always set FusionCharts as the first parameter
+//   fcRoot(FusionCharts, Charts, FusionTheme);
+
 		const { session } = stores();
 
 		// export let selected;
@@ -32,7 +39,7 @@ import {onMount} from 'svelte';
 		const regex = new RegExp(searchTerm, "gi");
 		export let jsonResponse;
 $:	productions = searchTerm
-    ? jsonResponse.filter(element => element.prodDate.match(regex))
+    ? jsonResponse.filter(element => element.prodDate.match(searchTerm))
     : jsonResponse;
 
 function handleSubmit(event) {
