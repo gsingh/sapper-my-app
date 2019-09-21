@@ -3,13 +3,14 @@
 // import {token, authenticated} from '../../store/stores.js';
 // import { get } from '../api/utils.js';
 import { get } from '../api/utils';
-import {onMount} from 'svelte';
+// import {onMount} from 'svelte';
 // import { stores } from '@sapper/app'; 
 
 
-	export async function preload(page, session) {
-	const jsonResponse = await get('mutate/get','productions');
-			return { jsonResponse };
+	export async function preload(page, session, params) {
+	const productions = await get('mutate/get','productions');
+		// const jsonResponse = productions;
+			return { productions };
 	}
 </script>
 <script>
@@ -17,7 +18,11 @@ import {onMount} from 'svelte';
 		import { stores } from '@sapper/app';
 		import Creater from '../_CRUD/_Creater';
 		import { send, receive } from "../../components/crossFade";
-		import SearchForm from '../_CRUD/SearchForm';
+		import {onMount} from 'svelte';
+		// import { get } from '../api/utils';
+
+
+		// import SearchForm from '../_CRUD/_SearchForm';
 // 		 import FusionCharts from 'fusioncharts/core';
 //   		 import Charts from 'fusioncharts/fusioncharts.charts';
 //   import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
@@ -25,7 +30,7 @@ import {onMount} from 'svelte';
 // 		 // Always set FusionCharts as the first parameter
 //   fcRoot(FusionCharts, Charts, FusionTheme);
 
-		const { session } = stores();
+		const { page, preloading, session } = stores();
 
 		// export let selected;
 		export let productions;
@@ -35,29 +40,39 @@ import {onMount} from 'svelte';
 		import Getter from '../_CRUD/_Getter.svelte';
 		import Delete from '../_CRUD/_Delete.svelte';
 		import Update from '../_CRUD/_Update.svelte';
-		let searchTerm;
+		let searchTerm = '2019';
 		const regex = new RegExp(searchTerm, "gi");
 		export let jsonResponse;
-$:	productions = searchTerm
-    ? jsonResponse.filter(element => element.prodDate.match(searchTerm))
-    : jsonResponse;
+// $:	{ jsonResponse =  get('mutate/get','productions');
+// 	
+// $: productions = searchTerm ? jsonResponse.filter(element => element.prodDate.match(searchTerm)) : jsonResponse;
+	// return productions;	
+$: productions = get('mutate/get', 'productions');
 
+// 	searchTerm
+//     ? jsonResponse.filter(element => element.prodDate.match(searchTerm))
+//     : jsonResponse;
+// }
 function handleSubmit(event) {
 	// do stuff
-	   productions = searchTerm
+
+	productions = searchTerm
     ? jsonResponse.filter(element => element.prodDate.includes(searchTerm))
     : jsonResponse;
   }
 
 	onMount(async () => {
-		 productions  =searchTerm
-    ? jsonResponse.filter(element => element.prodDate.includes(searchTerm))
-    : jsonResponse;
+		productions = await get('mutate/get','productions');
+		jsonResponse = productions;
+	// 	 productions  =searchTerm
+    // ? jsonResponse.filter(element => element.prodDate.includes(searchTerm))
+    // : jsonResponse;
   });
 
-$: productions  =  searchTerm  ? jsonResponse.filter(element => element.prodDate.includes(searchTerm))
-	: jsonResponse;
-	
+// $: productions  = { 
+// 	searchTerm  ? jsonResponse.filter(element => element.prodDate.includes(searchTerm))
+// 	: jsonResponse;
+// }
 </script>
 
 
@@ -72,7 +87,7 @@ $: productions  =  searchTerm  ? jsonResponse.filter(element => element.prodDate
 <div class="w-4/5 mx-auto pt-4">
 <form on:submit|preventDefault={handleSubmit}>
   <label for="search">Search:</label>
-  <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-400 rounded-lg mt-1 block w-full" type="search" id="search" bind:value={searchTerm}  required />
+  <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-400 rounded-lg mt-1 block w-full" type="date" id="search" bind:value={searchTerm}  required />
   <button class="inline-block border border-blue-500 rounded py-1 px-3 bg-blue-400 text-white" type="submit">Search</button>
 </form>
 </div>
@@ -83,7 +98,7 @@ $: productions  =  searchTerm  ? jsonResponse.filter(element => element.prodDate
  {/if}
   <div class="bg-white shadow-md rounded my-6">
   <main>
-  {#if {productions}}
+  <!-- {#if {productions}} -->
     <table  out:send="{{key: 'table'}}" in:receive="{{key: 'table'}}" class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
       <thead>
         <tr>
@@ -118,7 +133,7 @@ $: productions  =  searchTerm  ? jsonResponse.filter(element => element.prodDate
        {/each}
       </tbody>
     </table>
-	{/if}
+	<!-- {/if} -->
 	</main>
   </div>
 </div>
