@@ -41,6 +41,8 @@ import { get } from '../api/utils';
 		import Delete from '../_CRUD/_Delete.svelte';
 		import Update from '../_CRUD/_Update.svelte';
 		let searchTerm = '2019';
+				let searchTerm2 = '2020';
+
 		const regex = new RegExp(searchTerm, "gi");
 		export let jsonResponse;
 // $:	{ jsonResponse =  get('mutate/get','productions');
@@ -57,7 +59,7 @@ function handleSubmit(event) {
 	// do stuff
 
 	productions = searchTerm
-    ? jsonResponse.filter(element => element.prodDate.includes(searchTerm))
+    ? jsonResponse.filter((element) => element.prodDate >= searchTerm && element.prodDate <= searchTerm2 )
     : jsonResponse;
   }
 
@@ -87,7 +89,9 @@ function handleSubmit(event) {
 <div class="w-4/5 mx-auto pt-4">
 <form on:submit|preventDefault={handleSubmit}>
   <label for="search">Search:</label>
-  <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-400 rounded-lg mt-1 block w-full" type="date" id="search" bind:value={searchTerm}  required />
+  <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-400 rounded-lg mt-1" type="date" id="search" bind:value={searchTerm}  required />
+   <label for="search">Search:</label>
+  <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-400 rounded-lg mt-1" type="date" id="search" bind:value={searchTerm2}  required />
   <button class="inline-block border border-blue-500 rounded py-1 px-3 bg-blue-400 text-white" type="submit">Search</button>
 </form>
 </div>
