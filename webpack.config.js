@@ -1,3 +1,15 @@
+const tailwind = require("./tailwind.js");
+const preprocessOptions = {
+    transformers: {
+        postcss: {
+			plugins: [require("postcss-import")(), 
+			require("postcss-url")(),
+			require("tailwindcss")(tailwind),
+			require("autoprefixer")({ browsers: "last 4 version" })
+		]
+        }
+    }
+};
 const webpack = require('webpack');
 const config = require('sapper/config/webpack.js');
 const pkg = require('./package.json');
@@ -22,7 +34,10 @@ module.exports = {
 						options: {
 							dev,
 							hydratable: true,
-							hotReload: false // pending https://github.com/sveltejs/svelte/issues/2377
+							hotReload: true,
+						    preprocess: require("svelte-preprocess")(
+					        preprocessOptions
+						  )
 						}
 					}
 				}
@@ -54,8 +69,11 @@ module.exports = {
 						loader: 'svelte-loader',
 						options: {
 							css: false,
-							generate: 'ssr',
-							dev
+							generate: "ssr",
+							dev,
+						   preprocess: require("svelte-preprocess")(
+						  preprocessOptions
+						   )
 						}
 					},
 					// use:	 {
