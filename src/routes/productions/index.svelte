@@ -19,6 +19,7 @@ import { get } from '../api/utils';
 		import Creater from '../_CRUD/_Creater';
 		import { send, receive } from "../../components/crossFade";
 		import {onMount} from 'svelte';
+		
 		// import { get } from '../api/utils';
 
 
@@ -40,6 +41,7 @@ import { get } from '../api/utils';
 		import Getter from '../_CRUD/_Getter.svelte';
 		import Delete from '../_CRUD/_Delete.svelte';
 		import Update from '../_CRUD/_Update.svelte';
+		import * as tailwind from '../../../tailwind'
 		let searchTerm = '2019';
 				let searchTerm2 = '2020';
 
@@ -76,7 +78,12 @@ function handleSubmit(event) {
 // 	: jsonResponse;
 // }
 </script>
+<style>
+.th {
+@apply py-4 px-6 font-bold uppercase text-lg text-red-700 border-b;
+}
 
+</style>
 
 
 
@@ -108,12 +115,12 @@ function handleSubmit(event) {
     <table  out:send="{{key: 'table'}}" in:receive="{{key: 'table'}}" class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
       <thead>
         <tr>
-          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">ID</th>
-          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Date</th>
-		  <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Shift</th>
-          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">No Of Plates</th>
-		  <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tonnage</th>
-          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Shift Manager</th>
+          <th class="th">ID</th>
+          <th class="th">Date</th>
+		  <th class="th">Shift</th>
+          <th class="th">No Of Plates</th>
+		  <th class="th">Tonnage</th>
+          <th class="th">Shift Manager</th>
 		</tr>
       </thead>
       <tbody>

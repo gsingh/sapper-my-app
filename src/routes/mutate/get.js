@@ -13,7 +13,7 @@ export async function get(req, res, next) {
     // console.log("data from get: " + JSON.stringify(data_json));
     // console.log("token_id from del(req,res) : " + req.session.token_id);
 	const data = await api.get( route, null );
-            console.log("data " + JSON.stringify(data));
+            // console.log("data " + JSON.stringify(data));
         
         if (data !== null) {
             res.setHeader('Content-Type', 'application/json');
