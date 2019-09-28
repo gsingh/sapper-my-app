@@ -8,9 +8,9 @@ import { get } from '../api/utils';
 
 
 	export async function preload(page, session, params) {
-	const productions = await get('mutate/get','productions');
-		// const jsonResponse = productions;
-			return { productions };
+	const normalisings = await get('mutate/get','normalisings');
+		// const jsonResponse = normalisings;
+			return { normalisings };
 	}
 </script>
 <script>
@@ -34,7 +34,7 @@ import { get } from '../api/utils';
 		const { page, preloading, session } = stores();
 
 		// export let selected;
-		export let productions;
+		export let normalisings;
 		// export let managers;
 		// export let id;
 		let count =0;
@@ -47,21 +47,21 @@ import { get } from '../api/utils';
 
 		const regex = new RegExp(searchTerm, "gi");
 		export let jsonResponse;
-// $:	{ jsonResponse =  get('mutate/get','productions');
+// $:	{ jsonResponse =  get('mutate/get','normalisings');
 // 	
-// $: productions = searchTerm ? jsonResponse.filter(element => element.prodDate.match(searchTerm)) : jsonResponse;
-	// return productions;	
-$: productions = get('mutate/get', 'productions');
+// $: normalisings = searchTerm ? jsonResponse.filter(element => element.normalisingDate.match(searchTerm)) : jsonResponse;
+	// return normalisings;	
+$: normalisings = get('mutate/get', 'normalisings');
 
 // 	searchTerm
-//     ? jsonResponse.filter(element => element.prodDate.match(searchTerm))
+//     ? jsonResponse.filter(element => element.normalisingDate.match(searchTerm))
 //     : jsonResponse;
 // }
 function handleSubmit(event) {
 	// do stuff
 
-	productions = searchTerm
-    ? jsonResponse.filter((element) => element.prodDate >= searchTerm && element.prodDate <= searchTerm2 ).sort(function(a,b){
+	normalisings = searchTerm
+    ? jsonResponse.filter((element) => element.normalisingDate >= searchTerm && element.normalisingDate <= searchTerm2 ).sort(function(a,b){
   // Turn your strings into dates, and then subtract them
   // to get a value that is either negative, positive, or zero.
   return new Date(b.date) - new Date(a.date);
@@ -70,15 +70,15 @@ function handleSubmit(event) {
   }
 
 	onMount(async () => {
-		productions = await get('mutate/get','productions');
-		jsonResponse = productions;
-	// 	 productions  =searchTerm
-    // ? jsonResponse.filter(element => element.prodDate.includes(searchTerm))
+		normalisings = await get('mutate/get','normalisings');
+		jsonResponse = normalisings;
+	// 	 normalisings  =searchTerm
+    // ? jsonResponse.filter(element => element.normalisingDate.includes(searchTerm))
     // : jsonResponse;
   });
 
-// $: productions  = { 
-// 	searchTerm  ? jsonResponse.filter(element => element.prodDate.includes(searchTerm))
+// $: normalisings  = { 
+// 	searchTerm  ? jsonResponse.filter(element => element.normalisingDate.includes(searchTerm))
 // 	: jsonResponse;
 // }
 </script>
@@ -96,12 +96,12 @@ function handleSubmit(event) {
 
 
 <svelte:head>
-	<title>Production</title>
+	<title>normalising</title>
 </svelte:head>
 
 
 	<div>
-	<h1 class="w-full text-center font-serif text-lg text-grey-800 shadow-md pb-4" >Production</h1>
+	<h1 class="w-full text-center font-serif text-lg text-grey-800 shadow-md pb-4" >normalising</h1>
 	<!-- <SearchForm /> -->
 	</div>
 <div class="flex border border-gray-300">	
@@ -116,13 +116,13 @@ function handleSubmit(event) {
 	</div>
 	<div class="w-1/4 pt-4 order-2">
 		{#if $session.user}
-		<Creater base="productions/update/create" ></Creater>
+		<Creater base="normalisings/update/create" ></Creater>
 		{/if}
 	</div>
 </div>
 <div class="flex border border-green-200">
   <div class="w-3/4 border-gray-200 shadow-md rounded my-6">
-  	  	<!-- {#if {productions}} -->
+  	  	<!-- {#if {normalisings}} -->
     <table  out:send="{{key: 'table'}}" in:receive="{{key: 'table'}}" class="text-left border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
       <thead>
         <tr>
@@ -135,19 +135,19 @@ function handleSubmit(event) {
 		</tr>
       </thead>
       <tbody>
-	  {#each productions as production}
+	  {#each normalisings as normalising}
         <tr class="hover:bg-gray-300">
-          <td class="td">{production.id}</td>
-		  <td class="td">{production.prodDate}</td>
-  		  <td class="td">{production.shift}</td>
-		  <td class="td">{production.noOfPlates}</td>			
-		  <td class="td">{production.prodTonnage}</td>
-		  <td class="py-4 px-8 border-b border-gray-400">{production.manager.name}</td>
+          <td class="td">{normalising.id}</td>
+		  <td class="td">{normalising.normalisingDate}</td>
+  		  <td class="td">{normalising.shift}</td>
+		  <td class="td">{normalising.noOfPlates}</td>			
+		  <td class="td">{normalising.normalisedTonnage}</td>
+		  <td class="py-4 px-8 border-b border-gray-400">{normalising.manager.name}</td>
           <td class="td">
-            <Getter base='productions' id='{production.id}'></Getter>
+            <Getter base='normalisings' id='{normalising.id}'></Getter>
 			{#if $session.user}
-				<a href='productions/update/{production.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
-					<Delete target= 'mutate/del' base='productions/' id='{production.id}'>
+				<a href='normalisings/update/{normalising.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
+					<Delete target= 'mutate/del' base='normalisings/' id='{normalising.id}'>
 					<!-- <p>{count+1}</p> -->
 					</Delete>
 			{/if}
