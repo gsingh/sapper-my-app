@@ -3,8 +3,8 @@
 import { get } from '../api/utils';
 
 export async function preload(page, session, params) {
-const productions = await get('mutate/get','productions');
-		return { productions };
+const eventOfPlateMills = await get('mutate/get','eventOfPlateMills');
+		return { eventOfPlateMills };
 }
 </script>
 <script>
@@ -17,7 +17,7 @@ import {onMount} from 'svelte';
 
 const { page, preloading, session } = stores();
 
-export let productions;
+export let eventOfPlateMills;
 let count =0;
 import Getter from '../_CRUD/_Getter.svelte';
 import Delete from '../_CRUD/_Delete.svelte';
@@ -28,19 +28,19 @@ let searchTerm2 = '2020';
 
 const regex = new RegExp(searchTerm, "gi");
 export let jsonResponse;
-$: productions = get('mutate/get', 'productions');
+$: eventOfPlateMills = get('mutate/get', 'eventOfPlateMills');
 
 function handleSubmit(event) {
 
-	productions = searchTerm
-	? jsonResponse.filter((element) => element.prodDate >= searchTerm && element.prodDate <= searchTerm2 ).sort(function(a,b){
+	eventOfPlateMills = searchTerm
+	? jsonResponse.filter((element) => element.eventDate >= searchTerm && element.eventDate <= searchTerm2 ).sort(function(a,b){
  	 return new Date(b.date) - new Date(a.date);
 	})  : jsonResponse;
 	}
 
 onMount(async () => {
-	productions = await get('mutate/get','productions');
-	jsonResponse = productions;
+	eventOfPlateMills = await get('mutate/get','eventOfPlateMills');
+	jsonResponse = eventOfPlateMills;
 	});
 </script>
 <style>
@@ -56,7 +56,7 @@ onMount(async () => {
 
 
 <svelte:head>
-	<title>Production</title>
+	<title>Event</title>
 </svelte:head>
 
 <div>
@@ -74,38 +74,32 @@ onMount(async () => {
 	</div>
 	<div class="w-1/4 pt-4 order-2">
 		{#if $session.user}
-		<Creater base="productions/update/create"></Creater>
+		<Creater base="eventOfPlateMills/update/create"></Creater>
 		{/if}
 	</div>
 </div>
 <div class="flex border border-green-200">
   <div class="w-3/4 border-gray-200 shadow-md rounded my-6">
-  	  	<!-- {#if {productions}} -->
+  	  	<!-- {#if {eventOfPlateMills}} -->
     <table  out:send="{{key: 'table'}}" in:receive="{{key: 'table'}}" class="text-left border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
       <thead>
         <tr>
           <th class="th">ID</th>
-          <th class="th">Date</th>
-		  <th class="th">Shift</th>
-          <th class="th">No Of Plates</th>
-		  <th class="th">Tonnage</th>
-          <th class="th">Shift Manager</th>
-		</tr>
+          <th class="th">Event Date</th>
+		  <th class="th">Event Name</th>
+        </tr>
       </thead>
       <tbody>
-	  {#each productions as production}
+	  {#each eventOfPlateMills as eventOfPlateMill}
         <tr class="hover:bg-gray-300">
-          <td class="td">{production.id}</td>
-		  <td class="td">{production.prodDate}</td>
-  		  <td class="td">{production.shift}</td>
-		  <td class="td">{production.noOfPlates}</td>			
-		  <td class="td">{production.prodTonnage}</td>
-		  <td class="py-4 px-8 border-b border-gray-400">{production.manager.name}</td>
-          <td class="td">
-            <Getter base='productions' id='{production.id}'></Getter>
+          <td class="td">{eventOfPlateMill.id}</td>
+		  <td class="td">{eventOfPlateMill.eventDate}</td>
+  		  <td class="td">{eventOfPlateMill.eventName}</td>
+		  <td class="td">
+            <Getter base='eventOfPlateMills' id='{eventOfPlateMill.id}'></Getter>
 			{#if $session.user}
-				<a href='productions/update/{production.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
-					<Delete target= 'mutate/del' base='productions/' id='{production.id}'>
+				<a href='eventOfPlateMills/update/{eventOfPlateMill.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
+					<Delete target= 'mutate/del' base='eventOfPlateMills/' id='{eventOfPlateMill.id}'>
 					<!-- <p>{count+1}</p> -->
 					</Delete>
 			{/if}

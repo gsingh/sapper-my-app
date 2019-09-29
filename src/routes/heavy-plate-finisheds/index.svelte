@@ -3,8 +3,8 @@
 import { get } from '../api/utils';
 
 export async function preload(page, session, params) {
-const productions = await get('mutate/get','productions');
-		return { productions };
+const hpFinisheds = await get('mutate/get','heavy-plate-finisheds');
+		return { hpFinisheds };
 }
 </script>
 <script>
@@ -17,7 +17,7 @@ import {onMount} from 'svelte';
 
 const { page, preloading, session } = stores();
 
-export let productions;
+export let hpFinisheds;
 let count =0;
 import Getter from '../_CRUD/_Getter.svelte';
 import Delete from '../_CRUD/_Delete.svelte';
@@ -28,19 +28,19 @@ let searchTerm2 = '2020';
 
 const regex = new RegExp(searchTerm, "gi");
 export let jsonResponse;
-$: productions = get('mutate/get', 'productions');
+$: hpFinisheds = get('mutate/get', 'heavy-plate-finisheds');
 
 function handleSubmit(event) {
 
-	productions = searchTerm
-	? jsonResponse.filter((element) => element.prodDate >= searchTerm && element.prodDate <= searchTerm2 ).sort(function(a,b){
+	hpFinisheds = searchTerm
+	? jsonResponse.filter((element) => element.hpFinishedDate >= searchTerm && element.hpFinishedDate <= searchTerm2 ).sort(function(a,b){
  	 return new Date(b.date) - new Date(a.date);
 	})  : jsonResponse;
 	}
 
 onMount(async () => {
-	productions = await get('mutate/get','productions');
-	jsonResponse = productions;
+	hpFinisheds = await get('mutate/get','heavy-plate-finisheds');
+	jsonResponse = heavy-plate-finisheds;
 	});
 </script>
 <style>
@@ -56,11 +56,11 @@ onMount(async () => {
 
 
 <svelte:head>
-	<title>Production</title>
+	<title>heavy-plate-finished</title>
 </svelte:head>
 
 <div>
-	<h1 class="w-full text-center font-serif text-lg text-grey-800 shadow-md pb-4" >Production</h1>
+	<h1 class="w-full text-center font-serif text-lg text-grey-800 shadow-md pb-4" >heavy plate finished</h1>
 </div>
 <div class="flex border border-gray-300">	
 	<div class="w-3/4 mx-auto pt-4 order-1">
@@ -74,13 +74,13 @@ onMount(async () => {
 	</div>
 	<div class="w-1/4 pt-4 order-2">
 		{#if $session.user}
-		<Creater base="productions/update/create"></Creater>
+		<Creater base="heavy-plate-finisheds/update/create"></Creater>
 		{/if}
 	</div>
 </div>
 <div class="flex border border-green-200">
   <div class="w-3/4 border-gray-200 shadow-md rounded my-6">
-  	  	<!-- {#if {productions}} -->
+  	  	<!-- {#if {heavy-plate-finisheds}} -->
     <table  out:send="{{key: 'table'}}" in:receive="{{key: 'table'}}" class="text-left border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
       <thead>
         <tr>
@@ -93,19 +93,19 @@ onMount(async () => {
 		</tr>
       </thead>
       <tbody>
-	  {#each productions as production}
+	  {#each hpFinisheds as hpFinished}
         <tr class="hover:bg-gray-300">
-          <td class="td">{production.id}</td>
-		  <td class="td">{production.prodDate}</td>
-  		  <td class="td">{production.shift}</td>
-		  <td class="td">{production.noOfPlates}</td>			
-		  <td class="td">{production.prodTonnage}</td>
-		  <td class="py-4 px-8 border-b border-gray-400">{production.manager.name}</td>
+          <td class="td">{hpFinished.id}</td>
+		  <td class="td">{hpFinished.hPFinishedDate}</td>
+  		  <td class="td">{hpFinished.shift}</td>
+		  <td class="td">{hpFinished.noOfPlates}</td>			
+		  <td class="td">{hpFinished.hPFinishedTonnage}</td>
+		  <td class="py-4 px-8 border-b border-gray-400">{hpFinished.manager.name}</td>
           <td class="td">
-            <Getter base='productions' id='{production.id}'></Getter>
+            <Getter base='heavy-plate-finisheds' id='{hpFinished.id}'></Getter>
 			{#if $session.user}
-				<a href='productions/update/{production.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
-					<Delete target= 'mutate/del' base='productions/' id='{production.id}'>
+				<a href='heavy-plate-finisheds/update/{hpFinished.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
+					<Delete target= 'mutate/del' base='heavy-plate-finisheds/' id='{hpFinished.id}'>
 					<!-- <p>{count+1}</p> -->
 					</Delete>
 			{/if}
