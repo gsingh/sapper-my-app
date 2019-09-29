@@ -1,86 +1,47 @@
 <script context = "module">
-// import Select from 'svelte-select';
-// import {token, authenticated} from '../../store/stores.js';
-// import { get } from '../api/utils.js';
+
 import { get } from '../api/utils';
-// import {onMount} from 'svelte';
-// import { stores } from '@sapper/app'; 
 
-
-	export async function preload(page, session, params) {
-	const productions = await get('mutate/get','productions');
-		// const jsonResponse = productions;
-			return { productions };
-	}
+export async function preload(page, session, params) {
+const productions = await get('mutate/get','productions');
+		return { productions };
+}
 </script>
 <script>
 	
-		import { stores } from '@sapper/app';
-		import Creater from '../_CRUD/_Creater';
-		import { send, receive } from "../../components/crossFade";
-		import {onMount} from 'svelte';
-		
-		// import { get } from '../api/utils';
+import { stores } from '@sapper/app';
+import Creater from '../_CRUD/_Creater';
+import { send, receive } from "../../components/crossFade";
+import {onMount} from 'svelte';
 
 
-		// import SearchForm from '../_CRUD/_SearchForm';
-// 		 import FusionCharts from 'fusioncharts/core';
-//   		 import Charts from 'fusioncharts/fusioncharts.charts';
-//   import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
-//   import SvelteFC, { fcRoot } from 'svelte-fusioncharts';
-// 		 // Always set FusionCharts as the first parameter
-//   fcRoot(FusionCharts, Charts, FusionTheme);
+const { page, preloading, session } = stores();
 
-		const { page, preloading, session } = stores();
+export let productions;
+let count =0;
+import Getter from '../_CRUD/_Getter.svelte';
+import Delete from '../_CRUD/_Delete.svelte';
+import Update from '../_CRUD/_Update.svelte';
+import * as tailwind from '../../../tailwind'
+let searchTerm = '2019';
+let searchTerm2 = '2020';
 
-		// export let selected;
-		export let productions;
-		// export let managers;
-		// export let id;
-		let count =0;
-		import Getter from '../_CRUD/_Getter.svelte';
-		import Delete from '../_CRUD/_Delete.svelte';
-		import Update from '../_CRUD/_Update.svelte';
-		import * as tailwind from '../../../tailwind'
-		let searchTerm = '2019';
-				let searchTerm2 = '2020';
-
-		const regex = new RegExp(searchTerm, "gi");
-		export let jsonResponse;
-// $:	{ jsonResponse =  get('mutate/get','productions');
-// 	
-// $: productions = searchTerm ? jsonResponse.filter(element => element.prodDate.match(searchTerm)) : jsonResponse;
-	// return productions;	
+const regex = new RegExp(searchTerm, "gi");
+export let jsonResponse;
 $: productions = get('mutate/get', 'productions');
 
-// 	searchTerm
-//     ? jsonResponse.filter(element => element.prodDate.match(searchTerm))
-//     : jsonResponse;
-// }
 function handleSubmit(event) {
-	// do stuff
 
 	productions = searchTerm
-    ? jsonResponse.filter((element) => element.prodDate >= searchTerm && element.prodDate <= searchTerm2 ).sort(function(a,b){
-  // Turn your strings into dates, and then subtract them
-  // to get a value that is either negative, positive, or zero.
-  return new Date(b.date) - new Date(a.date);
-})
-    : jsonResponse;
-  }
+	? jsonResponse.filter((element) => element.prodDate >= searchTerm && element.prodDate <= searchTerm2 ).sort(function(a,b){
+ 	 return new Date(b.date) - new Date(a.date);
+	})  : jsonResponse;
+	}
 
-	onMount(async () => {
-		productions = await get('mutate/get','productions');
-		jsonResponse = productions;
-	// 	 productions  =searchTerm
-    // ? jsonResponse.filter(element => element.prodDate.includes(searchTerm))
-    // : jsonResponse;
-  });
-
-// $: productions  = { 
-// 	searchTerm  ? jsonResponse.filter(element => element.prodDate.includes(searchTerm))
-// 	: jsonResponse;
-// }
+onMount(async () => {
+	productions = await get('mutate/get','productions');
+	jsonResponse = productions;
+	});
 </script>
 <style>
 .th {
@@ -90,7 +51,6 @@ function handleSubmit(event) {
 .td{
 	@apply py-4 px-2 border-b border-gray-400 ;
 }
-
 </style>
 
 
@@ -99,11 +59,9 @@ function handleSubmit(event) {
 	<title>Production</title>
 </svelte:head>
 
-
-	<div>
+<div>
 	<h1 class="w-full text-center font-serif text-lg text-grey-800 shadow-md pb-4" >Production</h1>
-	<!-- <SearchForm /> -->
-	</div>
+</div>
 <div class="flex border border-gray-300">	
 	<div class="w-3/4 mx-auto pt-4 order-1">
 		<form on:submit|preventDefault={handleSubmit}>
