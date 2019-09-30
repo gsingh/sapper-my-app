@@ -92,9 +92,12 @@ const displayTimeMs=6000;
 		<li><a rel=prefetch class='{segment === "productions" ? "selected" : ""} bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' href='productions'>production</a></li>
 		<li><a rel=prefetch class='{segment === "managers" ? "selected" : ""} bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' href='managers'>shift-manager</a></li>
 		<li><a rel=prefetch class='{segment === "pictureOfEvents" ? "selected" : ""} bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' href='pictureOfEvents'>Pictures</a></li>
-		<li><a rel=prefetch class='{segment === "normalisings" ? "selected" : ""} bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' href='pictureOfEvents'>Normalising</a></li>
-		<li><a rel=prefetch class='{segment === "shippings" ? "selected" : ""} bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' href='pictureOfEvents'>Shipping</a></li>
-		<li><a rel=prefetch class='{segment === "heavy-plate-finisheds" ? "selected" : ""} bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' href='pictureOfEvents'>Heavy Plate</a></li>
+		<li><a rel=prefetch class='{segment === "normalisings" ? "selected" : ""} bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' href='normalisings'>Normalising</a></li>
+		<li><a rel=prefetch class='{segment === "shippings" ? "selected" : ""} bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' href='shippings'>Shipping</a></li>
+		<li><a rel=prefetch class='{segment === "heavy-plate-finisheds" ? "selected" : ""} bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' href='heavy-plate-finisheds'>Heavy Plate</a></li>
+		<li><a rel=prefetch class='{segment === "eventOfPlateMills" ? "selected" : ""} bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' href='eventOfPlateMills'>Events</a></li>
+		<!-- <li><a rel=prefetch class='{segment === "videoOfEvents" ? "selected" : ""} bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' href='videoOfEvents'>Videos</a></li> -->
+
 		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
 		     the blog data when we hover over the link or tap it on a touchscreen -->
 		<li><a rel=prefetch class='{segment === "blog" ? "selected" : ""} bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold' href='blog'>blog</a></li>
