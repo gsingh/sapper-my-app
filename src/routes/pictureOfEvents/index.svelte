@@ -40,19 +40,21 @@ $: pictureOfEvents  =  get('mutate/get', 'picture-of-events');
 
 
 <svelte:head>
-	<title>Production</title>
+	<title>Picture Of Event</title>
 </svelte:head>
 
 
 <div>
- <h1 class="text-center font-serif text-lg text-grey-800 shadow-md pb-4" >Production</h1>
+ <h1 class="text-center font-serif text-lg text-grey-800 shadow-md pb-4" >Picture Of Event</h1>
 
  <div class="w-4/5 mx-auto pt-4">
  {#if $session.user}
  <Creater base="pictureOfEvents/update/create" ></Creater>
  {/if}
  			<a class="inline-block border border-blue-500 rounded py-1 px-3 bg-blue-500 text-white" rel='prefetch' href='/pictureOfEvents/carousel'>Carousel</a>
-
+	{#await pictureOfEvents}
+	<h1> ...loading ...</h1>
+	{:then}
   <div in:fadeIn out:fadeOut class="bg-white shadow-md rounded my-6">
     <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
       <thead>
@@ -87,6 +89,7 @@ $: pictureOfEvents  =  get('mutate/get', 'picture-of-events');
       </tbody>
     </table>
   </div>
+  {/await}
 </div>
 
 </div>

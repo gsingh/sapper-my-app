@@ -5,10 +5,10 @@ import { post } from '../../api/utils'
 	
 	export async function preload(page, session, params) {
 	
-				const managers = await get('mutate/get', `shift-managers`);
+				const events = await get('mutate/get', `eventOfPlateMills`);
 		
 return {
-		  managers
+		  events
 		};
 }
 </script>
@@ -21,20 +21,21 @@ import { fly, fade } from 'svelte/transition';
   const { page, preloading, session } = stores();
     	let notifications;
 	    let message; 
-	export let production= {
+	export let pictureOfEvent= {
         id: "",
-        prodDate: "",
-        noOfPlates: "",
-        prodTonnage: "",
-        shift: "",
-        manager: ""
+        picDate: "",
+        imgType: "",
+        imgFile: "",
+        imgFileContentType: "",
+        eventPM: ""
     };
-    export let managers;
+    export let events;
+    let _PREVIEW_URL;
     let visible = true;
     
    
      async function create(event) {
-     const response =  await post('mutate/create', {...production},'productions');
+     const response =  await post('mutate/create', {...pictureOfEvent},'eventOfPlateMills');
      
     notify();
   
@@ -47,7 +48,7 @@ import { fly, fade } from 'svelte/transition';
         // notifications.success(message, displayTimeMs);
         visible = false;
         notice.set({message: message, status: "success"});
-         goto('productions'); 
+         goto('eventOfPlateMills'); 
   } else{
     		message = 'Looks like there was a problem. Status:  ' +
           response.statusText;
@@ -61,41 +62,87 @@ import { fly, fade } from 'svelte/transition';
     } 
 async function cancel(){
         notice.set({message: 'cancelled !! ', status: "info"});
-        goto('productions');
+        goto('eventOfPlateMills');
 }
+
+async function displayImage(){
+  // user selected file
+    let file = this.files[0];
+    console.log("image : " + JSON.stringify(file));
+    // allowed MIME types
+    var mime_types = [ 'image/jpeg', 'image/png' ];
+    
+    // validate MIME
+    if(mime_types.indexOf(file.type) == -1) {
+        alert('Error : Incorrect file type');
+        return;
+    }
+    else {
+        pictureOfEvent.imgType = file.type;
+            console.log("file type : " + file.type);
+
+        
+    }
+
+
+
+    // validate file size
+    if(file.size > 12*1024*1024) {
+        alert('Error : Exceeded size 2MB');
+        return;
+    }
+
+    // validation is successful
+
+    // hide upload dialog button
+    // document.querySelector("#upload-dialog").style.display = 'none';
+
+    // object url
+    _PREVIEW_URL = URL.createObjectURL(file);
+
+    // set src of image and show
+    document.querySelector("#preview-image").setAttribute('src', _PREVIEW_URL);
+    document.querySelector("#preview-image").style.display = 'inline-block';
+}
+
+// function clickInput(){
+//     document.querySelector("#picDate").click();
+// }
     
 </script>
 
 <div>
     <div class='p-2 border-green-300'>
-       <h1 class="text-center font-serif text-lg text-grey-800 shadow-md pb-4">Add Production Data</h1>
+       <h1 class="text-center font-serif text-lg text-grey-800 shadow-md pb-4">Add Picture Data</h1>
        <!-- <Notifications bind:this={notifications} /> -->
       {#if visible }
        <form in:fly="{{ x: 150, duration: 3000 }}" out:fade on:submit|preventDefault="{create}">
         <div class="p-3 font-medium border-orange-200">
              <label class="block" for="id">
              <span class="text-gray-700">ID</span></label>
-            <input readonly  class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="id" id="id" bind:value={production.id}>
+            <input readonly  class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="id" id="id" bind:value={pictureOfEvent.id}>
         </div>
         <div class="p-3 font-medium border-orange-200">
-            <label for="prodDate">
-            <span class="text-gray-700">Production Date</span></label>
-            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="date" name="prodDate" id="prodDate" bind:value={production.prodDate}>
+            <label for="picDate">
+            <span class="text-gray-700">Picture Date</span></label>
+            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="date" name="picDate" id="picDate" bind:value={pictureOfEvent.picDate}>
         </div>
         <div class="p-3 font-medium border-orange-200">
-            <label for="noOfPlates">
-            <span class="text-gray-700">No Of Plates</span></label>
-            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="noOfPlates" id="noOfPlates" bind:value={production.noOfPlates}>
+            <label for="imgType">
+            <span class="text-gray-700">Image Type</span></label>
+            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="imgType" id="imgType" bind:value={pictureOfEvent.imgType}>
         </div>
         <div class="p-3 font-medium border-orange-200">
-            <label for="prodTonnage">
-            <span class="text-gray-700">Tonnage</span></label>
-            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="prodTonnage" id="prodTonnage" bind:value={production.prodTonnage}>
+            <label for="imgFile">
+            <span class="text-gray-700">Image File</span></label>
+            <!-- <button class="inline-block border border-blue-500 rounded py-1 px-3 bg-blue-500 text-white" id="upload-dialog" on:click = {clickInput} >Choose Image</button> -->
+            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="file" name="imgFile" id="imgFile" bind:value={pictureOfEvent.imgFile}  accept="image/jpg,image/png" on:change = {displayImage}>
+             <img id="preview-image" style="display:none" alt = "Image to upload" />
         </div>
         <div class="p-3 font-medium border-orange-200">
-            <label for="shift">
-            <span class="text-gray-700">Shift</span></label>  
-            <select class="form-select mt-1 block w-full" name="shift" id="shift" bind:value={production.shift}>
+            <label for="imgFileContentType">
+            <span class="text-gray-700">Image File Content Type</span></label>  
+            <select class="form-select mt-1 block w-full" name="imgFileContentType" id="imgFileContentType" bind:value={pictureOfEvent.imgFileContentType}>
                  <option>Select Shift</option>
                  <option value="A" >A</option>
                  <option value="B" >B</option>
@@ -103,13 +150,13 @@ async function cancel(){
             </select>
         </div>
         <div class="p-3 font-medium border-orange-200">
-            <label for="manager">
-            <span class="text-gray-700">Shift Manager</span></label>
-            <select class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" name="manager" id="manager" bind:value={production.manager}>
-            <option>Select Shift Manager</option>    
-            {#each managers as manager}
-			<option value={manager}>
-				{manager.name}
+            <label for="eventPM">
+            <span class="text-gray-700">Event</span></label>
+            <select class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" name="eventPM" id="eventPM" bind:value={pictureOfEvent.eventPM}>
+            <option>Select Event</option>    
+            {#each events as eventPM}
+			<option value={eventPM}>
+				{eventPM.eventName}
 			</option>
 		{/each}
         </div>

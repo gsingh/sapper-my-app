@@ -18,7 +18,7 @@ import {onMount} from 'svelte';
 import Carousel from '@beyonk/svelte-carousel';
 import { ChevronLeftIcon, ChevronRightIcon } from 'svelte-feather-icons';
     export let pictureOfEvents;
-
+$: pictureOfEvents = get('mutate/get', `picture-of-events`);
 
 </script>
 <!-- <style>
@@ -30,7 +30,11 @@ import { ChevronLeftIcon, ChevronRightIcon } from 'svelte-feather-icons';
 		border-radius: 32px;
 	}
   </style> -->
+
 <div class="container mx-auto content-center bg-grey-400 mx-auto">
+<!-- {#await pictureOfEvents} -->
+<!-- <h1> ... loading...</h1> -->
+<!-- {:then} -->
 <Carousel>
   <span class="control" slot="left-control">
     <ChevronLeftIcon />
@@ -45,4 +49,5 @@ import { ChevronLeftIcon, ChevronRightIcon } from 'svelte-feather-icons';
     <ChevronRightIcon />
   </span>
 </Carousel>
+<!-- {/await} -->
 </div>

@@ -11,12 +11,12 @@ import {get} from '../../api/utils.js';
 		const _id = page.params.id;
 		// const _idd = _id.slice(1,_id.length);
 		console.log("from [id].svelte: _id " + _id);
-		const production = await get('mutate/get', `productions/` + _id);
-		const managers = await get('mutate/get', `shift-managers`);
-		// const production = res.json();
+		const pictureOfEvent = await get('mutate/get', `picture-of-events/` + _id);
+		const managers = await get('mutate/get', `imgFileContentType-managers`);
+		// const pictureOfEvent = res.json();
 return {
 			id: _id,
-            production,
+            pictureOfEvent,
             managers
 		};
     }
@@ -34,13 +34,13 @@ import { fade } from 'svelte/transition';
   const { page, preloading, session } = stores();
     let notifications;
 	let message; 
-	export let production= {
+	export let pictureOfEvent= {
         id: "",
-        prodDate: "",
-        noOfPlates: "",
-        prodTonnage: "",
-        shift: "",
-        manager: ""
+        picDate: "",
+        imgType: "",
+        imgFile: "",
+        imgFileContentType: "",
+        imgPM: ""
     };
     export let managers;
     
@@ -48,7 +48,7 @@ import { fade } from 'svelte/transition';
     let selected;
    
      async function update() {
-       const response = await put('mutate/update', {...production}, 'productions');
+       const response = await put('mutate/update', {...pictureOfEvent}, 'productions');
         notify();
   
      
@@ -82,45 +82,45 @@ import { fade } from 'svelte/transition';
 
 <div transition:fade>
     <div  class="p-3 font-medium border-green-300">
-       <h1 class="text-center font-serif text-lg text-grey-800 shadow-md pb-4" >Edit Production</h1>
+       <h1 class="text-center font-serif text-lg text-grey-800 shadow-md pb-4" >Edit Picture</h1>
         <!-- <Notifications bind:this={notifications} /> -->
        <form on:submit|preventDefault="{update}">
         <div>
              <label class="block" for="id">
              <span class="text-gray-700">ID</span></label>
-            <input readonly  class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="id" id="id" bind:value={production.id}>
+            <input readonly  class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="id" id="id" bind:value={pictureOfEvent.id}>
         </div>
         <div>
-            <label for="prodDate">
+            <label for="picDate">
             <span class="text-gray-700">Last Name</span></label>
-            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="date" name="prodDate" id="prodDate" bind:value={production.prodDate}>
+            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="date" name="picDate" id="picDate" bind:value={pictureOfEvent.picDate}>
         </div>
         <div>
-            <label for="noOfPlates">
+            <label for="imgType">
             <span class="text-gray-700">No Of Plates</span></label>
-            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="noOfPlates" id="noOfPlates" bind:value={production.noOfPlates}>
+            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="imgType" id="imgType" bind:value={pictureOfEvent.imgType}>
         </div>
         <div>
-            <label for="prodTonnage">
+            <label for="imgFile">
             <span class="text-gray-700">Tonnage</span></label>
-            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="prodTonnage" id="prodTonnage" bind:value={production.prodTonnage}>
+            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="imgFile" id="imgFile" bind:value={pictureOfEvent.imgFile}>
         </div>
         <div>
-            <label for="shift">
+            <label for="imgFileContentType">
             <span class="text-gray-700">Shift</span></label>  
-            <select class="form-select mt-1 block w-full" type="text" name="shift" id="shift" bind:value={production.shift}>
+            <select class="form-select mt-1 block w-full" type="text" name="imgFileContentType" id="imgFileContentType" bind:value={pictureOfEvent.imgFileContentType}>
                  <option value="A" >A</option>
                  <option value="B" >B</option>
                  <option value="C" >C</option>
             </select>
         </div>
         <div>
-            <label for="manager">
+            <label for="imgPM">
             <span class="text-gray-700">Shift Manager</span></label>
-            <select class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="manager" id="manager" bind:value={production.manager}>
-                {#each managers as manager}
-			<option value={manager}>
-				{manager.name}
+            <select class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="imgPM" id="imgPM" bind:value={pictureOfEvent.imgPM}>
+                {#each managers as imgPM}
+			<option value={imgPM}>
+				{imgPM.name}
 			</option>
 		{/each}
         </div>
