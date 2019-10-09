@@ -35,7 +35,7 @@ import { fly, fade } from 'svelte/transition';
     
    
      async function create(event) {
-     const response =  await post('mutate/create', {...pictureOfEvent},'eventOfPlateMills');
+     const response =  await post('mutate/create', {...pictureOfEvent},'picture-of-events');
      
     notify();
   
@@ -62,7 +62,7 @@ import { fly, fade } from 'svelte/transition';
     } 
 async function cancel(){
         notice.set({message: 'cancelled !! ', status: "info"});
-        goto('eventOfPlateMills');
+        goto('pictureOfEvents');
 }
 
 async function displayImage(){
@@ -139,24 +139,19 @@ async function displayImage(){
             <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="file" name="imgFile" id="imgFile" bind:value={pictureOfEvent.imgFile}  accept="image/jpg,image/png" on:change = {displayImage}>
              <img id="preview-image" style="display:none" alt = "Image to upload" />
         </div>
-        <div class="p-3 font-medium border-orange-200">
+         <div class="p-3 font-medium border-orange-200">
             <label for="imgFileContentType">
-            <span class="text-gray-700">Image File Content Type</span></label>  
-            <select class="form-select mt-1 block w-full" name="imgFileContentType" id="imgFileContentType" bind:value={pictureOfEvent.imgFileContentType}>
-                 <option>Select Shift</option>
-                 <option value="A" >A</option>
-                 <option value="B" >B</option>
-                 <option value="C" >C</option>
-            </select>
+            <span class="text-gray-700">Image Content Type</span></label>
+            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="text" name="imgFileContentType" id="imgType" bind:value={pictureOfEvent.imgFileContentType}>
         </div>
         <div class="p-3 font-medium border-orange-200">
             <label for="eventPM">
             <span class="text-gray-700">Event</span></label>
             <select class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" name="eventPM" id="eventPM" bind:value={pictureOfEvent.eventPM}>
             <option>Select Event</option>    
-            {#each events as eventPM}
-			<option value={eventPM}>
-				{eventPM.eventName}
+            {#each events as event}
+			<option value={event}>
+				{event.id}{event.eventName}
 			</option>
 		{/each}
         </div>
