@@ -17,6 +17,8 @@ import { notice } from '../../../store/stores';
 import { stores } from '@sapper/app';
 // import Notifications from '@beyonk/svelte-notifications';
 import { fly, fade } from 'svelte/transition';
+import MersenneTwister from 'mersenne-twister';
+let generator = new MersenneTwister;
 
   const { page, preloading, session } = stores();
     	let notifications;
@@ -78,9 +80,11 @@ async function displayImage(){
         return;
     }
     else {
+        let s = file.type;
         pictureOfEvent.imgType = file.type;
-            console.log("file type : " + file.type);
-
+        console.log("file type : " + file.type);
+        var afterDot = s.substr(s.indexOf("/")+1);
+        pictureOfEvent.imgFileContentType = generator.random_int() + "." + afterDot;
         
     }
 
@@ -88,7 +92,7 @@ async function displayImage(){
 
     // validate file size
     if(file.size > 12*1024*1024) {
-        alert('Error : Exceeded size 2MB');
+        alert('Error : Exceeded size 12MB');
         return;
     }
 
