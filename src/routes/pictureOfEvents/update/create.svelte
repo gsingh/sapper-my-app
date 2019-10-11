@@ -35,7 +35,19 @@ let generator = new MersenneTwister;
     let _PREVIEW_URL;
     let visible = true;
     let fakepath;
-    
+    import ImgEncoder from 'svelte-image-encoder';
+
+	let src = 'https://i.imgur.com/37nlxAP.jpg';
+
+	let url;
+	let quality = 0.1;
+	let imageChosen = false;
+	let realTime = true;
+	let showResult = true;
+
+	function loadFile(e) {
+		src = URL.createObjectURL(e.target.files[0]);
+	}
    
      async function create(event) {
      const response =  await post('mutate/create', {...pictureOfEvent},'picture-of-events');
@@ -69,10 +81,12 @@ async function cancel(){
         goto('pictureOfEvents');
 }
 
-async function displayImage(){
+async function displayImage(e){
   // user selected file
-    let file = this.files[0];
-    console.log("image : " + JSON.stringify(file));
+  let file = e.target.files[0];
+  src = URL.createObjectURL(file);
+    // let file = this.files[0];
+    // console.log("image : " + JSON.stringify(file));
     // allowed MIME types
     var mime_types = [ 'image/jpeg', 'image/png' ];
     
@@ -87,7 +101,8 @@ async function displayImage(){
         console.log("file type : " + file.type);
         var afterDot = s.substr(s.indexOf("/")+1);
         pictureOfEvent.imgFileContentType = generator.random_int() + "." + afterDot;
-        pictureOfEvent.imgFile = fakepath.replace("C:\\fakepath\\", "");
+        console.log("ürl : " + JSON.stringify({url}));
+        pictureOfEvent.imgFile = url.slice(24);
         
     }
 
@@ -105,11 +120,11 @@ async function displayImage(){
     // document.querySelector("#upload-dialog").style.display = 'none';
 
     // object url
-    _PREVIEW_URL = URL.createObjectURL(file);
+    // _PREVIEW_URL = URL.createObjectURL(file);
 
     // set src of image and show
-    document.querySelector("#preview-image").setAttribute('src', _PREVIEW_URL);
-    document.querySelector("#preview-image").style.display = 'inline-block';
+    // document.querySelector("#preview-image").setAttribute('src', _PREVIEW_URL);
+    // document.querySelector("#preview-image").style.display = 'inline-block';
 }
 
 // function clickInput(){
@@ -143,8 +158,13 @@ async function displayImage(){
             <label for="imgFile">
             <span class="text-gray-700">Image File</span></label>
             <!-- <button class="inline-block border border-blue-500 rounded py-1 px-3 bg-blue-500 text-white" id="upload-dialog" on:click = {clickInput} >Choose Image</button> -->
-            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="file" name="imgFile" id="imgFile" bind:value={fakepath}  accept="image/jpg,image/png" on:change = {displayImage}>
-             <img id="preview-image" style="display:none" alt = "Image to upload" />
+           <p> <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="file" name="imgFile" id="imgFile"   accept="image/jpg,image/png" on:change = {displayImage} bind:value={pictureOfEvent.imgFile}> Quality: <input type='number' bind:value={quality} min='0' max='1' step='0.05'></p>
+             <!-- <img id="preview-image" style="display:none" alt = "Image to upload" /> -->
+             <ImgEncoder {src} {quality} bind:url {realTime} width={256} height={256} crossOrigin='anonymous' classes='profile-image'/>
+            <img src={url} alt='' >
+
+        <p>Result ({url && url.length} bytes):</p>
+        <p>{ url }</p>
         </div>
          <div class="p-3 font-medium border-orange-200">
             <label for="imgFileContentType">
