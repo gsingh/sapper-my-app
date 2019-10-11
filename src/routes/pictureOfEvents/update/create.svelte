@@ -39,19 +39,19 @@ let generator = new MersenneTwister;
 
 	let src = 'https://i.imgur.com/37nlxAP.jpg';
 
-	let url;
+	let url, url_json, url_stripped;
 	let quality = 0.1;
 	let imageChosen = false;
 	let realTime = true;
 	let showResult = true;
 
-	function loadFile(e) {
-		src = URL.createObjectURL(e.target.files[0]);
-	}
+	// function loadFile(e) {
+	// 	src = URL.createObjectURL(e.target.files[0]);
+	// }
    
      async function create(event) {
      const response =  await post('mutate/create', {...pictureOfEvent},'picture-of-events');
-     console.log("pictureofevent : " + JSON.stringify(pictureOfEvent));
+    //  console.log("pictureofevent : " + JSON.stringify(pictureOfEvent));
 
     notify();
   
@@ -84,9 +84,19 @@ async function cancel(){
 async function displayImage(e){
   // user selected file
   let file = e.target.files[0];
+  if(e.target.files[0]){
+      const FR = new FileReader();
+      FR.readAsDataURL(file);
+      FR.onload = function (e){
+          document.getElementById('image-preview').src = e.target.result;
+          pictureOfEvent.imgFile = e.target.result;  
+
+      }
+  }
   src = URL.createObjectURL(file);
+
     // let file = this.files[0];
-    // console.log("image : " + JSON.stringify(file));
+    console.log("src : " + src);
     // allowed MIME types
     var mime_types = [ 'image/jpeg', 'image/png' ];
     
@@ -101,8 +111,12 @@ async function displayImage(e){
         console.log("file type : " + file.type);
         var afterDot = s.substr(s.indexOf("/")+1);
         pictureOfEvent.imgFileContentType = generator.random_int() + "." + afterDot;
-        console.log("ürl : " + JSON.stringify({url}));
-        pictureOfEvent.imgFile = url.slice(24);
+        url_json = JSON.stringify({url});
+        // console.log("ürl : " + JSON.stringify({url}));
+        console.log("ürl stripped : " + url_json.slice(31));
+        url_stripped = url_json.slice(31);
+        
+        // pictureOfEvent.imgFile = url_stripped.slice(0, -2);
         
     }
 
@@ -159,9 +173,9 @@ async function displayImage(e){
             <span class="text-gray-700">Image File</span></label>
             <!-- <button class="inline-block border border-blue-500 rounded py-1 px-3 bg-blue-500 text-white" id="upload-dialog" on:click = {clickInput} >Choose Image</button> -->
            <p> <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg mt-1 block w-full" type="file" name="imgFile" id="imgFile"   accept="image/jpg,image/png" on:change = {displayImage} bind:value={pictureOfEvent.imgFile}> Quality: <input type='number' bind:value={quality} min='0' max='1' step='0.05'></p>
-             <!-- <img id="preview-image" style="display:none" alt = "Image to upload" /> -->
-             <ImgEncoder {src} {quality} bind:url {realTime} width={256} height={256} crossOrigin='anonymous' classes='profile-image'/>
-            <img src={url} alt='' >
+             <img id="preview-image" style="display:none" alt = "Image to upload" />
+             <!-- <ImgEncoder {src} {quality} bind:url {realTime} width={256} height={256} crossOrigin='anonymous' classes='profile-image'/>
+            <img src={url} alt='' > -->
 
         <p>Result ({url && url.length} bytes):</p>
         <p>{ url }</p>
