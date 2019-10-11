@@ -73,7 +73,7 @@ $: pictureOfEvents  =  get('mutate/get', 'picture-of-events');
 		  <td class="py-4 px-6 border-b border-grey-light">{pictureOfEvent.picDate}</td>
   		  <td class="py-4 px-6 border-b border-grey-light">{pictureOfEvent.imgType}</td>
 		  <td class="py-4 px-6 border-b border-grey-light"><img src="data:image/png;base64,{pictureOfEvent.imgFile}" alt='picture of event'/></td>			
-		  <td class="py-4 px-6 border-b border-grey-light">{pictureOfEvent.eventPM}</td>
+		  <td class="py-4 px-6 border-b border-grey-light">{pictureOfEvent.eventPM.eventName}</td>
 
           <td class="py-4 px-6 border-b border-grey-light">
             <Getter base='picture-of-events' id='{pictureOfEvent.id}' ></Getter>
