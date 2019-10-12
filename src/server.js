@@ -7,6 +7,10 @@ import sessionFileStore from 'session-file-store';
 import bodyParser from 'body-parser';
 
 const FileStore = sessionFileStore(session);
+// bodyParser = {
+// 	json: {limit: '50mb', extended: true},
+// 	urlencoded: {limit: '50mb', extended: true}
+//   };
 
 // Log every request
 function logger(req, res, next) {
@@ -18,7 +22,9 @@ const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
 var fileStoreOptions = {};
 express()
-	.use(bodyParser.json())
+	.use(bodyParser.json({ limit: '50mb' }))
+	// ({ limit: '50mb' }))
+	// .use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit:50000 }))
 	.use(session({
 		// store: new FileStore(fileStoreOptions),
 		secret: 'keyboard cat',

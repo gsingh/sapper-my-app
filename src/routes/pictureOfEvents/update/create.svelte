@@ -96,6 +96,13 @@
         console.log("e.target.result : " + file_untrimmed);
        
         pictureOfEvent.imgFile =file_untrimmed.slice(23);
+         let s = file.type;
+      pictureOfEvent.imgType = file.type;
+      console.log("file type : " + file.type);
+      var afterDot = s.substr(s.indexOf("/") + 1);
+      pictureOfEvent.imgFileContentType =
+        generator.random_int() + "." + afterDot;
+
       };
     }
     // src = URL.createObjectURL(file);

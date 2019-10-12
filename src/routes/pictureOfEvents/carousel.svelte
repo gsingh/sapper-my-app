@@ -40,7 +40,7 @@ $: pictureOfEvents = get('mutate/get', `picture-of-events`);
     <ChevronLeftIcon />
   </span>
   {#each pictureOfEvents as picture}
-  <div class="slide-content"><img class="rounded-full w-full object-center object-contain overflow-hidden w-full" src="data:image/png;base64,{picture.imgFile}" alt='picture of event'/></div>
+  <div class="slide-content"><img class="rounded-full w-full object-center object-contain overflow-hidden w-full" src="data:image/jpeg;base64,{picture.imgFile}" alt='picture of event'/></div>
   {/each}
    <!-- <div class="slide-content">slide 2</div>
  
