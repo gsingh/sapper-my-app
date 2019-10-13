@@ -100,8 +100,7 @@
       pictureOfEvent.imgType = file.type;
       console.log("file type : " + file.type);
       var afterDot = s.substr(s.indexOf("/") + 1);
-      pictureOfEvent.imgFileContentType =
-        generator.random_int() + "." + afterDot;
+      pictureOfEvent.imgFileContentType = generator.random_int() + "." + afterDot;
 
       };
     }
@@ -123,9 +122,9 @@
       let s = file.type;
       pictureOfEvent.imgType = file.type;
       console.log("file type : " + file.type);
-      var afterDot = s.substr(s.indexOf("/") + 1);
-      pictureOfEvent.imgFileContentType =
-        generator.random_int() + "." + afterDot;
+      // var afterDot = s.substr(s.indexOf("/") + 1);
+      // pictureOfEvent.imgFileContentType = "pictures/" +
+      //   generator.random_int() + "." + afterDot;
       // url_json = url;
       // // console.log("ürl : " + JSON.stringify({url}));
       // console.log("ürl stripped : " + url_json.slice(31));

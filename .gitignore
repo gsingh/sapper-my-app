@@ -5,3 +5,4 @@ yarn-error.log
 /__sapper__/
 .sessions
 .vscode/settings.json
+/static/pictures/
