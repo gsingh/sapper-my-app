@@ -9,6 +9,7 @@ import {send, receive} from '../components/crossFade';
 import { stores } from '@sapper/app';
 import { onMount } from 'svelte';
 import Clock from '../components/Clock'
+import P5Trial from '../components/P5Trial'
 const { session } = stores();
 export let user;
 // export let  userName;
@@ -64,6 +65,7 @@ $: {user = $session.user;
 <h1>Great success!</h1>
 
 <Clock />
+<!-- <P5Trial /> -->
 <!-- <p>Token is : {$token}</p> -->
 <!-- <p>Authenticated is {$authenticated}</p> -->
 
