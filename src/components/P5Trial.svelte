@@ -1,22 +1,33 @@
 <script>
 import { onMount } from 'svelte';
-import p5 from 'p5';
+// import p5 from 'p5';
 
 let myp5;
-// let p5;
+let p5;
 // // let p;
 onMount(async () => {
+ const module = await import('p5');
+ let canvas;
+  p5=module.default;
+
 	const p = (sketch) => {
   let x = 200; 
   let y = 200;
  
+ sketch.windowResized = () => {
+  //  console.log("resized");
+  sketch.resizeCanvas(sketch.windowWidth,sketch.windowHeight);
+ };
+
   sketch.setup = () => {
-    sketch.createCanvas(400, 400);
+    canvas=sketch.createCanvas(sketch.windowWidth,sketch.windowHeight);
+    canvas.position(0,0);
+    canvas.style('z-index', '-1');
   };
 
   // sketch.draw = function() {
   sketch.draw = () => {
-    sketch.background(0);
+    sketch.background(175);
     sketch.fill(255);
     sketch.circle(x, y, 150, 150);
   };
