@@ -8,11 +8,23 @@ let p5;
 onMount(async () => {
  const module = await import('p5');
  let canvas;
+ let spot = {
+     x: 100,
+     y: 100,
+     radius: 20
+  };
+  let rgba = {
+    r: 0,
+    g: 0,
+    b: 0,
+    alpha: 127
+  }
   p5=module.default;
 
 	const p = (sketch) => {
   let x = 200; 
   let y = 200;
+  
  
  sketch.windowResized = () => {
   //  console.log("resized");
@@ -23,13 +35,23 @@ onMount(async () => {
     canvas=sketch.createCanvas(sketch.windowWidth,sketch.windowHeight);
     canvas.position(0,0);
     canvas.style('z-index', '-1');
+     sketch.background(255);
   };
 
   // sketch.draw = function() {
   sketch.draw = () => {
-    sketch.background(175);
-    sketch.fill(255);
-    sketch.circle(x, y, 150, 150);
+   spot.x = sketch.random(0, sketch.width);
+   spot.y = sketch.random(0, sketch.height);
+   spot.radius = sketch.random(5,55);
+   rgba.r= sketch.random(50,255);
+   rgba.g  = sketch.random(0, 200);
+   rgba.g  = sketch.random(0, 200);
+   rgba.alpha  = sketch.random(50, 255);
+
+
+    sketch.fill(rgba.r, rgba.g, rgba.b, rgba.alpha);
+    sketch.noStroke();
+    sketch.circle(spot.x, spot.y, spot.radius);
   };
 };
 myp5 = new p5(p, document.getElementById('p5sketch'));

@@ -9,7 +9,9 @@ import {send, receive} from '../components/crossFade';
 import { stores } from '@sapper/app';
 import { onMount } from 'svelte';
 import Clock from '../components/Clock'
-import P5Tree from '../components/P5Tree'
+import P5Tree from '../components/P5Tree';
+import P5Trial from '../components/P5Trial';
+
 const { session } = stores();
 export let user;
 let myp5;
@@ -220,48 +222,18 @@ $: {user = $session.user;
         // $token= "123456";
 </script> 
 
- <!-- <style>
-	h1, p {
-		text-align: center;
-		margin: 0 auto;
-	}
-
-	h1 {
-		font-size: 2.8em;
-		text-transform: uppercase;
-		font-weight: 700;
-		margin: 0 0 0.5em 0;
-	}
-
-	/* figure {
-		margin: 0 0 1em 0;
-	} */
-
-	/* img {
-		width: 100%;
-		max-width: 400px;
-		margin: 0 0 1em 0;
-	} */
-
-	p {
-		margin: 1em auto;
-	}
-
-	/* @media (min-width: 480px) {
-		h1 {
-			font-size: 4em;
-		}
-	} */
-</style> -->
+ 
 
 <svelte:head>
 	<title>Sapper project template</title>
 </svelte:head>
 <div class="p5sketch"></div>
+<div class="flex border border-gray-300">	
+	<div class="w-3/4 mx-auto pt-4 order-1">
 <h1>Great success!</h1>
 
 <Clock />
-<P5Tree /> -->
+<P5Trial />
 <!-- <p>Token is : {$token}</p> -->
 <!-- <p>Authenticated is {$authenticated}</p> -->
 
@@ -281,7 +253,8 @@ $: {user = $session.user;
 <p>Fine playig along, Gurmeet !!!</p> 
 <!-- <p>Token is {$token} and authorization is {$authenticated}</p> -->
 
-
+	</div>	
+</div>
 
 
 
