@@ -10,7 +10,7 @@ import { stores } from '@sapper/app';
 import { onMount } from 'svelte';
 import Clock from '../components/Clock'
 import P5Tree from '../components/P5Tree';
-import P5Trial from '../components/P5Trial';
+import P5Phyllotaxis from '../components/P5Phyllotaxis';
 
 const { session } = stores();
 export let user;
@@ -233,7 +233,7 @@ $: {user = $session.user;
 <h1>Great success!</h1>
 
 <Clock />
-<P5Trial />
+<P5Phyllotaxis />
 <!-- <p>Token is : {$token}</p> -->
 <!-- <p>Authenticated is {$authenticated}</p> -->
 
