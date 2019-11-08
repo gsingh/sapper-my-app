@@ -2,14 +2,14 @@
 import { onMount } from 'svelte';
 // import p5 from 'p5';
 
-let myp5;
+export let myp5;
 let p5;
 // // let p;
 onMount(async () => {
  const module = await import('p5');
  let canvas;
  let n=0;
- let c=5;
+ let c=3;
 
  let spot = {
      x: 100,
@@ -27,7 +27,7 @@ onMount(async () => {
 	const p = (sketch) => {
   let x = 200; 
   let y = 200;
-  
+  let start;
  
  sketch.windowResized = () => {
   //  console.log("resized");
@@ -37,35 +37,50 @@ onMount(async () => {
   sketch.setup = () => {
     canvas=sketch.createCanvas(sketch.windowWidth,sketch.windowHeight);
     canvas.position(0,0);
-    canvas.style('z-index', '1');
-     sketch.background(0);
+    canvas.style('z-index', 'auto');
+    
      sketch.angleMode(sketch.DEGREES);
      sketch.colorMode(sketch.HSB);
+     start=0;
   };
 
   // sketch.draw = function() {
   sketch.draw = () => {
-   spot.x = sketch.random(0, sketch.width);
-   spot.y = sketch.random(0, sketch.height);
-   spot.radius = sketch.random(5,55);
-   rgba.r= sketch.random(50,255);
+     sketch.background(0);
+     sketch.translate(sketch.width/2, sketch.height/2);
+     
+   for(var i=0;i<n;i++){ 
+     sketch.rotate(n*0.001); 
+  //  spot.x = sketch.random(0, sketch.width);
+  //  spot.y = sketch.random(0, sketch.height);
+  //  spot.radius = sketch.random(5,55);
+  //  rgba.r= sketch.random(50,255);
    rgba.g  = sketch.random(0, 200);
-   rgba.g  = sketch.random(0, 200);
+   rgba.b  = sketch.random(0, 200);
    rgba.alpha  = sketch.random(50, 255);
-   let theta=n*137.5;
-   let r= c*sketch.sqrt(n);
-   let x = r*sketch.cos(theta) + sketch.width/2;
-   let y=r*sketch.sin(theta) + sketch.height/2;
+   let theta=i*137.5;
+   let r= c*sketch.sqrt(i);
+   let x = r*sketch.cos(theta);
+   let y=r*sketch.sin(theta);
+   var hu=sketch.sin(start+i);
+   hu=sketch.map(hu, -1, 1, 0, 360);
     // sketch.fill(255);
-    sketch.fill(n % 256,255,255);
+
+    sketch.fill(hu,255,255,0.5);
   //  sketch.scale(sketch.height/n);  
-   sketch.ellipse(x,y,4,4);
+   sketch.noStroke();
+   sketch.ellipse(x,y,8,8);
  
-   n++;
+   
+   
+
    
     // sketch.fill(rgba.r, rgba.g, rgba.b, rgba.alpha);
-    sketch.noStroke();
+   
     // sketch.circle(spot.x, spot.y, spot.radius);
+  }
+  n += 5;
+  start += 5;
   };
 };
 myp5 = new p5(p, document.getElementById('p5sketch'));
