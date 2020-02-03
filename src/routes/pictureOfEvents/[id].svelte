@@ -9,11 +9,11 @@ import {get} from '../api/utils.js';
 		console.log("from [id].svelte: page.params.id " + page.params.id);
 		const _id = page.params.id;
 		console.log("from [id].svelte: _id " + _id);
-		const production = await get('mutate/get', `productions/` + _id);
+		const pictureOfEvent = await get('mutate/get', `picture-of-events/` + _id);
 		
 return {
 			id: _id,
-			production
+			pictureOfEvent
 		};
 	}
 	</script>
@@ -23,7 +23,7 @@ import { stores } from '@sapper/app';
 
   const { page, preloading, session } = stores();
 
-	export let production;
+	export let pictureOfEvent;
 	export let id;
 	
 </script>
@@ -31,7 +31,7 @@ import { stores } from '@sapper/app';
 
 
 <svelte:head>
-	<title>{production.prodDate}</title>
+	<title>{pictureOfEvent.prodDate}</title>
 </svelte:head>
 <div class="w-2/3 mx-auto">
   <div class="bg-white shadow-md rounded my-6">
@@ -40,23 +40,23 @@ import { stores } from '@sapper/app';
         <tr>
           <th class="py-2 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">ID</th>
           <th class="py-2 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Date</th>
-		  <th class="py-2 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Shift</th>
-          <th class="py-2 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">No Of Plates</th>
-		  <th class="py-2 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tonnage</th>
-          <th class="py-2 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Shift Manager</th>
+		  <th class="py-2 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Type</th>
+          <!-- th class="py-2 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Image</th-->
+		  <!--th class="py-2 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Content Type</th-->
+          <th class="py-2 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Event</th>
         </tr>
       </thead>
       <tbody>
         <tr class="hover:bg-grey-lighter">
-          <td class="py-2 px-6 border-b border-grey-light">{production.id}</td>
-		  <td class="py-2 px-6 border-b border-grey-light">{production.prodDate}</td>
-  		  <td class="py-2 px-6 border-b border-grey-light">{production.shift}</td>
-		  <td class="py-2 px-6 border-b border-grey-light">{production.noOfPlates}</td>			
-		  <td class="py-2 px-6 border-b border-grey-light">{production.prodTonnage}</td>
-		  <td class="py-2 px-6 border-b border-grey-light">{production.manager.name}</td>
+          <td class="py-2 px-6 border-b border-grey-light">{pictureOfEvent.id}</td>
+		  <td class="py-2 px-6 border-b border-grey-light">{pictureOfEvent.picDate}</td>
+  		  <td class="py-2 px-6 border-b border-grey-light">{pictureOfEvent.imgType}</td>
+		  <!--td class="py-2 px-6 border-b border-grey-light">{pictureOfEvent.imgFile}</td-->			
+		  <td class="py-2 px-6 border-b border-grey-light"><img src=pictures/{pictureOfEvent.imgFileContentType} alt='picture of event'/></td>
+		  <td class="py-2 px-6 border-b border-grey-light">{pictureOfEvent.eventPM}</td>
           <td class="py-2 px-6 border-b border-grey-light">
-            <a href='productions/update/{production.id}' class="text-grey-lighter font-bold py-2 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
-            <!-- <a href="productions/{production.id}" class="text-grey-lighter font-bold py-2 px-3 rounded text-xs bg-blue hover:bg-blue-dark">View</a> -->
+            <a href='pictureOfEvents/update/{pictureOfEvent.id}' class="text-grey-lighter font-bold py-2 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
+            <!-- <a href="pictureOfEvents/{pictureOfEvent.id}" class="text-grey-lighter font-bold py-2 px-3 rounded text-xs bg-blue hover:bg-blue-dark">View</a> -->
           </td>
         </tr>
        
@@ -75,8 +75,8 @@ import { stores } from '@sapper/app';
 
 
 
-<!-- <h1>{production.prodDate}</h1>
-<h2>{production.prodTonnage}</h2> -->
+<!-- <h1>{pictureOfEvent.prodDate}</h1>
+<h2>{pictureOfEvent.prodTonnage}</h2> -->
 <!-- <div class='content'>
 	{@html post.html}
 </div> -->

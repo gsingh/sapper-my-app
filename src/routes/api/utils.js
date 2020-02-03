@@ -45,7 +45,7 @@ export function get(endpoint, route) {
 }
 
 export function del(endpoint, data) {
-	console.log("from utils: del data : " + data + "  endpoint :  " + endpoint);
+	console.log("from utils: del data : " +JSON.stringify(data) + "  endpoint :  " + endpoint);
 	// console.log("from utils.js : " + JSON.stringify(data));
 	return fetch(endpoint, {
 		method: 'DELETE',

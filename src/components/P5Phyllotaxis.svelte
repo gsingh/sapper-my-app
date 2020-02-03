@@ -9,7 +9,7 @@ onMount(async () => {
  const module = await import('p5');
  let canvas;
  let n=0;
- let c=3;
+ let c=5;
 
  let spot = {
      x: 100,
@@ -50,7 +50,7 @@ onMount(async () => {
      sketch.translate(sketch.width/2, sketch.height/2);
      
    for(var i=0;i<n;i++){ 
-     sketch.rotate(n*0.001); 
+     sketch.rotate(n*0.005); 
   //  spot.x = sketch.random(0, sketch.width);
   //  spot.y = sketch.random(0, sketch.height);
   //  spot.radius = sketch.random(5,55);
@@ -66,7 +66,7 @@ onMount(async () => {
    hu=sketch.map(hu, -1, 1, 0, 360);
     // sketch.fill(255);
 
-    sketch.fill(hu,255,255,0.5);
+    sketch.fill(hu,255,255,0.3);
   //  sketch.scale(sketch.height/n);  
    sketch.noStroke();
    sketch.ellipse(x,y,8,8);

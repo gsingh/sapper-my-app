@@ -76,11 +76,11 @@ $: pictureOfEvents  =  get('mutate/get', 'picture-of-events');
 		  <td class="py-4 px-6 border-b border-grey-light">{pictureOfEvent.eventPM}</td>
 
           <td class="py-4 px-6 border-b border-grey-light">
-            <Getter base='picture-of-events' id='{pictureOfEvent.id}' ></Getter>
+            <Getter base='pictureOfEvents' id='{pictureOfEvent.id}' ></Getter>
 	{#if $session.user}
 			<a href='pictureOfEvents/update/{pictureOfEvent.id}' class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
 			
-			<Delete target= 'mutate/del' base='picture-of-events/' id='{pictureOfEvent.id}'>
+			<Delete target= 'mutate/del' base='pictureOfEvents/' id='{pictureOfEvent.id}'>
 				<!-- <p>{count+1}</p> -->
 			</Delete>
 	{/if}

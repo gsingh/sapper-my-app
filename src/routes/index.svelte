@@ -233,7 +233,7 @@ $: {user = $session.user;
 <h1>Great success!</h1>
 
 <Clock />
-<P5Phyllotaxis />
+  <!--P5Phyllotaxis /-->
 <!-- <p>Token is : {$token}</p> -->
 <!-- <p>Authenticated is {$authenticated}</p> -->
 
